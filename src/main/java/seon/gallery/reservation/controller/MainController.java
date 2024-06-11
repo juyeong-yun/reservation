@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@Slf4j
 public class MainController {
     
     @GetMapping({"", "/"})

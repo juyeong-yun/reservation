@@ -18,7 +18,7 @@
     <div class="header">
         <div class="top-bar">
             <div class="logo">
-                <a th:href="main.html"><img th:src="@{/images/logo.jpeg}" alt="logo"></a>
+                <a th:href="@{main.html}"><img th:src="@{/images/logo.jpeg}" alt="logo"></a>
             </div>
             
             <div class="right-side">
@@ -31,15 +31,15 @@
                         </ul>
                     </li>
                     <li>
-                        <a th:href="@{board.html}">Board</a>
+                        <a th:href="@{/guest/board.html}">Board</a>
                         <ul>
                             <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
-                            <li><a th:href="@{board.html#notice}">Notice</a></li>
-                            <li><a th:href="@{board.html#qna}">QnA</a></li>
+                            <li><a th:href="@{/guest/board.html#notice}">Notice</a></li>
+                            <li><a th:href="@{/guest/board.html#qna}">QnA</a></li>
                         </ul>
                     </li>
-                    <li><a id="" th:href="@{reservation.html}">Reserve</a></li>
-                    <li><a id="" th:href="@{reviews.html}">Review</a></li>
+                    <li><a id="" th:href="@{/guest/reservation.html}">Reserve</a></li>
+                    <li><a id="" th:href="@{/write/reviews.html}">Review</a></li>
                 </ul>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <!-- 모두가 질문사항 작성할 수있게 -->
             <div class="qna" id="qna">
                 <h3>QnA</h3>
-                <div class="write"><a href="write.html"><i class="fa-solid fa-pen-to-square"></i> 글쓰기</a></div>
+                <div class="write"><a th:href="@{/write/write.html}"><i class="fa-solid fa-pen-to-square"></i> 글쓰기</a></div>
                 <table>
                     <tr>
                         <th class="name">질문자</th>
