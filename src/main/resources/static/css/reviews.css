@@ -1,0 +1,61 @@
+@import "main.css";
+
+@media (max-width:768px){
+    .content .gallery li{width:33.33333%;}
+}
+@media (max-width:560px){
+    .content .gallery li{width:50%;}
+}
+@media (max-width:480px){
+    .content .gallery li{width:100%;}
+}
+
+.event-info{
+    margin: 30px 0; 
+}
+
+.write {
+    /* border: 0.72px solid; */
+}
+
+.gallery {
+    margin:40px -20px;
+    box-sizing:border-box;
+}
+
+.gallery:after {
+    content:"";
+    display:block;
+    clear:both;
+    visibility: hidden;
+}
+
+.gallery li {
+    width:20%;
+    float:left;
+    box-sizing:border-box;
+    padding:0 20px;
+    margin:40px 0 30px 0;
+    /* margin: 40px 22px 30px 22px; */
+    /* border: 0.64px solid; */
+}
+
+.gallery li img {
+    width:100%;
+    height:auto;
+}
+
+.gallery .info {
+    margin-bottom: 0;
+}
+
+.gallery span {
+    display: block;
+    padding: 8px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;  /* 한 줄로 표현하고 싶다면 nowrap을 사용하면 된다 */
+}
+
+
+
