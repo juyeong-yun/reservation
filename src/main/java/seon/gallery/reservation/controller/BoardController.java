@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
-@RequestMapping("main")
+@RequestMapping("/guest")
 public class BoardController {
 
-    @GetMapping("board")
+    @GetMapping("/board")
     public String board() {
-
-        return "board";
+        log.info("어디니?");
+        return "guest/board";
     }
     
     

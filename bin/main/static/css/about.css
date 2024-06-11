@@ -1,0 +1,6 @@
+@import "main.css";
+
+#directions .explain,
+#directions img {
+    margin: 20px;
+}

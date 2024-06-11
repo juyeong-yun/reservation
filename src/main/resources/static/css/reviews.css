@@ -1,13 +1,19 @@
 @import "main.css";
 
 @media (max-width:768px){
-    .content .gallery li{width:33.33333%;}
+    .content .gallery li, 
+    .content .event-info,
+    .content .write{width:33.33333%;}
 }
 @media (max-width:560px){
-    .content .gallery li{width:50%;}
+    .content .gallery li,
+    .content .event-info,
+    .content .write{width:50%;}
 }
 @media (max-width:480px){
-    .content .gallery li{width:100%;}
+    .content .gallery li,
+    .content .event-info,
+    .content .write{width:100%;}
 }
 
 .event-info{
