@@ -31,7 +31,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a th:href="@{/reservation/board.html}">Board</a>
+                        <a th:href="@{/reservation/board}">Board</a>
                         <ul>
                             <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
                             <li><a th:href="@{/reservation/board#notice}">Notice</a></li>
@@ -105,12 +105,14 @@
             <a href="https://x.com/Du_Bidubap"><i class="fa-brands fa-twitter"></i></a>
         </div>
         <div class="footer-info">
-			<span>Lee Seungyoon Birthday Exhibition</span>
-			<span>Aug.16-18.2024 Gallary Non-Scaled</span>
-			<div class="footer-img">
-				<img th:src="@{/images/icon.jpeg}">
-				<img th:src="@{/images/logo_white.png}">				
+	        <div>
+				<span>Lee Seungyoon Birthday Exhibition</span>
+				<span>Aug.16-18.2024 Gallary Non-Scaled</span>
 			</div>
+			<div class="footer-img">
+				<img th:src="@{/images/icon_white.png}">
+				<img th:src="@{/images/logo_white.png}">	
+			</div>			
 		</div>
     </footer>
 </body>
