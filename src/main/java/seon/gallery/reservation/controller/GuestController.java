@@ -42,14 +42,5 @@ public class GuestController {
         return "/guest/reserve";
     }
     
-    /**
-     * 리뷰 페이지
-     * @return
-     */
-    @GetMapping("/reviews")
-    public String reviews() {
-    	
-        return "/write/reviews";
-    }
     
 }
