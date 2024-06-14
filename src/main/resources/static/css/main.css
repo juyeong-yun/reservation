@@ -85,7 +85,7 @@ div.background .right-side a{
 
 .right-side {
     position: relative;
-    right: 18%;
+    right: 12%;
 }
 
 .right-side ul{
@@ -142,7 +142,7 @@ div.background .right-side a{
 
 /* 본문 */
 .content {
-    padding: 0 125px 60px;
+	padding: 0 125px 60px;
     height: auto;
     flex: 1;
     min-height: calc(100% - 60px);

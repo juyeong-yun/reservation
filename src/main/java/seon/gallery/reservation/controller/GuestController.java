@@ -42,5 +42,13 @@ public class GuestController {
         return "/guest/reserve";
     }
     
+    @GetMapping("/booking")
+    public String booking() {
+    	
+    	return "/guest/booking";
+    }
+    
+    
+    
     
 }
