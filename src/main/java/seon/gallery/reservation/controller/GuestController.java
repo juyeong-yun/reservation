@@ -36,10 +36,10 @@ public class GuestController {
      * 예약 페이지
      * @return
      */
-    @GetMapping("/reservation")
-    public String reservation() {
+    @GetMapping("/reserve")
+    public String reserve() {
     	
-        return "/guest/reservation";
+        return "/guest/reserve";
     }
     
     /**
