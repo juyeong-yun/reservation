@@ -1,45 +1,47 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>온실(溫室) | 예약 진행</title>
-    <link rel="icon" href="../static/images/icon.jpeg" type="image/png">
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
 
-    <link rel="stylesheet" href="../static/css/reservation.css">
+    <link rel="stylesheet" th:href="@{/css/reservation.css}">
+    
     <!-- 폰트어썸 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- js -->
-    <script src="../static/script/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <!-- 개인용 -->
-    <script src="../static/js/myFunction.js"></script>
+    <script th:src="@{/js/myFunction.js}"></script>
 </head>
 <body>
     <div class="header">
         <div class="top-bar">
             <div class="logo">
-                <a href="main.html"><img src="../static/images/logo_white.png" alt="logo"></a>
+                <a th:href="@{main}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
             </div>
                 
-            <div class="right-side">
+           <div class="right-side">
                 <ul id="menu">
                     <li>
-                        <a id="" href="about.html">About</a>
+                        <a id="" th:href="@{about}">About</a>
                         <ul>
-                            <li><a href="about.html#introduce">온실 溫室</a></li>
-                            <li><a href="about.html#directions">Directions</a></li>
+                            <li><a th:href="@{/reservation/about#introduce}">온실 溫室</a></li>
+                             <li><a th:href="@{/reservation/about#directions}">Directions</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="board.html">Board</a>
+                        <a th:href="@{/reservation/board}">Board</a>
                         <ul>
-                            <li><a href="board.html#notice">Notice</a></li>
-                            <li><a href="board.html#qna">QnA</a></li>
+                            <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
+                            <li><a th:href="@{/reservation/board#notice}">Notice</a></li>
+                            <li><a th:href="@{/reservation/board#qna}">QnA</a></li>
                         </ul>
                     </li>
-                    <li><a id="" href="reservation.html">Reserve</a></li>
-                    <li><a id="" href="reviews.html">Review</a></li>
+                    <li><a id="" th:href="@{/reservation/reservation}">Reserve</a></li>
+                    <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
                 </ul>
             </div>
         </div>

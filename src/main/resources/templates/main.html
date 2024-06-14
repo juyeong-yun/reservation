@@ -18,28 +18,28 @@
         <div class="header">
             <div class="top-bar">
                 <div class="logo">
-                    <a th:href="@{main.html}"><img th:src="@{/images/logo.jpeg}" alt="logo"></a>
+                    <a th:href="@{/main}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
                 </div>
                 
                 <div class="right-side">
                     <ul id="menu">
                         <li>
-                            <a id="" th:href="@{about.html}">About</a>
+                            <a id="" th:href="@{/reservation/about}">About</a>
                             <ul>
-                                <li><a th:href="@{about.html#introduce}">온실 溫室</a></li>
-                                <li><a th:href="@{about.html#directions}">Directions</a></li>
+                                <li><a th:href="@{/reservation/about#introduce}">온실 溫室</a></li>
+                                <li><a th:href="@{/reservation/about#directions}">Directions</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a th:href="@{/guest/board.html}">Board</a>
+                            <a th:href="@{/reservation/board}">Board</a>
                             <ul>
                                 <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
-                                <li><a th:href="@{/guest/board.html#notice}">Notice</a></li>
-                                <li><a th:href="@{/guest/board.html#qna}">QnA</a></li>
+                                <li><a th:href="@{/reservation/board#notice}">Notice</a></li>
+                                <li><a th:href="@{/reservation/board#qna}">QnA</a></li>
                             </ul>
                         </li>
-                        <li><a id="" th:href="@{/guest/reservation.html}">Reserve</a></li>
-                        <li><a id="" th:href="@{/write/reviews.html}">Review</a></li>
+                        <li><a id="" th:href="@{/reservation/reservation}">Reserve</a></li>
+                        <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
                     </ul>
                 </div>
             </div>
