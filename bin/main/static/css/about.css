@@ -1,6 +1,42 @@
 @import "main.css";
 
 #directions .explain,
-#directions img {
+#directions .map {
     margin: 20px;
+}
+
+.explain p {
+	display: flex;
+    padding: 3px;
+    align-items: center;
+}
+
+.explain p img {
+	height: auto;
+    width: 15px;
+    margin: 6px;
+}
+
+.explain p:nth-child(3){
+	margin-top: 12px;
+}	
+	
+
+.explain .parking {
+	counter-reset: list-counter;
+    float:left;
+}
+
+.parking li {
+     margin: 1.3em 0;
+    line-height: 1em
+}
+
+.parking li:before{
+    content: counter(list-counter);
+    counter-increment: list-counter;
+    color: #666;
+    font: inherit;
+    font-size: 1.3em;
+    margin: 0.7em;
 }

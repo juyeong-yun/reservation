@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>온실(溫室) | about</title>
-    <link rel="icon" th:href="@{/images/icon_white.png}" type="image/png">
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
 
-    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/about.css}">
     <!-- 폰트어썸 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -53,13 +53,24 @@
             
             <div id="directions">
                 <h2>오시는 길</h2>
-                <img th:src="@{/images/map_example.jpeg}" alt="약도">
-                <p class="explain">
-                    サービス内容 デザイン歴25年以上になります。心地の良いもの、心動かされるものを少しでも創り出していけるように…。 <br>
-                    Osanai design studio（長内デザイン室） は、グラフィックデザインを中心に、アートディレクション、ロゴマークやパッケージデザイン、タイポグラフィ、写真撮影・写真加工、店舗などの空間計画などのお手伝いなどをしています。 地図デザインはとても難しいものです。 <br>
-                    特に小さなショップカードなどに載せる場合は、文字の大きさが難しかったり、相手に正しく伝わりやすいか…など。プロのデザイナーが経験から導きだす美しい地図をご提供いたします。 ＜制作する地図について＞ ● シ...
-                </p>
-
+                <div class="explain">
+					<p>
+						<img th:src="@{/images/Seoul_Metro_Line_6.svg}">
+						<img src="">
+						망원역 2번출구 도보4분</p>
+					<p>
+						<img th:src="@{/images/Seoul_Metro_Line_2.svg}">
+						<img th:src="@{/images/Seoul_Metro_Line_6.svg}">
+					합정역 9번출구 도보9분</p>
+					<p>주차 공간이 제공되지 않는 관계로 주변 공영주차장 이용을 부탁드립니다.</p>
+					
+					<ul class="parking">
+						<li>청기와2 노상 공영 주차장 : 서울 마포구 서교동 467-11 <a href="https://naver.me/5Q4GasLa">https://naver.me/5Q4GasLa</a></li>
+						<li>청기와3 노상 공영 주차장 : 서울 마포구 서교동 458-12 <a href="https://naver.me/Gi9pDmAz">https://naver.me/Gi9pDmAz</a></li>
+						<li>현대유통주차장 : 서울특별시 마포구 동교로12길 27 <a href="https://naver.me/GltSKycM">https://naver.me/GltSKycM</a></li>							
+					</ul>
+              	</div>
+                <img class="map" th:src="@{/images/map_example.jpeg}" alt="약도">
             </div>
         </form>
     </div>

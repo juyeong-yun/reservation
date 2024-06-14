@@ -11,9 +11,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("reservation")
 public class WriteController {
 
+	/**
+	 * 후기/질문쓰는 페이지
+	 * @return
+	 */
 	@GetMapping("/write")
 	public String write( ) {
 		
 		return "/write/write";
 	}
+	
+	
 }

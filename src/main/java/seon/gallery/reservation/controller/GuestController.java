@@ -37,11 +37,15 @@ public class GuestController {
      * @return
      */
     @GetMapping("/reservation")
-    public String reserve() {
+    public String reservation() {
     	
         return "/guest/reservation";
     }
     
+    /**
+     * 리뷰 페이지
+     * @return
+     */
     @GetMapping("/reviews")
     public String reviews() {
     	
