@@ -6,10 +6,14 @@
     <title>온실(溫室) | 글쓰기</title>
     <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
 
-    <link rel="stylesheet" th:href="@{/css/about.css}">
+    <link rel="stylesheet" th:href="@{/css/write.css}">
     
     <!-- 폰트어썸 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--ckeditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <!-- 개인용 -->
+    <script th:src="@{/js/myFunction.js}"></script>
 </head>
 <body>
     <div class="header">
@@ -54,8 +58,12 @@
                         </select>
                     </th>
                 </tr>
-                <tr><th>제목<input type="text" name="" id=""></th></tr>
-                <tr><td><input type="text" name="" id=""></td></tr>
+                <tr>
+					<th>제목<input type="text" name="" id=""></th>
+				</tr>
+                <tr>
+					<td><div id="editor"></div></td>
+				</tr>
             </table>
         </form>
     </div>

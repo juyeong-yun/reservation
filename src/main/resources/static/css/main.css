@@ -53,6 +53,10 @@ body {
     height: 100%;
 }
 
+a:hover {
+    color: rgb(116, 116, 116);
+}
+
 div.background {
     background-image: url('../images/poster.jpg');
     position: fixed;
