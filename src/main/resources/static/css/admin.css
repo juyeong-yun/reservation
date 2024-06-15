@@ -1,14 +1,9 @@
 @import "main.css";
 
-table {
-	width: 90%;
-	
-}
 
 /*********
 ckeditor
 **********/
-
 .ck-editor__editable[role="textbox"] {
 	/* Editing area */
 	min-height: 200px;

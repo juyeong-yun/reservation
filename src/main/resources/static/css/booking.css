@@ -5,13 +5,21 @@ table {
 	
 }
 
-.ck-editor__editable[role="textbox"] {
-	/* Editing area */
-	min-height: 200px;
+.reserve-form {
+	display: flex;
+	
+}
+section {
+	border:1px solid;
 }
 
-.ck-content .image {
-	/* Block images */
-	max-width: 80%;
-	margin: 20px auto;
+.ticket,
+.reserve-info {
+	width: 52%;
+}
+
+.amount,
+.agree {
+	float: right;
+	width: 42%;
 }
