@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import seon.gallery.reservation.dto.ReviewDTO;
-import seon.gallery.reservation.dto.check.YesorNo;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,6 +32,9 @@ public class ReviewEntity {
 	@Column(name="review_name", nullable = false)
 	private String reviewName;
 	
+	@Column(name="phone_endNumber", nullable = false)
+	private String phoneEndNumber;
+	
 	@Column(name="review_title", nullable = false)
 	private String reviewTitle;
 	
@@ -49,6 +51,7 @@ public class ReviewEntity {
 		return ReviewEntity.builder()
 				.reviewId(dto.getReviewId())
 				.reviewName(dto.getReviewName())
+				.phoneEndNumber(dto.getPhoneEndNumber())
 				.reviewTitle(dto.getReviewTitle())
 				.reviewDetail(dto.getReviewDetail())
 				.writeDate(dto.getWriteDate())

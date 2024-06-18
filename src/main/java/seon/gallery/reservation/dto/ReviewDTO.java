@@ -22,6 +22,7 @@ public class ReviewDTO {
 
 	private Long reviewId;
 	private String reviewName;
+	private String phoneEndNumber;
 	private String reviewTitle;
 	private String reviewDetail;
 	private LocalDateTime writeDate;
@@ -32,6 +33,7 @@ public class ReviewDTO {
 		return ReviewDTO.builder()
 				.reviewId(entity.getReviewId())
 				.reviewName(entity.getReviewName())
+				.phoneEndNumber(entity.getPhoneEndNumber())
 				.reviewTitle(entity.getReviewTitle())
 				.reviewDetail(entity.getReviewDetail())
 				.writeDate(entity.getWriteDate())

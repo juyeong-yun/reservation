@@ -50,6 +50,26 @@ public class GuestController {
     	return "/guest/booking";
     }
     
+	/**
+     * 리뷰 페이지
+     * @return
+     */
+    @GetMapping("/reviews")
+    public String reviews() {
+    	
+        return "/guest/reviews";
+    }
+
+	/**
+	 * 후기/질문쓰는 페이지
+	 * @return
+	 */
+	@GetMapping("/write")
+	public String write( ) {
+		
+		return "/guest/write";
+	}
+    
     
     
     
