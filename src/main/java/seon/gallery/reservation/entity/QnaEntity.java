@@ -29,13 +29,13 @@ public class QnaEntity {
 	@Column(name="qna_num")
 	private Long qnaId;
 	
-	@Column(name="qna_name")
+	@Column(name="qna_name", nullable = false)
 	private String qnaName;
 	
-	@Column(name="qna_title")
+	@Column(name="qna_title", nullable = false)
 	private String qnaTitle;
 	
-	@Column(name="qna_detail")
+	@Column(name="qna_detail", nullable = false)
 	private String qnaDetail;
 	
 	@Column(name="write_date")

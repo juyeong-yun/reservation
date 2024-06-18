@@ -29,10 +29,13 @@ public class ReserveEntity {
 	@Column(name="reserve_num")
 	private Long reserveId;
 	
-	@Column(name="reserve_name")
+	@Column(name="event_time")
+	private LocalDateTime eventTime;
+	
+	@Column(name="reserve_name", nullable = false)
 	private String reserveName;
 	
-	@Column(name="phone")
+	@Column(name="phone", nullable = false)
 	private String phone;
 	
 	@Column(name="reserve_date")
@@ -52,6 +55,7 @@ public class ReserveEntity {
 	
 	public static ReserveEntity toEntitiy (ReserveDTO dto) {
 		return ReserveEntity.builder()
+				.eventTime(dto.getEventTime())
 				.reserveName(dto.getReserveName())
 				.phone(dto.getPhone())
 				.reserveDate(dto.getReserveDate())

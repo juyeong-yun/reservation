@@ -31,10 +31,10 @@ public class NoticeEntity {
 	@Column(name="notice_num")
 	private Long noticeId;
 	
-	@Column(name="notice_title")
+	@Column(name="notice_title", nullable = false)
 	private String noticeTitle;
 	
-	@Column(name="notice_detail")
+	@Column(name="notice_detail", nullable = false)
 	private String noticeDetail;
 	
 	@Column(name="write_date")

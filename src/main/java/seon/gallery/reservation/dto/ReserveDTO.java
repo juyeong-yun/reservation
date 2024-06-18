@@ -20,6 +20,7 @@ import seon.gallery.reservation.entity.ReserveEntity;
 public class ReserveDTO {
 	
 	private Long reserveId;
+	private LocalDateTime eventTime;
 	private String reserveName;
 	private String phone;
 	private LocalDateTime reserveDate;
@@ -30,6 +31,7 @@ public class ReserveDTO {
 	
 	public static ReserveDTO toDTO (ReserveEntity entity) {
 		return ReserveDTO.builder()
+				.eventTime(entity.getEventTime())
 				.reserveName(entity.getReserveName())
 				.phone(entity.getPhone())
 				.reserveDate(entity.getReserveDate())

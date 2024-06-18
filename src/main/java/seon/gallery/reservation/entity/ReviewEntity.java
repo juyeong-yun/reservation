@@ -30,13 +30,13 @@ public class ReviewEntity {
 	@Column(name="review_num")
 	private Long reviewId;
 	
-	@Column(name="review_name")
+	@Column(name="review_name", nullable = false)
 	private String reviewName;
 	
-	@Column(name="review_title")
+	@Column(name="review_title", nullable = false)
 	private String reviewTitle;
 	
-	@Column(name="review_detail")
+	@Column(name="review_detail", nullable = false)
 	private String reviewDetail;
 	
 	@Column(name="write_date")
