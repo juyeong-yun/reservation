@@ -32,11 +32,23 @@
     margin-top: 13%;
 }
 
+#calendar h4 {
+	font-weight: 400;
+    margin-bottom: 13px;
+}
 
 #calendar th, td {
     width: 254px;
-    border: 0.74px solid;
-}    
+    border: 1px solid #ffffff;
+   	color:ffffff ;
+   	background: darkgray;
+} 
+
+#calendar *[class*="available"] {
+	border-color: #000000;
+	color: #000000;
+	background: #ffffff;
+}   
 
 #calendar th {
     height: 32px;
@@ -54,9 +66,7 @@
 }
 
 .day {
-    position: relative;
     float: inline-end;
-    top: -45%;
     padding: 5px;
 }
 
