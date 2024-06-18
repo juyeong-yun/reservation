@@ -26,7 +26,7 @@ create table qna(
     ,qna_title varchar2(200) not null
     ,qna_detail varchar2(4000) not null
     ,write_date date default sysdate
-    ,qna_pwd number(4)
+    ,qna_pwd NUMBER(4)
     ,qna_answer varchar2(4000)
     ,is_lock char(1) default 'N' check(is_lock in ('N','Y'))
     ,is_answer char(1) default 'N' check(is_answer in ('N','Y'))
