@@ -21,8 +21,8 @@ import seon.gallery.reservation.entity.ReviewEntity;
 public class ReviewDTO {
 
 	private Long reviewId;
-	private String reviewName;
-	private String phoneEndNumber;
+	private String reviewer;
+	private String phone;
 	private String reviewTitle;
 	private String reviewDetail;
 	private LocalDateTime writeDate;
@@ -32,8 +32,8 @@ public class ReviewDTO {
 	public static ReviewDTO toDTO(ReviewEntity entity) {
 		return ReviewDTO.builder()
 				.reviewId(entity.getReviewId())
-				.reviewName(entity.getReviewName())
-				.phoneEndNumber(entity.getPhoneEndNumber())
+				.reviewer(entity.getReviewer())
+				.phone(entity.getPhone())
 				.reviewTitle(entity.getReviewTitle())
 				.reviewDetail(entity.getReviewDetail())
 				.writeDate(entity.getWriteDate())

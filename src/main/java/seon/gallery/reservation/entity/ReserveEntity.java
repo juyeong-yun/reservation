@@ -26,14 +26,17 @@ import seon.gallery.reservation.dto.check.YesorNo;
 public class ReserveEntity {
 	
 	@Id
-	@Column(name="reserve_num")
+	@Column(name="reserve_id")
 	private Long reserveId;
+	
+	@Column(name="event_id")
+	private Long eventId;
 	
 	@Column(name="event_time")
 	private LocalDateTime eventTime;
 	
-	@Column(name="reserve_name", nullable = false)
-	private String reserveName;
+	@Column(name="reserver", nullable = false)
+	private String reserver;
 	
 	@Column(name="phone", nullable = false)
 	private String phone;
@@ -55,8 +58,9 @@ public class ReserveEntity {
 	
 	public static ReserveEntity toEntitiy (ReserveDTO dto) {
 		return ReserveEntity.builder()
+				.reserveId(dto.getReserveId())
 				.eventTime(dto.getEventTime())
-				.reserveName(dto.getReserveName())
+				.reserver(dto.getReserver())
 				.phone(dto.getPhone())
 				.reserveDate(dto.getReserveDate())
 				.isPay(dto.getIsPay())

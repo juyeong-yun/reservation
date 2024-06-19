@@ -28,7 +28,7 @@ import seon.gallery.reservation.dto.check.YesorNo;
 public class NoticeEntity {
 	
 	@Id
-	@Column(name="notice_num")
+	@Column(name="notice_id")
 	private Long noticeId;
 	
 	@Column(name="notice_title", nullable = false)

@@ -13,15 +13,32 @@ import seon.gallery.reservation.service.AdminService;
 public class AdminController {
 	private static AdminService adminService;
 	
+	/**   
+	 * 관리자 메인화면	
+	 * @return
+	 */
 	@GetMapping("/admin_main")
 	public String admin_main() {
 		
 		return "/admin/admin_main";
 	}
 	
+	/**
+	 * 관리자 예약 확인 화면
+	 * @return
+	 */
 	@GetMapping("/check")
 	public String check() {
 		return "/admin/check";
+	}
+	
+	/**
+	 * 관리자 관리화면
+	 * @return
+	 */
+	@GetMapping("/manage")
+	public String manage() {
+		return "/admin/manage";
 	}
 	
 

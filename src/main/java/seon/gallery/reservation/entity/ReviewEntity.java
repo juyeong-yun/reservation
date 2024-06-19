@@ -29,11 +29,11 @@ public class ReviewEntity {
 	@Column(name="review_num")
 	private Long reviewId;
 	
-	@Column(name="review_name", nullable = false)
-	private String reviewName;
+	@Column(name="reviewer", nullable = false)
+	private String reviewer;
 	
-	@Column(name="phone_endNumber", nullable = false)
-	private String phoneEndNumber;
+	@Column(name="phone", nullable = false)
+	private String phone;
 	
 	@Column(name="review_title", nullable = false)
 	private String reviewTitle;
@@ -50,8 +50,8 @@ public class ReviewEntity {
 	public static ReviewEntity toEntity(ReviewDTO dto) {
 		return ReviewEntity.builder()
 				.reviewId(dto.getReviewId())
-				.reviewName(dto.getReviewName())
-				.phoneEndNumber(dto.getPhoneEndNumber())
+				.reviewer(dto.getReviewer())
+				.phone(dto.getPhone())
 				.reviewTitle(dto.getReviewTitle())
 				.reviewDetail(dto.getReviewDetail())
 				.writeDate(dto.getWriteDate())
