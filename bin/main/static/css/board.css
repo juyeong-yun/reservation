@@ -59,6 +59,7 @@ table td.date {
     margin-bottom: 32%;
 }
 
+.notice .write,
 .qna .write {
     float: right;
     padding: 0 14px 10px;

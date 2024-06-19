@@ -1,4 +1,7 @@
 @import "../main.css";
+@import "../board.css";
+
+/* 메인 화면 */
 
 .progress-bar {
     width: 100%;
@@ -15,6 +18,41 @@
     text-align: center;
     background-color: #4F98FF;
     color: #111;
+}
+
+
+/* admin_write 화면 */
+.answer textarea{
+	resize: none;
+	width: 100%;
+    display: ;
+    height: 6em;
+    padding: 5px;
+}
+button{
+	margin: 0 2px;
+}
+.submit{
+	padding: 3px;
+    color: white;
+    background-color: #ff395e;
+    border: none;
+	cursor: pointer;	
+}
+.delete {
+	padding: 3px;
+    color: white;
+    background-color: #ff395e;
+    border: none;
+	cursor: pointer;
+}
+
+.update {
+	padding: 3px;
+    color: white;
+    background-color: #268e26;
+    border: none;
+	cursor: pointer;
 }
 
 /*********
