@@ -26,7 +26,7 @@ import seon.gallery.reservation.dto.ReviewDTO;
 @Table(name="review")
 public class ReviewEntity {
 	@Id
-	@Column(name="review_num")
+	@Column(name="review_id")
 	private Long reviewId;
 	
 	@Column(name="reviewer", nullable = false)

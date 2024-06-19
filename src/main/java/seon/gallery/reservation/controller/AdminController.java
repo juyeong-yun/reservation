@@ -40,6 +40,15 @@ public class AdminController {
 	public String manage() {
 		return "/admin/manage";
 	}
+
+	/**
+	 * 관리자 글작성 화면
+	 * @return
+	 */
+	@GetMapping("/admin_write")
+	public String admin_write() {
+		return "/admin/admin_write";
+	}
 	
 
 }

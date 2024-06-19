@@ -28,7 +28,7 @@
                         <a id="" th:href="@{about}">About</a>
                         <ul>
                             <li><a th:href="@{/reservation/about#introduce}">온실 溫室</a></li>
-                             <li><a th:href="@{/reservation/about#directions}">Directions</a></li>
+                            <li><a th:href="@{/reservation/about#directions}">Directions</a></li>
                         </ul>
                     </li>
                     <li>
@@ -50,15 +50,16 @@
     
     <div class="content">
         <form action="">
+            <h4>본인 확인을 위해 개인 정보를 입력해주세요.</h4>
             <table>
 				<tr>
-					<td>이름</td>
-					<td><input type="text" name="" id="" requird></td>
-					<td>핸드폰 번호</td>
+					<td>이름<p>*</p></td>
+					<td><input type="text" name="" id="" placeholder="홍길동"></td>
+					<td>핸드폰 번호<p>*</p></td>
 					<td><input type="text" name="" id="phone" placeholder="01012345678" required></td> 
 				</tr>
                 <tr>
-					<td colspan="4"><input type="text" name="" id="title" placeholder="제목을 입력해주세요." required></tdㅊ>
+					<td colspan="4"><input type="text" name="" id="title" placeholder="제목을 입력해주세요." required></td>
 				</tr>
                 <tr>
 					<td colspan="4"><div id="editor"></div></td>

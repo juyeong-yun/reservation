@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.service.GuestService;
 
-
 @Controller
 @Slf4j
 @RequestMapping("/reservation")
 public class GuestController {
-	private GuestService guestService;
+	private GuestService GuestService;
 
 	/**
 	 * board 로 가는
@@ -20,7 +19,6 @@ public class GuestController {
 	 */
     @GetMapping("/board")
     public String board() {
-    	
         return "/guest/board";
     }
     
@@ -30,7 +28,6 @@ public class GuestController {
      */
     @GetMapping("/about")
     public String about() {
-    	
         return "/guest/about";
     }
     
@@ -40,37 +37,35 @@ public class GuestController {
      */
     @GetMapping("/reserve")
     public String reserve() {
-    	
         return "/guest/reserve";
     }
     
+    /**
+     * 예약 과정 페이지
+     * @return
+     */
     @GetMapping("/booking")
     public String booking() {
-    	
-    	return "/guest/booking";
+        return "/guest/booking";
     }
     
-	/**
+    /**
+     * 글쓰기 페이지
+     * @return
+     */
+    @GetMapping("/write")
+    public String write() {
+        return "/guest/write";
+    }
+    
+    /**
      * 리뷰 페이지
      * @return
      */
     @GetMapping("/reviews")
     public String reviews() {
-    	
         return "/guest/reviews";
     }
-
-	/**
-	 * 후기/질문쓰는 페이지
-	 * @return
-	 */
-	@GetMapping("/write")
-	public String write( ) {
-		
-		return "/guest/write";
-	}
-    
-    
     
     
 }
