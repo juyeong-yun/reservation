@@ -47,22 +47,21 @@
     </div>
     
     <!-- 글 쓰는 건 ckeditor 쓰기 -->
+    
     <div class="content">
         <form action="">
             <table>
-                <tr>
-                    <th>글 남길 곳
-                        <select name="write" class="select">
-                            <option value="qna">QnA</option>
-                            <option value="review">Reviews</option>
-                        </select>
-                    </th>
-                </tr>
-                <tr>
-					<th>제목<input type="text" name="" id=""></th>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="" id="" requird></td>
+					<td>핸드폰 번호</td>
+					<td><input type="text" name="" id="phone" placeholder="01012345678" required></td> 
 				</tr>
                 <tr>
-					<td><div id="editor"></div></td>
+					<td colspan="4"><input type="text" name="" id="title" placeholder="제목을 입력해주세요." required></tdㅊ>
+				</tr>
+                <tr>
+					<td colspan="4"><div id="editor"></div></td>
 				</tr>
             </table>
         </form>

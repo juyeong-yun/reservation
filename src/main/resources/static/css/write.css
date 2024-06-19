@@ -1,8 +1,29 @@
 @import "main.css";
 
 table {
-	width: 90%;
+	width: 100%;
 	
+}
+
+td span{
+	font-size: 16px;
+}
+
+.info{
+	display: inline-flex;
+    align-items: center;
+}
+
+.info input {
+	width: 40%;
+	height: 40px;
+}
+
+#title{
+	margin: 10px 0;
+    width: 100%;
+    height: 40px;
+    padding: 5px;
 }
 
 /*********
@@ -11,7 +32,7 @@ ckeditor
 
 .ck-editor__editable[role="textbox"] {
 	/* Editing area */
-	min-height: 200px;
+	min-height: 50vh;
 }
 
 .ck-content .image {
