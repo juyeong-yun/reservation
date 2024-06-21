@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.service.GuestService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @Slf4j
@@ -65,6 +67,17 @@ public class GuestController {
     @GetMapping("/reviews")
     public String reviews() {
         return "/guest/reviews";
+    }
+    
+    /**
+     * 리뷰 페이지에서 눌렀을때 해당하는 내용의 리뷰 세부페이지로 이동
+     * 여기서는 확실히 @requestParam 필요
+     * @return
+     */
+    @GetMapping("/reviewsDetail")
+    public String reviewsDetail() {
+
+        return "/guest/reviewsDetail";
     }
     
     

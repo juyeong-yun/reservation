@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온실(溫室) | 후기</title>
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
+
+    <link rel="stylesheet" th:href="@{/css/reviews.css}">
+    
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- js -->
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
+            </div>
+            
+            <div class="right-side">
+                <ul id="menu">
+                    <li>
+                        <a id="" th:href="@{/reservation/about}">About</a>
+                        <ul>
+                            <li><a th:href="@{/reservation/about#introduce}">온실 溫室</a></li>
+                            <li><a th:href="@{/reservation/about#directions}">Directions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a th:href="@{/reservation/board}">Board</a>
+                        <ul>
+                            <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
+                            <li><a th:href="@{/reservation/board#notice}">Notice</a></li>
+                            <li><a th:href="@{/reservation/board#qna}">QnA</a></li>
+                        </ul>
+                    </li>
+                    <li><a id="" th:href="@{/reservation/reserve}">Reserve</a></li>
+                    <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        
+    </div>
+
+    <footer>
+        <div class="sns">
+            <a href="https://www.instagram.com/du_bi_dubap?igsh=aHo1a3JnenZrajJh&utm_source=qr"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/Du_Bidubap"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <div class="footer-info">
+            <div>
+				<span>Lee Seungyoon Birthday Exhibition</span>
+				<span>Aug.16-18.2024 Gallary Non-Scaled</span>
+			</div>
+			<div class="footer-img">
+				<img th:src="@{/images/icon_white.png}">
+				<img th:src="@{/images/logo_white.png}">	
+			</div>			
+		</div>
+    </footer>
+</body>
+</html>

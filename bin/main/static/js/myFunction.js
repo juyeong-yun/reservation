@@ -8,7 +8,7 @@
  */
 
 
-// reserve 페이지에 달력 사용하는 자바 오픈 api
+//// reserve 페이지에 달력 사용하는 자바 오픈 api
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendars');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// ckeditor 불러오는 api
+//// ckeditor 불러오는 api
 document.addEventListener("DOMContentLoaded", function() {
 	ClassicEditor
 		.create(document.querySelector('#editor'))
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// modal 창과 연결된 js
+//// modal 창과 연결된 js
 $(function() {
     // Variable to store the href to navigate to upon confirmation
     let targetHref;
@@ -55,7 +55,7 @@ $(function() {
 });
 
 
-// 리뷰페이지 글쓰기 버튼 기간 지정
+//// 리뷰페이지 글쓰기 버튼 기간 지정
 function checkDate() {
     // 지정된 날짜 (이벤트 시작 날짜)
     // 날짜는 여기서 지정 하면 될 거 같다.
