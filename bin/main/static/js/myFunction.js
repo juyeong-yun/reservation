@@ -24,9 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
         .create(document.querySelector('#editor'), {
             enter : 'paragraph', // 엔터 키 동작을 문단 생성으로 설정
         })
-        .then(editor => {
-            console.log('Editor was initialized', editor);
-        })
         .catch(error => {
             console.error('Editor initialization failed', error);
         });

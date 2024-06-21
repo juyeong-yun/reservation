@@ -46,6 +46,9 @@ public class ReviewEntity {
 	
 	@Column(name="update_date")
 	private LocalDateTime updateDate;
+
+	@Column(name="original_file_name")
+	private String originalFileName;
 	
 	public static ReviewEntity toEntity(ReviewDTO dto) {
 		return ReviewEntity.builder()
@@ -56,6 +59,7 @@ public class ReviewEntity {
 				.reviewDetail(dto.getReviewDetail())
 				.writeDate(dto.getWriteDate())
 				.updateDate(dto.getUpdateDate())
+				.originalFileName(dto.getOriginalFileName())
 				.build();
 	}
 
