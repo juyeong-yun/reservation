@@ -15,8 +15,7 @@ td{
 	text-align: center;
 }
 
-td p {
-	display: inline-flex;
+td span {
 	color: red;
 }
 

@@ -20,10 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //// ckeditor 불러오는 api
 document.addEventListener("DOMContentLoaded", function() {
-	ClassicEditor
-		.create(document.querySelector('#editor'))
-		.catch(error => {
-                    console.error(error);
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            enter : 'paragraph', // 엔터 키 동작을 문단 생성으로 설정
+        })
+        .then(editor => {
+            console.log('Editor was initialized', editor);
+        })
+        .catch(error => {
+            console.error('Editor initialization failed', error);
         });
 });
 
