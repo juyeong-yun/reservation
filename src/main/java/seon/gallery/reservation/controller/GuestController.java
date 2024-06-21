@@ -1,6 +1,6 @@
 package seon.gallery.reservation.controller;
 
-import org.hibernate.mapping.List;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
-import seon.gallery.reservation.repository.QnaRepository;
 import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
@@ -19,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @Controller
 @Slf4j
@@ -38,7 +34,13 @@ public class GuestController {
 	 * @return
 	 */
     @GetMapping("/board")
-    public String board() {
+    public String board(Model model) {
+
+        if (model.containsAttribute("qnaList")) {        
+            List<QnaDTO> qnaList = qnaService.getqnaList();
+            model.addAttribute("list", qnaList);
+        }
+        
         return "/guest/board";
     }
 
@@ -90,6 +92,8 @@ public class GuestController {
             }
 
             model.addAttribute("from", from);
+
+            log.info("여기는 write");
             
         return "/guest/write";
     }
@@ -104,10 +108,12 @@ public class GuestController {
      */
     @PostMapping("/writeInsert")
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
-        @ModelAttribute QnaDTO qnaDTO, @ModelAttribute ReviewDTO reviewDTO, RedirectAttributes attr
+        @ModelAttribute @Valid QnaDTO qnaDTO, @ModelAttribute @Valid ReviewDTO reviewDTO, RedirectAttributes attr
         ) {
             if ("qna".equals(from)) {
+                log.info("qnainsert");
                 qnaService.writeQna(qnaDTO);
+                log.info("저장했나?");
 
             }else if ("review".equals(from)) {
                 reviewService.writeReview(reviewDTO);

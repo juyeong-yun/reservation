@@ -50,7 +50,7 @@
     <!-- 글 쓰는 건 ckeditor 쓰기 -->
     
     <div class="content">
-        <form th:action="@{/reservation/writeInsert}" method="Post" enctype="multipart/form-data" >
+        <form th:action="@{/reservation/writeInsert(from=${from})}" method="Post" enctype="multipart/form-data" >
             <!-- <h4>본인 확인을 위해 개인 정보를 입력해주세요.</h4> -->
             <table>
 				<tr th:if="${from == 'qna'}">
@@ -71,6 +71,7 @@
 				</tr>
                 <tr>
 					<td colspan="4"><div id="editor"></div></td>
+                    <input type="hidden" name="detail" id="detail">
 				</tr>
             </table>
 
