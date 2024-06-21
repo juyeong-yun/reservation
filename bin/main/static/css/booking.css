@@ -1,0 +1,70 @@
+@import "main.css";
+
+table {
+	width: 90%;
+	
+}
+
+.reserve-form {
+	background-color: bisque;
+}
+
+.reserve-form div {
+	border: 0.72px solid;
+    margin: 30px 15px;
+    box-shadow: 2px 2px 3px rgb(22 22 22 / 47%);
+    border-radius: 15px;
+    padding: 9px;
+}
+
+div.ticket{
+	float:left;
+	width:47%;
+	height:50%
+}
+
+div.reserve-info {
+	clear: left;
+	float: left;
+	width:47%;
+	height:50%
+}
+
+div.amount {
+	float:right;
+	width:47%;
+	height:50%
+}
+
+div.agree{
+	clear: right;
+	float: right;
+	width:47%;
+	height:50%
+}
+
+.reserve-form span {
+	font-weight: 400;
+    font-size: 18px;
+    display: block;
+}
+
+.ticket img {
+	display: block;
+    margin: 30px;
+    width: 20%;
+    height: auto;
+}
+
+.amount input {
+	display: inline-block;
+    width: 35em;
+    margin: 10px;
+    height: 3.6em;
+}
+
+.reserve-info input {
+    width: 25em;
+    margin: 10px;
+    height: 3.6em;
+}

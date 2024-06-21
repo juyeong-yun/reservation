@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온실(溫室) | 관리자 예약확인</title>
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
+    
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" th:href="@{/css/admin/manage.css}">
+    
+    <!-- js -->
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
+            </div>
+            
+            <div class="right-side">
+                <ul id="menu">
+                    <li><a id="" th:href="@{/reservation/check}">예약 관리</a></li>
+                    <li><a th:href="@{/reservation/admin_write}">글 작성</a>
+                        <ul>
+                            <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
+                            <li><a th:href="@{/reservation/admin_write#notice}">공지 작성</a></li>
+                            <li><a th:href="@{/reservation/admin_write#qna}">질문 답변</a></li>
+                        </ul>
+                    </li>
+                    <li><a id="" th:href="@{/reservation/manage}">정보 추가</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+   <div class="content">
+	   
+   </div>
+    
+</body>
+</html>
