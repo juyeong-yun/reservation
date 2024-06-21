@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.service.GuestService;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.ui.Model;
+
 
 @Controller
 @Slf4j
@@ -56,7 +58,10 @@ public class GuestController {
      * @return
      */
     @GetMapping("/write")
-    public String write() {
+    public String write(
+        @RequestParam(value="from") String from, Model model ) {
+            model.addAttribute("from", from);
+            
         return "/guest/write";
     }
     

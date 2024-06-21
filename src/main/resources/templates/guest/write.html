@@ -56,10 +56,10 @@
 					<td>이름<p>*</p></td>
 					<td><input type="text" name="" id="" placeholder="홍길동"></td>
                     <!-- qna에서 페이지가 넘어올때는 핸드폰 번호가 아니라 비밀번호 설정이 보이게 하려면 if문을 걸면 된다. -->
-					<td>핸드폰 번호<p>*</p></td>
-					<td><input type="text" name="" id="phone" placeholder="01012345678" required></td> 
-                    <td>비밀번호 설정</td>
-                    <td><input type="text" name="" id="qnaPwd" placeholder="1234"></td>
+                    <td th:if="${from == 'qna'}">핸드폰 번호<p>*</p></td>
+                    <td th:if="${from == 'qna'}"><input type="text" name="" id="phone" placeholder="01012345678" required></td> 
+                    <td th:if="${from == 'review'}">비밀번호 설정</td>
+                    <td th:if="${from == 'review'}"><input type="text" name="" id="qnaPwd" placeholder="1234"></td>
 				</tr>
                 <tr>
 					<td colspan="4"><input type="text" name="" id="title" placeholder="제목을 입력해주세요." required></td>
