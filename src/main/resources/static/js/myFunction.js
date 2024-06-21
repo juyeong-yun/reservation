@@ -1,4 +1,29 @@
 
+// 리뷰페이지 글쓰기에 기간 지정
+
+function checkDate() {
+    // 지정된 날짜 (이벤트 시작 날짜)
+    // 날짜는 여기서 지정 하면 될 거 같다.
+    var startDate = new Date('2024-06-21'); // 이벤트 시작 날짜를 여기에 설정
+    var currentDate = new Date();
+
+    if (currentDate < startDate) {
+        alert('이벤트 참여 기간이 아닙니다. 이벤트는 2024년 7월 1일부터 시작됩니다.');
+    } else {
+        // 이벤트 시작 후 링크 활성화
+        document.getElementById('reviewLink').href = '/reservation/write?from=review';
+    }
+}
+
+// 페이지 로드 시 날짜를 체크하여 링크를 활성화하거나 비활성화
+document.addEventListener('DOMContentLoaded', function() {
+    var startDate = new Date('2024-07-01');
+    var currentDate = new Date();
+    
+    if (currentDate >= startDate) {
+        document.getElementById('reviewLink').href = '/reservation/write?from=review';
+    }
+});
 
 // reserve 페이지에 달력 사용하는 자바 오픈 api
 document.addEventListener('DOMContentLoaded', function() {
