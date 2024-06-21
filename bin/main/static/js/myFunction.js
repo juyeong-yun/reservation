@@ -1,33 +1,9 @@
 /**
  * 목차 설정
- * 1. reserve 페이지에 달력 사용하는 자바 오픈 api (현재 : 사용 안함 ) = 추후에 삭제 예정
- * 2. ckeditor 불러오는 api
- * 3. reserve 예약시간 누르면 나오는 모달과 관련된 js
- * 4. 리뷰페이지 글쓰기 버튼 기간 설정
- * 
+ * 1. reserve 예약시간 누르면 나오는 모달과 관련된 js
+ * 2. 리뷰페이지 글쓰기 버튼 기간 설정
+ * 3. board 페이지에서 isLock 에 체크하면 input 박스 보이도록
  */
-
-
-//// reserve 페이지에 달력 사용하는 자바 오픈 api
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendars');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-    });
-        calendar.render();
-});
-
-
-//// ckeditor 불러오는 api
-document.addEventListener("DOMContentLoaded", function() {
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-            enter : 'paragraph', // 엔터 키 동작을 문단 생성으로 설정
-        })
-        .catch(error => {
-            console.error('Editor initialization failed', error);
-        });
-});
 
 
 //// modal 창과 연결된 js
@@ -79,5 +55,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (currentDate >= startDate) {
         document.getElementById('reviewLink').href = '/reservation/write?from=review';
+    }
+});
+
+
+// board 페이지에서 isLock 에 체크하면 input 박스 보이도록
+document.addEventListener('DOMContentLoaded', function(){
+    var ischeck = document.getElementById('isLock');
+    var pwdinput = document.getElementById('qnaPwd');
+    
+    if (ischeck && pwdinput) { // 요소가 존재하는지 확인
+        ischeck.addEventListener('change', function(){
+            pwdinput.style.display = this.checked ? 'block' : 'none';
+        });
+        
+        // 페이지 로드 시 초기 상태에 따라 처리
+        pwdinput.style.display = ischeck.checked ? 'block' : 'none';
+    } else {
+        console.error('Cannot find isLock or qnaPwd element.');
     }
 });

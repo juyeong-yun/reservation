@@ -23,8 +23,8 @@ public class ReviewDTO {
 	private Long reviewId;
 	private String reviewer;
 	private String phone;
-	private String reviewTitle;
-	private String reviewDetail;
+	private String title;
+	private String detail;
 	private LocalDateTime writeDate;
 	private LocalDateTime updateDate;
 	private MultipartFile reviewImage;
@@ -35,8 +35,8 @@ public class ReviewDTO {
 				.reviewId(entity.getReviewId())
 				.reviewer(entity.getReviewer())
 				.phone(entity.getPhone())
-				.reviewTitle(entity.getReviewTitle())
-				.reviewDetail(entity.getReviewDetail())
+				.title(entity.getTitle())
+				.detail(entity.getDetail())
 				.writeDate(entity.getWriteDate())
 				.updateDate(entity.getUpdateDate())
 				.originalFileName(entity.getOriginalFileName())

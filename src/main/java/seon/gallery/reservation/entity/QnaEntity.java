@@ -32,17 +32,17 @@ public class QnaEntity {
 	@Column(name="qna_name", nullable = false)
 	private String qnaName;
 	
-	@Column(name="qna_title", nullable = false)
-	private String qnaTitle;
+	@Column(name="title", nullable = false)
+	private String title;
 	
-	@Column(name="qna_detail", nullable = false)
-	private String qnaDetail;
+	@Column(name="detail", nullable = false)
+	private String detail;
 	
 	@Column(name="write_date")
 	private LocalDateTime writeDate;
 	
 	@Column(name="qna_pwd")
-	private int qnaPwd;
+	private String qnaPwd;
 	
 	@Column(name="qna_answer")
 	private String answer;
@@ -57,8 +57,8 @@ public class QnaEntity {
 		return QnaEntity.builder()
 				.qnaId(dto.getQnaId())
 				.qnaName(dto.getQnaName())
-				.qnaTitle(dto.getQnaTitle())
-				.qnaDetail(dto.getQnaDetail())
+				.title(dto.getTitle())
+				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
 				.answer(dto.getAnswer())
 				.isLock(dto.getIsLock())

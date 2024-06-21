@@ -35,11 +35,11 @@ public class ReviewEntity {
 	@Column(name="phone", nullable = false)
 	private String phone;
 	
-	@Column(name="review_title", nullable = false)
-	private String reviewTitle;
+	@Column(name="title", nullable = false)
+	private String title;
 	
-	@Column(name="review_detail", nullable = false)
-	private String reviewDetail;
+	@Column(name="detail", nullable = false)
+	private String detail;
 	
 	@Column(name="write_date")
 	private LocalDateTime writeDate;
@@ -55,8 +55,8 @@ public class ReviewEntity {
 				.reviewId(dto.getReviewId())
 				.reviewer(dto.getReviewer())
 				.phone(dto.getPhone())
-				.reviewTitle(dto.getReviewTitle())
-				.reviewDetail(dto.getReviewDetail())
+				.title(dto.getTitle())
+				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
 				.updateDate(dto.getUpdateDate())
 				.originalFileName(dto.getOriginalFileName())

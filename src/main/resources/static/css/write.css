@@ -19,6 +19,12 @@ td span {
 	color: red;
 }
 
+td input[type="checkbox"] {
+    width: 11%;
+    margin: 5px;
+    height: 14px;
+}
+
 td input {
 	margin: 10px 0;
     width: 100%;

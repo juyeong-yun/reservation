@@ -23,10 +23,10 @@ public class QnaDTO {
 
 	private Long qnaId;
 	private String qnaName;
-	private String qnaTitle;
-	private String qnaDetail;
+	private String title;
+	private String detail;
 	private LocalDateTime writeDate;
-	private int qnaPwd;
+	private String qnaPwd;
 	private String answer;
 	private YesorNo isLock;
 	private YesorNo isAnswer;
@@ -35,8 +35,8 @@ public class QnaDTO {
 		return QnaDTO.builder()
 				.qnaId(entity.getQnaId())
 				.qnaName(entity.getQnaName())
-				.qnaTitle(entity.getQnaTitle())
-				.qnaDetail(entity.getQnaDetail())
+				.title(entity.getTitle())
+				.detail(entity.getDetail())
 				.writeDate(entity.getWriteDate())
 				.answer(entity.getAnswer())
 				.isLock(entity.getIsLock())

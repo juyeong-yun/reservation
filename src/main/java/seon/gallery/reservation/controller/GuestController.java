@@ -1,5 +1,6 @@
 package seon.gallery.reservation.controller;
 
+import org.hibernate.mapping.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +11,6 @@ import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
 import seon.gallery.reservation.repository.QnaRepository;
 import seon.gallery.reservation.service.EventService;
-import seon.gallery.reservation.service.GuestService;
 import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
 import seon.gallery.reservation.service.ReviewService;
@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Slf4j
 @RequestMapping("/reservation")
 public class GuestController {
+
 	private QnaService qnaService;
     private ReviewService reviewService;
     private ReserveService reserveService;
@@ -77,14 +78,15 @@ public class GuestController {
      */
     @GetMapping("/write")
     public String write(
-        @RequestParam(value="from") String from, Model model ) {
+        @RequestParam(value="from", required = false) String from, Model model ) {
 
             if ("qna".equals(from)) {
                 model.addAttribute("title", "QnA 글쓰기");
-                model.addAttribute("placeholder", "QnA 관련 내용을 입력해주세요.");
+                model.addAttribute("detail","질문입니다.");
+                
             } else if ("review".equals(from)) {
                 model.addAttribute("title", "후기 쓰기");
-                model.addAttribute("placeholder", "후기 관련 내용을 입력해주세요.");  
+                model.addAttribute("detail","후기입니다.");
             }
 
             model.addAttribute("from", from);
@@ -101,7 +103,7 @@ public class GuestController {
      * @return
      */
     @PostMapping("/writeInsert")
-    public String writeInsert(@RequestParam(value = "from") String from, 
+    public String writeInsert(@RequestParam(value = "from", required = false) String from, 
         @ModelAttribute QnaDTO qnaDTO, @ModelAttribute ReviewDTO reviewDTO, RedirectAttributes attr
         ) {
             if ("qna".equals(from)) {
