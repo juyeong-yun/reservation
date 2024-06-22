@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,6 @@ import seon.gallery.reservation.dto.check.YesorNo;
 @Entity
 @Table(name="event")
 public class EventEntity {
-	
 	@Id
 	@Column(name="event_id")
 	private Long eventId;

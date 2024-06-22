@@ -6,8 +6,8 @@ create sequence notice_seq;
 create table notice(
     notice_num number constraint notice_seq primary key
     -- ckeditor 로 변경할 예정
-    ,notice_title varchar2(200) not null
-    ,notice_detail clob not null
+    ,title varchar2(200) default '제목없음'
+    ,detail clob
     ,write_date date default sysdate
     ,notice_image clob
     ,is_post char(1) check(is_post in ('N','Y'))
@@ -19,19 +19,31 @@ drop sequence qna_seq;
 
 create sequence qna_seq;
 create table qna(
-    qna_num number constraint qna_seq primary key
+    qna_id number constraint qna_seq primary key
     ,qna_name varchar2(10) not null
-    ,title varchar2(200) not null
-    ,detail varchar2(4000) not null
+    ,title varchar2(200) default '제목없음'
+    ,detail clob
     ,write_date date default sysdate
     ,qna_pwd varchar2(4)
     ,qna_answer varchar2(4000)
-    ,is_lock char(1) default 'N' check(is_lock in ('N','Y'))
+    ,is_lock number(1) default 0 check(is_lock in (1,0))
     ,is_answer char(1) default 'N' check(is_answer in ('N','Y'))
 );
 
+
 select * from qna;
 
+drop table event;
+drop sequence event_seq;
+
+create sequence event_seq;
+create table event(
+    event_id number constraint event_seq primary key,
+    event_time DATE,
+    is_full char(1) default 'N' check(is_full in ('N','Y'))
+);
+
+select * from event;
 -- 관리자가 필요한 걸까 전시 정보에 대해 필요할까 
 -- 전시 정보에 대한게 필요하겠네...
 
@@ -46,10 +58,12 @@ create table reserve(
     ,reserve_name varchar2(10)
     ,phone varchar2(20)
     ,reserve_date date
-    ,is_pay char(1) check(is_post in ('N','Y'))
-    ,is_confirm char(1) check(is_post in ('N','Y'))
-    ,is_cancle char(1) default 'N' check(is_post in ('N','Y'))
+    ,is_pay char(1) check(is_pay in ('N','Y'))
+    ,is_confirm char(1) check(is_confirm in ('N','Y'))
+    ,is_cancle char(1) default 'N' check(is_cancle in ('N','Y'))
     ,cancle_reason varchar2(500)
+    ,event_id number
+    , constraint event_pk foreign key(event_id) REFERENCES event(event_id)
 );
 
 -- 4) 리뷰 게시판
@@ -60,8 +74,8 @@ create sequence review_seq;
 create table review(
     review_id number constraint review_seq primary key
     ,reviewer varchar2(10) not null
-    ,title varchar2(200) not null
-    ,detail clob not null
+    ,title varchar2(200) default '제목없음'
+    ,detail clob
     ,write_date date default sysdate
     ,update_date date
     ,review_images clob
