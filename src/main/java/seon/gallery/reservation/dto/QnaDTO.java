@@ -28,7 +28,7 @@ public class QnaDTO {
 	private LocalDateTime writeDate;
 	private String qnaPwd;
 	private String answer;
-	private YesorNo isLock;
+	private boolean isLock;
 	private YesorNo isAnswer;
 	
 	public static QnaDTO toDTO(QnaEntity entity) {
@@ -39,7 +39,7 @@ public class QnaDTO {
 				.detail(entity.getDetail())
 				.writeDate(entity.getWriteDate())
 				.answer(entity.getAnswer())
-				.isLock(entity.getIsLock())
+				.isLock(entity.isLock())
 				.isAnswer(entity.getIsAnswer())
 				.build();
 	}

@@ -2,9 +2,14 @@ package seon.gallery.reservation.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,21 +29,30 @@ import seon.gallery.reservation.dto.check.YesorNo;
 @Entity
 @Table(name="qna")
 public class QnaEntity {
+
+	@SequenceGenerator(
+		name = "qna_seq"
+		, sequenceName = "qna_seq"
+		, initialValue = 1
+		,allocationSize = 1
+	)
 	
 	@Id
-	@Column(name="qna_num")
+	@GeneratedValue(generator = "qna_seq")
+	@Column(name="qna_id")
 	private Long qnaId;
 	
 	@Column(name="qna_name", nullable = false)
 	private String qnaName;
 	
-	@Column(name="title", nullable = false)
+	@Column(name="title")
 	private String title;
 	
-	@Column(name="detail", nullable = false)
+	@Column(name="detail")
 	private String detail;
 	
 	@Column(name="write_date")
+	@CreationTimestamp
 	private LocalDateTime writeDate;
 	
 	@Column(name="qna_pwd")
@@ -48,7 +62,7 @@ public class QnaEntity {
 	private String answer;
 	
 	@Column(name="is_lock")
-	private YesorNo isLock;
+	private boolean isLock;
 	
 	@Column(name="is_answer")
 	private YesorNo isAnswer;
@@ -61,7 +75,7 @@ public class QnaEntity {
 				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
 				.answer(dto.getAnswer())
-				.isLock(dto.getIsLock())
+				.isLock(dto.isLock())
 				.isAnswer(dto.getIsAnswer())
 				.build();
 	}

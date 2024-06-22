@@ -2,8 +2,12 @@ package seon.gallery.reservation.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.QnaDTO;
@@ -15,51 +19,53 @@ import seon.gallery.reservation.repository.QnaRepository;
 @Slf4j
 @RequiredArgsConstructor
 public class QnaService {
-
+    
     private final QnaRepository qnaRepository;
 
-    public List<QnaDTO> getqnaList() {
+    /**
+     * 모든 질문글 불러오기
+     * @return
+     */
+    public List<QnaDTO> selectAll() {
+
         List<QnaEntity> entityList = qnaRepository.findAll();
         List<QnaDTO> dtoList = new ArrayList<>();
 
-        for (QnaEntity entity : entityList) {
-            QnaDTO dto = new QnaDTO();
-            
-            // QnaEntity에서 QnaDTO로 필드 복사
-            dto.setQnaName(entity.getQnaName());
-            dto.setTitle(entity.getTitle());
-            dto.setWriteDate(entity.getWriteDate());
-
+        for (QnaEntity qna : entityList) {
+            QnaDTO dto = new QnaDTO(
+                qna.getQnaId(),
+                qna.getQnaName(),
+                qna.getTitle(),
+                qna.getDetail(),
+                qna.getWriteDate(),
+                qna.getQnaPwd(),
+                qna.getAnswer(),
+                qna.isLock(),
+                qna.getIsAnswer()
+            );
             dtoList.add(dto);
         }
-        
+
         log.info("여기는 list service");
 
         return dtoList;
     }
+
 
     /**
      * 글 작성
      * @param qnaDTO
      */
     public void writeQna(QnaDTO qnaDTO) {
-        
-        // 디폴트값 생성
-        qnaDTO.setIsAnswer(YesorNo.N);
-        
-        if (qnaDTO.getQnaPwd() != null && !qnaDTO.getQnaPwd().isEmpty()) {
-            qnaDTO.setIsLock(YesorNo.Y);
-
-        } else {
-            qnaDTO.setIsLock(YesorNo.N);
-        }
-
-         // QnaDTO를 QnaEntity로 변환하여 저장
-        QnaEntity qnaEntity = QnaEntity.toEntity(qnaDTO) 
+    
+        QnaEntity qnaEntity = QnaEntity.toEntity(qnaDTO);
         qnaRepository.save(qnaEntity);
         
         if (qnaEntity != null) {
             log.info("저장 완료");
-        } 
+        } else {
+            log.error("저장 실패");
+        }
     }
+
 }

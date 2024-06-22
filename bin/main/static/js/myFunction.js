@@ -75,3 +75,28 @@ document.addEventListener('DOMContentLoaded', function(){
         console.error('Cannot find isLock or qnaPwd element.');
     }
 });
+
+
+$(document).ready(function () {
+    // CKEditor 인스턴스 초기화
+    CKEDITOR.replace('editor');
+
+    // 폼 제출 이벤트 핸들러
+    $('#submitForm').submit(function (event) {
+        event.preventDefault(); // 기본 제출 동작 방지
+
+        // CKEditor에서 텍스트 가져오기
+        let contents = CKEDITOR.instances.editor.getData().trim();
+
+        if (!contents) {
+            alert("Please fill in the Product Description field.");
+            return; // 필드가 비어있으면 제출 방지
+        }
+
+        $("#detail").val(contents); // 숨겨진 필드에 값 설정
+
+        if (confirm("Are you sure you want to submit?")) { // 사용자 확인 요청
+            this.submit(); // 폼 제출
+        }
+    });
+});

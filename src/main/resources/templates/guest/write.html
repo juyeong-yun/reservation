@@ -50,7 +50,7 @@
     <!-- 글 쓰는 건 ckeditor 쓰기 -->
     
     <div class="content">
-        <form th:action="@{/reservation/writeInsert(from=${from})}" method="Post" enctype="multipart/form-data" >
+        <form th:action="@{/reservation/writeInsert(from=${from})}" id="submitForm" method="Post" enctype="multipart/form-data" >
             <!-- <h4>본인 확인을 위해 개인 정보를 입력해주세요.</h4> -->
             <table>
 				<tr th:if="${from == 'qna'}">
@@ -60,6 +60,7 @@
                     <td><input type="checkbox" id="isLock" name="isLock">비밀글 설정</td>
                     <td><input type="text" name="qnaPwd" id="qnaPwd" placeholder="숫자 네자리로 설정해주세요."></td>
 				</tr>
+                
                 <tr th:if="${from=='review'}">
                     <td>이름<span>*</span></td>
 					<td><input type="text" name="reviewer" id="reviewer" placeholder="홍길동" required></td>
@@ -70,13 +71,12 @@
 					<td colspan="4"><input type="text" name="title" id="title" placeholder="제목을 입력해주세요." required></td>
 				</tr>
                 <tr>
-					<td colspan="4"><div id="editor"></div></td>
-                    <input type="hidden" name="detail" id="detail">
+					<td colspan="4"><div id="editor"><input type="hidden" name="detail" id="detail"></div></td>
 				</tr>
             </table>
 
             <div class="button">
-                <button class="submit" type="submit">제출</button>
+                <button class="submit" id="submit" type="submit">제출</button>
             </div>
         </form>
     </div>

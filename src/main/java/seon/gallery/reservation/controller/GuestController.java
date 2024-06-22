@@ -16,11 +16,15 @@ import seon.gallery.reservation.service.ReviewService;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller
 @Slf4j
+@Controller
 @RequestMapping("/reservation")
 public class GuestController {
 
@@ -29,19 +33,22 @@ public class GuestController {
     private ReserveService reserveService;
     private EventService eventService;
 
+    public GuestController(QnaService qnaService){
+        this.qnaService = qnaService;
+    }
+
 	/**
 	 * board 로 가는
 	 * @return
 	 */
     @GetMapping("/board")
-    public String board(Model model) {
+    public String board(HttpServletRequest request, Model model) {
 
-        if (model.containsAttribute("qnaList")) {        
-            List<QnaDTO> qnaList = qnaService.getqnaList();
-            model.addAttribute("list", qnaList);
-        }
+        List<QnaDTO> qnaList = qnaService.selectAll();
+
+        model.addAttribute("qnaList", qnaList);
         
-        return "/guest/board";
+        return "guest/board";
     }
 
     
@@ -82,18 +89,10 @@ public class GuestController {
     public String write(
         @RequestParam(value="from", required = false) String from, Model model ) {
 
-            if ("qna".equals(from)) {
-                model.addAttribute("title", "QnA 글쓰기");
-                model.addAttribute("detail","질문입니다.");
-                
-            } else if ("review".equals(from)) {
-                model.addAttribute("title", "후기 쓰기");
-                model.addAttribute("detail","후기입니다.");
-            }
+            if ("qna".equals(from)) {  log.info("qna 글쓰기");
+            } else if ("review".equals(from)) { log.info("review 글쓰기"); }
 
             model.addAttribute("from", from);
-
-            log.info("여기는 write");
             
         return "/guest/write";
     }
@@ -108,21 +107,43 @@ public class GuestController {
      */
     @PostMapping("/writeInsert")
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
-        @ModelAttribute @Valid QnaDTO qnaDTO, @ModelAttribute @Valid ReviewDTO reviewDTO, RedirectAttributes attr
-        ) {
-            if ("qna".equals(from)) {
-                log.info("qnainsert");
-                qnaService.writeQna(qnaDTO);
-                log.info("저장했나?");
-
-            }else if ("review".equals(from)) {
-                reviewService.writeReview(reviewDTO);
+        @ModelAttribute QnaDTO qnaDTO, @ModelAttribute ReviewDTO reviewDTO, 
+        RedirectAttributes attr, BindingResult bindingResult ) {
+            
+            if (bindingResult.hasErrors()) {
+                // 유효성 검사 실패 시 처리할 로직 추가
+                return "errorPage"; // 예시: 유효성 검사 실패 페이지로 리다이렉트
             }
 
-            attr.addFlashAttribute("message", "글 작성이 완료되었습니다."); 
-            // 리다이렉트 후 메시지 전달
+            if ("qna".equals(from)) {
+                log.info("qnainsert");
+                try {
+                    qnaService.writeQna(qnaDTO);
+                    attr.addFlashAttribute("message", "Q&A 작성이 완료되었습니다."); 
+                    return "redirect:/guest/board";
 
-        return "redirect:/guest/board";
+                } catch (Exception e) {
+                    attr.addFlashAttribute("error", "Q&A 작성 중 오류가 발생했습니다.");
+                    log.error("Q&A 작성 중 오류 발생", e);
+                }
+
+            } else if ("review".equals(from)) {
+                log.info("review insert");
+                try {
+                    reviewService.writeReview(reviewDTO);
+                    attr.addFlashAttribute("message", "리뷰 작성이 완료되었습니다."); 
+
+                } catch (Exception e) {
+                    attr.addFlashAttribute("error", "리뷰 작성 중 오류가 발생했습니다.");
+                    log.error("리뷰 작성 중 오류 발생", e);
+                }
+
+            } else {
+                attr.addFlashAttribute("error", "잘못된 요청입니다.");
+                log.warn("잘못된 요청: {}", from);
+            }
+
+        return "redirect:/reservation/board";
     }
     
     /**

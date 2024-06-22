@@ -12,6 +12,7 @@
 
     <!-- js -->
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/myFunction.js}"></script>
 
 </head>
 <body>
@@ -65,11 +66,6 @@
                         <td class="detail">냠냠</td>
                         <td class="date">날짜</td>
                     </tr>
-                    <tr>
-                        <th class="title">공지</th>
-                        <td class="detail">냠냠</td>
-                        <td class="date">날짜</td>
-                    </tr>
                 </table>
             </div>
 
@@ -79,21 +75,15 @@
                 <h3>QnA</h3>
                 <div class="write"><a th:href="@{/reservation/write?from=qna}"><i class="fa-solid fa-pen-to-square"></i> 글쓰기</a></div>
                 <table>
-                    <tr>
-                        <th class="name">질문자</th>
-                        <td class="question"><a href="">질문</a></td>
-                        <td class="date">날짜</td>
+                    <tr th:each="qna:${qnaList}">
+                        <th class="name" th:text="${qna.qnaName}">질문자</th>
+                        <td class="question" th:text="${qna.title}">질문</a></td>
+                        <td class="date" th:text="${qna.writeDate}">날짜</td>
                     </tr>
                     <!-- 답변이 있으면 펼쳐지게 안되면 안 펼쳐지게 하기가 나을까 새로운 페이지를 팔까? -->
                     <tr>
-                        <td colspan="3" class="answer">답변..</td>
+                        <td colspan="3" class="answer"><p id="answer" name="answer"></p></td>
                     </tr>
-                    <tr>
-                        <th class="name">질문자</th>
-                        <td class="question"><a href="">질문</a></td>
-                        <td class="date">날짜</td>
-                    </tr>
-                    
                 </table>
             </div>
         </form>
