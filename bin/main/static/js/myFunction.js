@@ -77,26 +77,34 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 
-$(document).ready(function () {
-    // CKEditor 인스턴스 초기화
-    CKEDITOR.replace('editor');
+//// ckeditor 불러오는 api
+document.addEventListener("DOMContentLoaded", function() {
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            enterMode: 'paragraph' // 엔터 키 동작을 문단 생성으로 설정
+        })
+        .then(editor => {
+            // 폼 제출 이벤트 핸들러
+            $('#submit').submit(function (e) {
+                e.preventDefault(); // 기본 제출 동작 방지
 
-    // 폼 제출 이벤트 핸들러
-    $('#submitForm').submit(function (event) {
-        event.preventDefault(); // 기본 제출 동작 방지
+                // CKEditor에서 텍스트 가져오기
+                let contents = editor.getData().trim();
+                console.log(contents)
 
-        // CKEditor에서 텍스트 가져오기
-        let contents = CKEDITOR.instances.editor.getData().trim();
+                if (!contents) {
+                    alert("내용을 작성해주세요.");
+                    return; // 필드가 비어있으면 제출 방지
+                }
 
-        if (!contents) {
-            alert("Please fill in the Product Description field.");
-            return; // 필드가 비어있으면 제출 방지
-        }
+                // 숨겨진 필드에 값 설정
+                $("#detail").val(contents);
 
-        $("#detail").val(contents); // 숨겨진 필드에 값 설정
-
-        if (confirm("Are you sure you want to submit?")) { // 사용자 확인 요청
-            this.submit(); // 폼 제출
-        }
-    });
+                if (confirm("제출하시겠습니까?")) { // 사용자 확인 요청
+                    submitForm();
+                }
+            });
+        })
 });
+
+

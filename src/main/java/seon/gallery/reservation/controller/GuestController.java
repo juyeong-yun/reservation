@@ -107,20 +107,17 @@ public class GuestController {
      */
     @PostMapping("/writeInsert")
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
+        @RequestParam(value = "detail") String detail,
         @ModelAttribute QnaDTO qnaDTO, @ModelAttribute ReviewDTO reviewDTO, 
-        RedirectAttributes attr, BindingResult bindingResult ) {
-            
-            if (bindingResult.hasErrors()) {
-                // 유효성 검사 실패 시 처리할 로직 추가
-                return "errorPage"; // 예시: 유효성 검사 실패 페이지로 리다이렉트
-            }
+        RedirectAttributes attr) {
 
             if ("qna".equals(from)) {
                 log.info("qnainsert");
                 try {
+                    log.info(detail);
+                    qnaDTO.setDetail(detail);
                     qnaService.writeQna(qnaDTO);
                     attr.addFlashAttribute("message", "Q&A 작성이 완료되었습니다."); 
-                    return "redirect:/guest/board";
 
                 } catch (Exception e) {
                     attr.addFlashAttribute("error", "Q&A 작성 중 오류가 발생했습니다.");
@@ -130,6 +127,7 @@ public class GuestController {
             } else if ("review".equals(from)) {
                 log.info("review insert");
                 try {
+                    reviewDTO.setDetail(detail);
                     reviewService.writeReview(reviewDTO);
                     attr.addFlashAttribute("message", "리뷰 작성이 완료되었습니다."); 
 

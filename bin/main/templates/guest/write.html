@@ -12,9 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--ckeditor -->
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+    <!-- js -->
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <!-- 개인용 -->
     <script th:src="@{/js/myFunction.js}"></script>
-    <script th:src="@{/js/myApi.js}"></script>
 </head>
 <body>
     <div class="header">
@@ -52,16 +54,27 @@
     <div class="content">
         <form th:action="@{/reservation/writeInsert(from=${from})}" id="submitForm" method="Post" enctype="multipart/form-data" >
             <!-- <h4>본인 확인을 위해 개인 정보를 입력해주세요.</h4> -->
-            <table>
-				<tr th:if="${from == 'qna'}">
+            <table  th:if="${from == 'qna'}">
+				<tr>
 					<td>이름<span>*</span></td>
 					<td><input type="text" name="qnaName" id="qnaName" placeholder="홍길동" required></td>
                     <!-- qna에서 페이지가 넘어올때는 핸드폰 번호가 아니라 비밀번호 설정이 보이게 하려면 if문을 걸면 된다. -->
                     <td><input type="checkbox" id="isLock" name="isLock">비밀글 설정</td>
                     <td><input type="text" name="qnaPwd" id="qnaPwd" placeholder="숫자 네자리로 설정해주세요."></td>
 				</tr>
-                
-                <tr th:if="${from=='review'}">
+                <tr>
+					<td colspan="4"><input type="text" name="title" id="title" placeholder="제목을 입력해주세요." required></td>
+				</tr>
+                <tr>
+					<td colspan="4"><div id="editor"><input type="hidden" name="detail" id="detail"></div></td>
+				</tr>
+            </table>
+            <div class="button" th:if="${from == 'qna'}">
+                <button class="submit" id="submit" type="submit">제출</button>
+            </div>
+            
+            <table th:if="${from=='review'}">
+                <tr>
                     <td>이름<span>*</span></td>
 					<td><input type="text" name="reviewer" id="reviewer" placeholder="홍길동" required></td>
                     <td>핸드폰 번호<span>*</span></td>
@@ -75,7 +88,7 @@
 				</tr>
             </table>
 
-            <div class="button">
+            <div class="button" th:if="${from=='review'}">
                 <button class="submit" id="submit" type="submit">제출</button>
             </div>
         </form>
