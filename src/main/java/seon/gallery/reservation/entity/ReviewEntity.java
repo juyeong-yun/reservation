@@ -2,6 +2,9 @@ package seon.gallery.reservation.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -33,16 +36,18 @@ public class ReviewEntity {
 	@Column(name="phone", nullable = false)
 	private String phone;
 	
-	@Column(name="title", nullable = false)
+	@Column(name="title")
 	private String title;
 	
-	@Column(name="detail", nullable = false)
+	@Column(name="detail")
 	private String detail;
 	
 	@Column(name="write_date")
+	@CreationTimestamp
 	private LocalDateTime writeDate;
 	
 	@Column(name="update_date")
+	@LastModifiedDate
 	private LocalDateTime updateDate;
 
 	@Column(name="original_file_name")

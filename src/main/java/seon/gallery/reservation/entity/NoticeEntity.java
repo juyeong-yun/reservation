@@ -6,7 +6,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,16 +28,23 @@ import seon.gallery.reservation.dto.check.YesorNo;
 @Entity
 @Table(name="notice")
 public class NoticeEntity {
+	@SequenceGenerator(
+		name = "notice_seq"
+		, sequenceName = "notice_seq"
+		, initialValue = 1
+		, allocationSize = 1
+	)
 	
 	@Id
+	@GeneratedValue(generator = "notice_seq")
 	@Column(name="notice_id")
 	private Long noticeId;
 	
-	@Column(name="notice_title", nullable = false)
-	private String noticeTitle;
+	@Column(name="title")
+	private String title;
 	
-	@Column(name="notice_detail", nullable = false)
-	private String noticeDetail;
+	@Column(name="detail")
+	private String detail;
 	
 	@Column(name="write_date")
 	private LocalDateTime writeDate;
@@ -47,8 +56,8 @@ public class NoticeEntity {
 	public static NoticeEntity toEntity(NoticeDTO dto) {
 		return NoticeEntity.builder()
 				.noticeId(dto.getNoticeId())
-				.noticeTitle(dto.getNoticeTitle())
-				.noticeDetail(dto.getNoticeDetail())
+				.title(dto.getTitle())
+				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
 				.isPost(dto.getIsPost())
 				.build();

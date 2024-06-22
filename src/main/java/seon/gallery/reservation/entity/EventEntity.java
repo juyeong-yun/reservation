@@ -31,7 +31,7 @@ public class EventEntity {
 	@Column(name="event_id")
 	private Long eventId;
 	
-	@Column(name="event_time", nullable = false)
+	@Column(name="event_time")
 	private LocalDateTime eventTime;
 	
 	@Column(name="is_full")

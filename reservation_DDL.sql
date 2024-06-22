@@ -53,11 +53,11 @@ drop sequence reserve_seq;
 
 create sequence reserve_seq;
 create table reserve(
-    reserve_num number constraint reserve_seq primary key
+    reserve_id number constraint reserve_seq primary key
     ,reserve_time date
-    ,reserve_name varchar2(10)
-    ,phone varchar2(20)
-    ,reserve_date date
+    ,reserver varchar2(10) not null
+    ,phone varchar2(20) not null
+    ,reserve_date date default sysdate
     ,is_pay char(1) check(is_pay in ('N','Y'))
     ,is_confirm char(1) check(is_confirm in ('N','Y'))
     ,is_cancle char(1) default 'N' check(is_cancle in ('N','Y'))
