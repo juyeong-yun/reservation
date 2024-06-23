@@ -7,7 +7,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +28,15 @@ import seon.gallery.reservation.dto.ReviewDTO;
 @Entity
 @Table(name="review")
 public class ReviewEntity {
+	@SequenceGenerator(
+		name = "review_seq"
+		, sequenceName = "review_seq"
+		,initialValue = 1
+		,allocationSize = 1
+	)
+
 	@Id
+	@GeneratedValue(generator="review_seq")
 	@Column(name="review_id")
 	private Long reviewId;
 	
@@ -52,7 +62,11 @@ public class ReviewEntity {
 
 	@Column(name="original_file_name")
 	private String originalFileName;
-	
+
+	@Column(name = "save_file_name")
+	private String saveFileName;
+
+
 	public static ReviewEntity toEntity(ReviewDTO dto) {
 		return ReviewEntity.builder()
 				.reviewId(dto.getReviewId())
@@ -63,6 +77,7 @@ public class ReviewEntity {
 				.writeDate(dto.getWriteDate())
 				.updateDate(dto.getUpdateDate())
 				.originalFileName(dto.getOriginalFileName())
+				.saveFileName(dto.getSaveFileName())
 				.build();
 	}
 

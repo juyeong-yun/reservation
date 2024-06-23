@@ -107,14 +107,14 @@ public class GuestController {
      */
     @PostMapping("/writeInsert")
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
-        @RequestParam(value = "detail") String detail,
+        @RequestParam(value = "detail", required = false) String detail,
         @ModelAttribute QnaDTO qnaDTO, @ModelAttribute ReviewDTO reviewDTO, 
         RedirectAttributes attr) {
 
             if ("qna".equals(from)) {
                 log.info("qnainsert");
                 try {
-                    log.info(detail);
+                    // log.info("detail:" + detail);
                     qnaDTO.setDetail(detail);
                     qnaService.writeQna(qnaDTO);
                     attr.addFlashAttribute("message", "Q&A 작성이 완료되었습니다."); 
@@ -127,6 +127,7 @@ public class GuestController {
             } else if ("review".equals(from)) {
                 log.info("review insert");
                 try {
+                    log.info("review:" +detail);
                     reviewDTO.setDetail(detail);
                     reviewService.writeReview(reviewDTO);
                     attr.addFlashAttribute("message", "리뷰 작성이 완료되었습니다."); 

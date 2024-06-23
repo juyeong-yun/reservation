@@ -17,6 +17,7 @@
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <!-- 개인용 -->
     <script th:src="@{/js/myFunction.js}"></script>
+
 </head>
 <body>
     <div class="header">
@@ -52,7 +53,8 @@
     <!-- 글 쓰는 건 ckeditor 쓰기 -->
     
     <div class="content">
-        <form th:action="@{/reservation/writeInsert(from=${from})}" id="submitForm" method="Post" enctype="multipart/form-data" >
+        <!-- qna 관련 폼 -->
+        <form th:action="@{/reservation/writeInsert(from=${from})}" id="qnaSubmitForm" method="post">
             <!-- <h4>본인 확인을 위해 개인 정보를 입력해주세요.</h4> -->
             <table  th:if="${from == 'qna'}">
 				<tr>
@@ -63,16 +65,20 @@
                     <td><input type="text" name="qnaPwd" id="qnaPwd" placeholder="숫자 네자리로 설정해주세요."></td>
 				</tr>
                 <tr>
-					<td colspan="4"><input type="text" name="title" id="title" placeholder="제목을 입력해주세요." required></td>
+					<td colspan="4"><input type="text" name="title" id="qnaTitle" placeholder="제목을 입력해주세요." required></td>
 				</tr>
                 <tr>
-					<td colspan="4"><div id="editor"><input type="hidden" name="detail" id="detail"></div></td>
+					<td colspan="4"><div id="qnaEditor"></div></td>
+                    <input type="hidden" name="detail" id="qnaDetail">
 				</tr>
             </table>
             <div class="button" th:if="${from == 'qna'}">
-                <button class="submit" id="submit" type="submit">제출</button>
+                <button class="submit" id="qnaSubmit" type="submit">제출</button>
             </div>
-            
+            </form>
+
+            <!-- 리뷰 관련 폼 -->
+            <form th:action="@{/reservation/writeInsert(from=${from})}" id="reviewSubmitForm" method="post" enctype="multipart/form-data" >
             <table th:if="${from=='review'}">
                 <tr>
                     <td>이름<span>*</span></td>
@@ -81,15 +87,15 @@
                     <td><input type="text" name="phone" id="phone" placeholder="01012345678" required></td> 
                 </tr>
                 <tr>
-					<td colspan="4"><input type="text" name="title" id="title" placeholder="제목을 입력해주세요." required></td>
+					<td colspan="4"><input type="text" name="title" id="reviewTitle" placeholder="제목을 입력해주세요." required></td>
 				</tr>
                 <tr>
-					<td colspan="4"><div id="editor"><input type="hidden" name="detail" id="detail"></div></td>
+					<td colspan="4"><div name="editor" id="reviewEditor"></div></td>
+                    <input type="hidden" name="detail" id="reviewDetail">
 				</tr>
             </table>
-
             <div class="button" th:if="${from=='review'}">
-                <button class="submit" id="submit" type="submit">제출</button>
+                <button class="submit" id="reviewSubmit" type="submit">제출</button>
             </div>
         </form>
     </div>

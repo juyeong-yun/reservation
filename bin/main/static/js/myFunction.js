@@ -79,32 +79,80 @@ document.addEventListener('DOMContentLoaded', function(){
 
 //// ckeditor 불러오는 api
 document.addEventListener("DOMContentLoaded", function() {
+
+    let ckEditorInstanceQna; // CKEditor 인스턴스 변수 선언
+    let ckEditorInstanceReview; // CKEditor 인스턴스 변수 선언
+
+    // 질문글 에디터
     ClassicEditor
-        .create(document.querySelector('#editor'), {
+        .create(document.querySelector('#qnaEditor'), {
+            language: 'ko',
             enterMode: 'paragraph' // 엔터 키 동작을 문단 생성으로 설정
         })
         .then(editor => {
-            // 폼 제출 이벤트 핸들러
-            $('#submit').submit(function (e) {
-                e.preventDefault(); // 기본 제출 동작 방지
+            ckEditorInstanceQna = editor; // CKEditor 인스턴스 할당
+        });
 
-                // CKEditor에서 텍스트 가져오기
-                let contents = editor.getData().trim();
-                console.log(contents)
-
-                if (!contents) {
-                    alert("내용을 작성해주세요.");
-                    return; // 필드가 비어있으면 제출 방지
-                }
-
-                // 숨겨진 필드에 값 설정
-                $("#detail").val(contents);
-
-                if (confirm("제출하시겠습니까?")) { // 사용자 확인 요청
-                    submitForm();
-                }
-            });
+    // 리뷰 에디터
+    ClassicEditor
+        .create(document.querySelector('#reviewEditor'), {
+            language: 'ko',
+            enterMode: 'paragraph' // 엔터 키 동작을 문단 생성으로 설정
         })
+        .then(editor => {
+            ckEditorInstanceReview = editor; // CKEditor 인스턴스 할당
+        });
+
+    // 폼 제출 이벤트 핸들러
+    $("#qnaSubmit").click(function(e) {
+        e.preventDefault(); // 기본 제출 동작 방지
+
+        if (!ckEditorInstanceQna) {
+            console.error("CKEditor 인스턴스가 초기화되지 않았습니다.");
+            return;
+        }
+
+        // CKEditor에서 텍스트 가져오기
+        let contents = ckEditorInstanceQna.getData().trim();
+        console.log(contents);
+
+        if (!contents) {
+            alert("내용을 작성해주세요."); // 필드가 비어있으면 제출 방지
+            return;
+        }
+
+        // 숨겨진 필드에 값 설정
+        $("#qnaDetail").val(contents);
+
+        if (confirm("제출하시겠습니까?")) { // 사용자 확인 요청
+            $('#qnaSubmitForm').submit(); // 폼 제출
+        }
+    });
+
+    $("#reviewSubmit").click(function(e) {
+        e.preventDefault(); // 기본 제출 동작 방지
+
+        if (!ckEditorInstanceReview) {
+            console.error("CKEditor 인스턴스가 초기화되지 않았습니다.");
+            return;
+        }
+
+        // CKEditor에서 텍스트 가져오기
+        let contents = ckEditorInstanceReview.getData().trim();
+        console.log(contents);
+
+        if (!contents) {
+            alert("내용을 작성해주세요.");// 필드가 비어있으면 제출 방지
+            return;
+        }
+
+        // 숨겨진 필드에 값 설정
+        $("#reviewDetail").val(contents);
+
+        if (confirm("제출하시겠습니까?")) { // 사용자 확인 요청
+            $('#reviewSubmitForm').submit(); // 폼 제출
+        }
+    });
 });
 
 

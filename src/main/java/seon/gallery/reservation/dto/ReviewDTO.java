@@ -29,6 +29,7 @@ public class ReviewDTO {
 	private LocalDateTime updateDate;
 	private MultipartFile reviewImage;
 	private String originalFileName;
+	private String saveFileName;
 	
 	public static ReviewDTO toDTO(ReviewEntity entity) {
 		return ReviewDTO.builder()
@@ -40,6 +41,7 @@ public class ReviewDTO {
 				.writeDate(entity.getWriteDate())
 				.updateDate(entity.getUpdateDate())
 				.originalFileName(entity.getOriginalFileName())
+				.saveFileName(entity.getSaveFileName())
 				.build();
 	}
 }
