@@ -60,11 +60,12 @@ public class ReviewEntity {
 	@LastModifiedDate
 	private LocalDateTime updateDate;
 
+	// 첨부파일이 있을때
 	@Column(name="original_file_name")
 	private String originalFileName;
 
-	@Column(name = "save_file_name")
-	private String saveFileName;
+	@Column(name = "saved_file_name")
+	private String savedFileName;
 
 
 	public static ReviewEntity toEntity(ReviewDTO dto) {
@@ -77,7 +78,7 @@ public class ReviewEntity {
 				.writeDate(dto.getWriteDate())
 				.updateDate(dto.getUpdateDate())
 				.originalFileName(dto.getOriginalFileName())
-				.saveFileName(dto.getSaveFileName())
+				.savedFileName(dto.getSavedFileName())
 				.build();
 	}
 

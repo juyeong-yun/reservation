@@ -13,60 +13,59 @@ import seon.gallery.reservation.entity.ReviewEntity;
 import seon.gallery.reservation.repository.ReviewRepository;
 import seon.gallery.reservation.util.FileService;
 
-@Service
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-    @Value("${spring.servlet.multipart.location}")
-    String uploadPath;
+    public List<ReviewDTO> selectAll() {
 
-    public List<ReviewDTO> allReview() {
         List<ReviewEntity> entityList = reviewRepository.findAll();
         List<ReviewDTO> dtoList = new ArrayList<>();
 
         for (ReviewEntity review : entityList) {
-            ReviewDTO dto = new ReviewDTO(
-                review.getReviewId(),
-                review.getReviewer(),
-                review.getPhone(),
-                review.getTitle(),
-                review.getDetail(),
-                review.getWriteDate(),
-                review.getUpdateDate(),
-                review.getOriginalFileName()
-            );
+            ReviewDTO dto = ReviewDTO.toDTO(review);
             dtoList.add(dto);
         }
 
         return dtoList;
     }
 
+    @Value("${spring.servlet.multipart.location}")
+    String uploadPath;
+    //  없던 폴더가 생겼으니 경로는 맞음
+
     /**
      * 리뷰 쓰기
      * @param reviewDTO
      */
     public void writeReview(ReviewDTO reviewDTO) {
+        log.info("저장경로: {} ", uploadPath);
+
         String originalFileName = null;
         String savedFile = null;
 
-        if(!reviewDTO.getReviewImage().isEmpty()){
+        if (reviewDTO.getReviewImage() != null && !reviewDTO.getReviewImage().isEmpty()) {
             originalFileName = reviewDTO.getReviewImage().getOriginalFilename();
             savedFile = FileService.saveFile(reviewDTO.getReviewImage(), uploadPath);
 
             reviewDTO.setOriginalFileName(originalFileName);
-            reviewDTO.setSaveFileName(savedFile);
+            reviewDTO.setSavedFileName(savedFile);
         }
-        log.info("=== 파일 저장 완료 : ", originalFileName);
+        
+        log.info("=== 파일 저장 완료: {}", originalFileName);
 
         ReviewEntity reviewEntity = ReviewEntity.toEntity(reviewDTO);
         reviewRepository.save(reviewEntity);
 
-        if (reviewEntity != null) { log.info("저장 완료");
-        } else { log.error("저장 실패"); }
-
+        if (reviewEntity != null) {
+            log.info("저장 완료");
+        } else {
+            log.error("저장 실패");
+        }
+        
     }
 
 }

@@ -71,8 +71,6 @@ document.addEventListener('DOMContentLoaded', function(){
         
         // 페이지 로드 시 초기 상태에 따라 처리
         pwdinput.style.display = ischeck.checked ? 'block' : 'none';
-    } else {
-        console.error('Cannot find isLock or qnaPwd element.');
     }
 });
 
@@ -103,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
             ckEditorInstanceReview = editor; // CKEditor 인스턴스 할당
         });
 
-    // 폼 제출 이벤트 핸들러
+    // qna 관한 ckeditor
     $("#qnaSubmit").click(function(e) {
         e.preventDefault(); // 기본 제출 동작 방지
 
@@ -112,9 +110,12 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        //qnapwd 는 조금 더 생각해보기
+        // 윗 부분 누르면 변하는 것도 같이 생각해 봐야겠다.. ㅎㅎ
+
         // CKEditor에서 텍스트 가져오기
         let contents = ckEditorInstanceQna.getData().trim();
-        console.log(contents);
+        // console.log(contents);
 
         if (!contents) {
             alert("내용을 작성해주세요."); // 필드가 비어있으면 제출 방지
@@ -129,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // 리뷰에 관한 ckeditor
     $("#reviewSubmit").click(function(e) {
         e.preventDefault(); // 기본 제출 동작 방지
 
@@ -136,10 +138,17 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("CKEditor 인스턴스가 초기화되지 않았습니다.");
             return;
         }
+        
+        let phone = document.getElementById('phone').value.trim(); // #phone 요소의 값 가져오기
+        if (phone.length !== 11) {
+            alert("전화번호는 11자리여야 합니다."); // 사용자에게 경고 메시지 표시
+            document.getElementById('phone').focus(); // 포커스를 다시 #phone 입력란으로 이동
+            return
+        }
 
         // CKEditor에서 텍스트 가져오기
         let contents = ckEditorInstanceReview.getData().trim();
-        console.log(contents);
+        // console.log(contents);
 
         if (!contents) {
             alert("내용을 작성해주세요.");// 필드가 비어있으면 제출 방지

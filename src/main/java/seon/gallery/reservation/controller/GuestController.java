@@ -33,9 +33,14 @@ public class GuestController {
     private ReserveService reserveService;
     private EventService eventService;
 
-    public GuestController(QnaService qnaService){
+    public GuestController(QnaService qnaService, ReviewService reviewService,
+    ReserveService reserveService, EventService eventService){
         this.qnaService = qnaService;
+        this.reviewService = reviewService;
+        this.reserveService = reserveService;
+        this.eventService = eventService;
     }
+
 
 	/**
 	 * board 로 가는
@@ -108,41 +113,42 @@ public class GuestController {
     @PostMapping("/writeInsert")
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
         @RequestParam(value = "detail", required = false) String detail,
-        @ModelAttribute QnaDTO qnaDTO, @ModelAttribute ReviewDTO reviewDTO, 
+        @ModelAttribute QnaDTO qnaDTO, 
+        @ModelAttribute ReviewDTO reviewDTO, 
         RedirectAttributes attr) {
 
             if ("qna".equals(from)) {
-                log.info("qnainsert");
+                
                 try {
-                    // log.info("detail:" + detail);
                     qnaDTO.setDetail(detail);
                     qnaService.writeQna(qnaDTO);
                     attr.addFlashAttribute("message", "Q&A 작성이 완료되었습니다."); 
-
+                    return "redirect:/reservation/board";
+                
                 } catch (Exception e) {
                     attr.addFlashAttribute("error", "Q&A 작성 중 오류가 발생했습니다.");
                     log.error("Q&A 작성 중 오류 발생", e);
+                    return "redirect:/reservation/board"; // 오류 발생 시에도 동일한 경로로 리다이렉트
                 }
-
             } else if ("review".equals(from)) {
-                log.info("review insert");
+                
                 try {
-                    log.info("review:" +detail);
+                    log.info("review:" + detail);
                     reviewDTO.setDetail(detail);
                     reviewService.writeReview(reviewDTO);
                     attr.addFlashAttribute("message", "리뷰 작성이 완료되었습니다."); 
+                    return "redirect:/reservation/reviews";
 
                 } catch (Exception e) {
                     attr.addFlashAttribute("error", "리뷰 작성 중 오류가 발생했습니다.");
                     log.error("리뷰 작성 중 오류 발생", e);
+                    return "redirect:/reservation/reviews"; // 오류 발생 시에도 동일한 경로로 리다이렉트
                 }
-
             } else {
                 attr.addFlashAttribute("error", "잘못된 요청입니다.");
                 log.warn("잘못된 요청: {}", from);
+                return "redirect:/"; // 잘못된 요청의 경우 에러 페이지로 리다이렉트
             }
-
-        return "redirect:/reservation/board";
     }
     
     /**
@@ -150,8 +156,15 @@ public class GuestController {
      * @return
      */
     @GetMapping("/reviews")
-    public String reviews() {
-        return "/guest/reviews";
+    public String reviews(HttpServletRequest request, Model model) {
+        
+        List<ReviewDTO> reviewList = reviewService.selectAll();
+        String contextPath = request.getContextPath();
+
+        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("contextPath", contextPath);
+
+        return "guest/reviews";
     }
     
     /**
@@ -161,7 +174,7 @@ public class GuestController {
      */
     @GetMapping("/reviewsDetail")
     public String reviewsDetail() {
-
+        
         return "/guest/reviewsDetail";
     }
     
