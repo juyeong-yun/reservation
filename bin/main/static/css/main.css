@@ -89,6 +89,7 @@ div.background .right-side a{
 
 .right-side ul{
     display: flex;
+    align-items: center;
 }
 
 .right-side li {

@@ -23,14 +23,9 @@
             
             <div class="right-side">
                 <ul id="menu">
-                    <li><a id="" th:href="@{/reservation/check}">예약 확인</a></li>
-                    <li><a th:href="@{/reservation/admin_write}">글 작성</a>
-                        <ul>
-                            <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
-                            <li><a th:href="@{/reservation/admin_write#notice}">공지 작성</a></li>
-                            <li><a th:href="@{/reservation/admin_write#qna}">질문 답변</a></li>
-                        </ul>
-                    </li>
+                    <li><a th:href="@{/reservation/admin_main}"><i class="fa-solid fa-house-user"></i></a></li>
+                    <li><a id="" th:href="@{/reservation/check}">예약 관리</a></li>
+                    <li><a th:href="@{/reservation/admin_write}">글 작성</a></li>
                     <li><a id="" th:href="@{/reservation/manage}">정보 추가</a></li>
                 </ul>
             </div>
@@ -38,7 +33,42 @@
     </div>
     
     <div class="content">
-    
+        <form action="" method="post">
+            <!-- 날짜별로 정렬 할 수 있게 -->
+            <!-- 예약자 이름 / 날짜 별로 검색할 수 있게 -->
+            <!-- 예약 변경도 넣어야 하나? -->
+            <table border="1">
+                <tr>
+                    <th>이름</th>
+                    <th>예약 날짜</th>
+                    <th>전시 날짜</th>
+                    <th>전시 시간</th>
+                    <th>전화 번호</th>
+                    <th>예약 인원</th>
+                    <!-- 클릭하면 크게 보이게 -->
+                    <th>요청 사항</th>
+                    <th>키링</th>
+                    <th>상태</th>
+                    <th>관리</th>
+                </tr>
+                <tr>
+                    <td>윤선애</td>
+                    <td>6/19</td>
+                    <td>8/16</td>
+                    <td>18:00</td>
+                    <td>010-1111-1111</td>
+                    <td>1</td>
+                    <td>없음</td>
+                    <td>0</td>
+                    <td>입금대기</td>
+                    <td>
+                        <button class="">입금 완료</button>
+                        <button class="">예약 취소</button>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
     </div>
         
     

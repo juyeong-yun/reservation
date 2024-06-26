@@ -23,14 +23,9 @@
             
             <div class="right-side">
                 <ul id="menu">
+                    <li><a th:href="@{/reservation/admin_main}"><i class="fa-solid fa-house-user"></i></a></li>
                     <li><a id="" th:href="@{/reservation/check}">예약 관리</a></li>
-                    <li><a th:href="@{/reservation/admin_write}">글 작성</a>
-                        <ul>
-                            <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
-                            <li><a th:href="@{/reservation/admin_write#notice}">공지 작성</a></li>
-                            <li><a th:href="@{/reservation/admin_write#qna}">질문 답변</a></li>
-                        </ul>
-                    </li>
+                    <li><a th:href="@{/reservation/admin_write}">글 작성</a></li>
                     <li><a id="" th:href="@{/reservation/manage}">정보 추가</a></li>
                 </ul>
             </div>
@@ -41,8 +36,8 @@
         <form action="">
             <!-- 공지글 쓰기 화면으로 -->
             <div class="notice" id="notice">
+                <div class="write"><a th:href="@{/reservation/admin_write}"><i class="fa-solid fa-plus"></i></a></div>
                 <h3>Notice</h3>
-                <div class="write"><a th:href="@{/reservation/admin_write}"><i class="fa-solid fa-pen-to-square"></i> 공지 쓰기</a></div>
                 <table >
                     <tr>
                         <th class="title">공지</th>

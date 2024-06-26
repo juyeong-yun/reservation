@@ -24,13 +24,7 @@
             <div class="right-side">
                 <ul id="menu">
                     <li><a id="" th:href="@{/reservation/check}">예약 관리</a></li>
-                    <li><a th:href="@{/reservation/admin_write}">글 작성</a>
-                        <ul>
-                            <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
-                            <li><a th:href="@{/reservation/admin_write#notice}">공지 작성</a></li>
-                            <li><a th:href="@{/reservation/admin_write#qna}">질문 답변</a></li>
-                        </ul>
-                    </li>
+                    <li><a th:href="@{/reservation/admin_write}">글 작성</a></li>
                     <li><a id="" th:href="@{/reservation/manage}">정보 추가</a></li>
                 </ul>
             </div>
@@ -38,6 +32,7 @@
     </div>
     
     <div class="content">
+        <!-- 예약 날짜와 시간에 맞게 막대 그래프 그리기 -->
         <form action="">
             <table>
                 <tr>

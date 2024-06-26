@@ -1,7 +1,16 @@
 @import "../main.css";
 @import "../board.css";
 
-/* 메인 화면 */
+
+/*********
+admin_main 화면
+**********/
+
+.top-bar .logo { flex: 1.5;}
+.top-bar .right-side { flex: 2;}
+.right-side ul {justify-content: flex-end;}
+.right-side a { padding-right: 0%;}
+
 
 .progress-bar {
     width: 100%;
@@ -21,7 +30,9 @@
 }
 
 
-/* admin_write 화면 */
+/*********
+admin_write 화면
+**********/
 .answer textarea{
 	resize: none;
 	width: 100%;
@@ -29,9 +40,11 @@
     height: 6em;
     padding: 5px;
 }
+
 button{
 	margin: 0 2px;
 }
+
 .submit{
 	padding: 3px;
     color: white;

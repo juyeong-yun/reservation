@@ -1,16 +1,12 @@
 @import "../main.css";
 
+.top-bar .logo { flex: 1.5;}
+.top-bar .right-side { flex: 2;}
+.right-side ul {justify-content: flex-end;}
+.right-side a { padding-right: 0%;}
 
-/*********
-ckeditor
-**********/
-.ck-editor__editable[role="textbox"] {
-	/* Editing area */
-	min-height: 200px;
-}
-
-.ck-content .image {
-	/* Block images */
-	max-width: 80%;
-	margin: 20px auto;
+table{
+	width: 100%;
+    margin-top: 45px;
+    text-align: center;
 }
