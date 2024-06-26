@@ -30,8 +30,8 @@ create table qna(
     ,is_answer char(1) default 'N' check(is_answer in ('N','Y'))
 );
 
-
 select * from qna;
+
 
 drop table event;
 drop sequence event_seq;
@@ -58,10 +58,12 @@ create table reserve(
     ,reserver varchar2(10) not null
     ,phone varchar2(20) not null
     ,reserve_date date default sysdate
-    ,is_pay char(1) check(is_pay in ('N','Y'))
+    ,request varchar2(500) default '요청 없음'
+    ,keyring number(2) default 0
+    ,is_pay char(1) default 0 check(is_pay in (1,0))
     ,is_confirm char(1) check(is_confirm in ('N','Y'))
     ,is_cancle char(1) default 'N' check(is_cancle in ('N','Y'))
-    ,cancle_reason varchar2(500)
+    ,cancle_reason varchar2(1000)
     ,event_id number
     , constraint event_pk foreign key(event_id) REFERENCES event(event_id)
 );
@@ -73,12 +75,14 @@ drop sequence review_seq;
 create sequence review_seq;
 create table review(
     review_id number constraint review_seq primary key
-    ,reviewer varchar2(10) not null
-    ,title varchar2(200) default '제목없음'
+    ,reviewer varchar2(20) not null
+    ,phone varchar2(20) not null
     ,detail clob
     ,write_date date default sysdate
     ,update_date date
     ,review_images clob
     ,original_file_name varchar2(200)
+    ,saved_file_name varchar2(200)
 );
 
+select * from review;
