@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온실(溫室) | 후기</title>
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
+
+    <!-- 페이지 분할로 인한 css 공유 -->
+    <link rel="stylesheet" th:href="@{/css/about.css}">
+    
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- js -->
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/myFunction.js}"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
+            </div>
+            
+            <div class="right-side">
+                <ul id="menu">
+                    <li><a id="" th:href="@{/reservation/about}">About</a></li>
+                    <li><a th:href="@{/reservation/board}">Board</a></li>
+                    <li><a id="" th:href="@{/reservation/reserve}">Reserve</a></li>
+                    <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
+                    <li><a th:href="@{/reservation/location}">Location</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h2>Location</h2>
+        <div id="directions">
+            <div class="map">
+                <img th:src="@{/images/gallerymap.jpeg}" alt="약도">
+            </div>
+            <div class="explain">
+                <h3>오시는 길</h3>
+                <span>
+                    <img th:src="@{/images/Seoul_Metro_Line_6.svg}">
+                    <img src="">
+                    망원역 2번출구 도보4분
+                </span>
+                <span>
+                    <img th:src="@{/images/Seoul_Metro_Line_2.svg}">
+                    <img th:src="@{/images/Seoul_Metro_Line_6.svg}">
+                합정역 9번출구 도보9분
+                </span>
+                <p>주차 공간이 제공되지 않는 관계로 주변 공영주차장 이용을 부탁드립니다.</p>
+                
+                <ul class="parking">
+                    <li>청기와2 노상 공영 주차장 : 서울 마포구 서교동 467-11 <a href="https://naver.me/5Q4GasLa">https://naver.me/5Q4GasLa</a></li>
+                    <li>청기와3 노상 공영 주차장 : 서울 마포구 서교동 458-12 <a href="https://naver.me/Gi9pDmAz">https://naver.me/Gi9pDmAz</a></li>
+                    <li>현대유통주차장 : 서울특별시 마포구 동교로12길 27 <a href="https://naver.me/GltSKycM">https://naver.me/GltSKycM</a></li>							
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="sns">
+            <a href="https://www.instagram.com/du_bi_dubap?igsh=aHo1a3JnenZrajJh&utm_source=qr"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/Du_Bidubap"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <div class="footer-info">
+            <div>
+				<span>Lee Seungyoon Birthday Exhibition</span>
+				<span>Aug.16-18.2024 Gallary Non-Scaled</span>
+			</div>
+			<div class="footer-img">
+				<img th:src="@{/images/icon_white.png}">
+				<img th:src="@{/images/logo_white.png}">	
+			</div>			
+		</div>
+    </footer>
+</body>
+</html>

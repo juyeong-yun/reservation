@@ -73,6 +73,10 @@ div.background .right-side a{
 }
 
 /* 상단 바 스타일링 */
+.header {
+    padding: 0 125px 0;
+    border-bottom: 1px solid;
+}
 .top-bar {
     display: flex;
     padding: 10px 20px;
@@ -80,7 +84,8 @@ div.background .right-side a{
 }
 
 .logo img{
-    width: 10%;
+    /* width: 10%; */
+    width: 23%;
 }
 
 .right-side {
@@ -93,7 +98,8 @@ div.background .right-side a{
 }
 
 .right-side li {
-    min-width: 52%;
+    /* min-width: 52%; */
+    margin: 0 20px;
     font-size: 19px;
 }
 
@@ -104,7 +110,7 @@ div.background .right-side a{
 
 .right-side a:hover {
     color: rgb(116, 116, 116);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     text-underline-offset: 6px;
     /* font-size: 21px; */
 }
@@ -149,9 +155,9 @@ div.background .right-side a{
 }
 
 .content h2 {
-    position: relative;
-    justify-content: center;
+    text-transform: capitalize;
     display: flex;
+    justify-content: center;
     font-weight: 300;
     font-size: xx-large;
     margin: 35px 0px;

@@ -30,25 +30,19 @@
                             <li><a th:href="@{/reservation/about#directions}">Directions</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a th:href="@{/reservation/board}">Board</a>
-                        <ul>
-                            <!-- 클릭시 해당 페이지의 아이디로 이동하게 하기 -->
-                            <li><a th:href="@{/reservation/board#notice}">Notice</a></li>
-                            <li><a th:href="@{/reservation/board#qna}">QnA</a></li>
-                        </ul>
-                    </li>
+                    <li><a th:href="@{/reservation/board}">Board</a></li>
                     <li><a id="" th:href="@{/reservation/reserve}">Reserve</a></li>
                     <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
+                    <li><a th:href="@{/reservation/location}">Location</a></li>
                 </ul>
             </div>
         </div>
     </div>
     
     <div class="content">
+        <h2>Review</h2>
         <div class="review">
             <form action="">
-                <h2>Review</h2>
                 <div class="review-event">
                     <h4>후기이벤트</h4>
                     <div class="explain">

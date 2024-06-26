@@ -66,6 +66,15 @@ public class GuestController {
     public String about() {
         return "/guest/about";
     }
+
+    /**
+     * 찾아오는 페이지
+     * @return
+     */
+    @GetMapping("/location")
+    public String location() {
+        return "/guest/location";
+    }
     
     /**
      * 예약 페이지
