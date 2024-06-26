@@ -148,6 +148,15 @@ div.background .right-side a{
     min-height: calc(100% - 60px);
 }
 
+.content h2 {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    font-weight: 300;
+    font-size: xx-large;
+    margin: 35px 0px;
+}
+
 footer {
     position: relative;
     /*padding: 10px 0;*/

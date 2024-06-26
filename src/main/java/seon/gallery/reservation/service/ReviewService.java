@@ -46,16 +46,20 @@ public class ReviewService {
 
         String originalFileName = null;
         String savedFile = null;
-
+        if (reviewDTO.getReviewImage() == null) {
+            log.info("파일이 비어있습니다.");
+        }
         if (reviewDTO.getReviewImage() != null && !reviewDTO.getReviewImage().isEmpty()) {
             originalFileName = reviewDTO.getReviewImage().getOriginalFilename();
             savedFile = FileService.saveFile(reviewDTO.getReviewImage(), uploadPath);
 
+            log.info("파일 이름", originalFileName);
+
             reviewDTO.setOriginalFileName(originalFileName);
             reviewDTO.setSavedFileName(savedFile);
+            
+            log.info("=== 파일 저장 완료: {}", originalFileName);
         }
-        
-        log.info("=== 파일 저장 완료: {}", originalFileName);
 
         ReviewEntity reviewEntity = ReviewEntity.toEntity(reviewDTO);
         reviewRepository.save(reviewEntity);

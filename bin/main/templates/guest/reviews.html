@@ -48,9 +48,18 @@
     <div class="content">
         <div class="review">
             <form action="">
-                <div class="event-info">
-                    <h4>후기이벤트가 진행 될 예정입니다.</h4>
-                    <h3>coming soon...</h3>
+                <h2>Review</h2>
+                <div class="review-event">
+                    <h4>후기이벤트</h4>
+                    <div class="explain">
+                        Review 게시판은 8월 16일 부터 오픈되며, 이벤트 기간이 지나도 후기 작성은 가능합니다. <br>
+                        예약할 때 기재한 이름과 전화번호 뒷자리와 동일하게 기재하셔야 이벤트에 응모됩니다.
+                    </div>
+                    <div class="event-info">
+                        <span>이벤트 기간 : 8월 16일(금) ~ 8월 19일(일)</span>
+                        <span>당첨자 발표 : 8월 21일(수)</span>
+                        <span>당첨 상품 : 커스텀CDP</span>
+                    </div>
                 </div>
                 <div class="write">
                     <!-- 일정 기간 전까진 이벤트 참여 기간이 아닙니다 라는 팝업이 뜬다던가 
@@ -69,9 +78,12 @@
                             <img src="https://via.placeholder.com/550x750" alt="#">
                         </div>
                         <div class="info">
-                            <span class="title" th:text="${review.title}">제목</span>
-                            <span class="name" th:text="${review.reviewer}">윤선애</span>
                             <span class="writeDate" th:text="${#temporals.format(review.writeDate,'yyyy/MM/dd')}">윤선애</span>
+                            <!-- 앞에 한 글자 이후에는 다 * 표시,번호 뒷자리-->
+                            <div class="private">
+                                <span class="name" th:text="${review.reviewer}">윤선애</span>
+                                <span class="phone" th:text="${#strings.substring(review.phone,7,11)}">010</span>
+                            </div>
                         </div>
                         </a>
                     </li>

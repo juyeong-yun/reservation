@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,9 +47,6 @@ public class ReviewEntity {
 	@Column(name="phone", nullable = false)
 	private String phone;
 	
-	@Column(name="title")
-	private String title;
-	
 	@Column(name="detail")
 	private String detail;
 	
@@ -73,7 +71,6 @@ public class ReviewEntity {
 				.reviewId(dto.getReviewId())
 				.reviewer(dto.getReviewer())
 				.phone(dto.getPhone())
-				.title(dto.getTitle())
 				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
 				.updateDate(dto.getUpdateDate())

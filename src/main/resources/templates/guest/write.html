@@ -13,6 +13,7 @@
     <!--ckeditor -->
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
+
     <!-- js -->
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <!-- 개인용 -->
@@ -43,8 +44,8 @@
                             <li><a th:href="@{/reservation/board#qna}">QnA</a></li>
                         </ul>
                     </li>
-                    <li><a id="" th:href="@{/reservation/reserve}">Reserve</a></li>
-                    <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
+                    <li><a th:href="@{/reservation/reserve}">Reserve</a></li>
+                    <li><a th:href="@{/reservation/reviews}">Review</a></li>
                 </ul>
             </div>
         </div>
@@ -86,9 +87,7 @@
                     <td>핸드폰 번호<span>*</span></td>
                     <td><input type="text" name="phone" id="phone" placeholder="01012345678" required></td> 
                 </tr>
-                <tr>
-					<td colspan="4"><input type="text" name="title" id="reviewTitle" placeholder="제목을 입력해주세요." required></td>
-				</tr>
+                <!-- 둘 사이 띄우기 -->
                 <tr>
 					<td colspan="4">
                         <div name="editor" id="reviewEditor">

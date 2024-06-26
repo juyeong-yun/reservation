@@ -95,7 +95,10 @@ document.addEventListener("DOMContentLoaded", function() {
     ClassicEditor
         .create(document.querySelector('#reviewEditor'), {
             language: 'ko',
-            enterMode: 'paragraph' // 엔터 키 동작을 문단 생성으로 설정
+            enterMode: 'paragraph', // 엔터 키 동작을 문단 생성으로 설정
+            ckfinder : {
+                uploadUrl : 'http://localhost:8080/write?from=review/imgUpload'
+            }
         })
         .then(editor => {
             ckEditorInstanceReview = editor; // CKEditor 인스턴스 할당
@@ -115,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // CKEditor에서 텍스트 가져오기
         let contents = ckEditorInstanceQna.getData().trim();
-        // console.log(contents);
 
         if (!contents) {
             alert("내용을 작성해주세요."); // 필드가 비어있으면 제출 방지
@@ -140,8 +142,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
         let phone = document.getElementById('phone').value.trim(); // #phone 요소의 값 가져오기
+        let name = document.getElementById('reviewer').value.trim();
+
+        if (name.length == 0) {
+            alert("개인 정보 확인을 위해 이름을 적어주세요."); // 사용자에게 경고 메시지 표시
+            document.getElementById('reviewer').focus(); // 포커스를 다시 #phone 입력란으로 이동
+            return
+        }
+
+        if (phone.length == 0) {
+            alert("개인 정보 확인을 위해 핸드폰 번호를 적어주세요."); // 사용자에게 경고 메시지 표시
+            document.getElementById('phone').focus(); // 포커스를 다시 #phone 입력란으로 이동
+            return
+        }
+        
         if (phone.length !== 11) {
-            alert("전화번호는 11자리여야 합니다."); // 사용자에게 경고 메시지 표시
+            alert("핸드폰 번호는 11자리여야 합니다."); // 사용자에게 경고 메시지 표시
             document.getElementById('phone').focus(); // 포커스를 다시 #phone 입력란으로 이동
             return
         }
