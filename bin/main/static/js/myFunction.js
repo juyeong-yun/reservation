@@ -41,7 +41,7 @@ function checkDate() {
     var currentDate = new Date();
 
     if (currentDate < startDate) {
-        alert('이벤트 참여 기간이 아닙니다. 이벤트는 2024년 7월 1일부터 시작됩니다.');
+        alert('이벤트 참여 기간이 아닙니다. 이벤트는 2024년 8월 1일부터 시작됩니다.');
     } else {
         // 이벤트 시작 후 링크 활성화
         document.getElementById('reviewLink').href = '/reservation/write?from=review';
@@ -50,7 +50,7 @@ function checkDate() {
 
 // 페이지 로드 시 날짜를 체크하여 링크를 활성화하거나 비활성화
 document.addEventListener('DOMContentLoaded', function() {
-    var startDate = new Date('2024-07-01');
+    var startDate = new Date('2024-08-01');
     var currentDate = new Date();
     
     if (currentDate >= startDate) {

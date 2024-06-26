@@ -37,9 +37,11 @@ table th.title, th.name {
     width: 165px;
     text-align: center;
     padding: 5px 0;
+    height: 47px;
 }
 
 table td.detail, td.question {
+    height: 47px;
     width: 800px;
     text-align: start;
     padding: 5px 0;

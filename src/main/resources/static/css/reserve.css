@@ -4,9 +4,11 @@
     font-family: 'Noto Sans KR';
 }
 
-
-.reserve-notice h2{
-    margin-bottom: 20px;
+#calendar h3,
+.reserve-notice h3{
+    padding: 7px;
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .reserve-notice ul {
@@ -30,40 +32,36 @@
 
 #calendar {
     margin-top: 13%;
+    font-family: 'Work Sans';
 }
 
-#calendar h4 {
-	font-weight: 400;
-    margin-bottom: 13px;
-}
 
 #calendar th, td {
-    width: 254px;
+    width: 200px;
     border: 1px solid #ffffff;
-   	color:ffffff ;
-   	background: darkgray;
+   	background: #f3f3f3;
 } 
 
-#calendar *[class*="available"] {
-	border-color: #000000;
+#calendar td[class*="available"] {
+    text-align: center;
+    letter-spacing: 6px;
 	color: #000000;
 	background: #ffffff;
+    border: 1px solid;
 }   
 
 #calendar th {
-    height: 32px;
     text-align: center;
+
+    color: #fff;
+    background: #000;
+    height: 32px;
 }
 
 #calendar td {
     height: 360px;
 }
 
-.time,
-.day,
-.fill {
-    font-family: 'Work Sans';
-}
 
 .day {
     float: inline-end;
@@ -71,14 +69,7 @@
 }
 
 td li {
-    margin: 20px;
-    
-}
-
-.time {
-    /* border: 0.74px solid; */
-    padding: 6px;
-    /* box-shadow: 1px 2px 2px 2px #bcb4b4; */
+    padding: 4px 0;  
 }
 
 /* modal css */
@@ -123,15 +114,22 @@ td li {
   min-height: 10em;
   max-height: 20em;
   text-align: center;
-  padding: 20px; /* Added for better spacing */
+  padding: 10px; /* Added for better spacing */
+  display: flex;
+  align-items: center;
+}
+
+.body-contentbox span{
+    font-size: 18px;
 }
 
 .close {
-  display: inline-flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-top: 1px solid #000000;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: #FFEC8E;
+    font-weight: 350;
 }

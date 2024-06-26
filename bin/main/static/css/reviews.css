@@ -16,9 +16,12 @@
     .content .write{width:100%;}
 }
 
-.review-event{ margin: 50px 0;}
+.review-event{ margin: 50px 0; padding: 7px;}
 
-.review-event h4{ font-weight: 400;}
+.review-event h3{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
 
 .review-event .explain {
     margin: 25px 0;

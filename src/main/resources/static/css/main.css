@@ -58,8 +58,7 @@ a:hover {
 }
 
 div.background {
-    background-image: url('../images/poster.jpg');
-    position: fixed;
+    background-image: url('../images/mainpage_imsi.jpeg');
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -74,32 +73,26 @@ div.background .right-side a{
 
 /* 상단 바 스타일링 */
 .header {
-    padding: 0 125px 0;
+    padding: 0 104px 0;
     border-bottom: 1px solid;
 }
 .top-bar {
     display: flex;
-    padding: 3px 20px;
+    /* padding: 3px 20px; */
     align-items: center;
 }
 
 .logo img{
-    /* width: 10%; */
     width: 23%;
 }
 
-/* .right-side {
-    position: relative;
-    right: 12%;
-} */
 
 .right-side ul{
     display: flex;
 }
 
 .right-side li {
-    /* min-width: 52%; */
-    margin: 0 29px;
+    margin: 0 12px 0 41px;
     font-size: 19px;
 }
 
@@ -148,7 +141,7 @@ div.background .right-side a{
 
 /* 본문 */
 .content {
-	padding: 0 125px 60px;
+	padding: 0 123px 60px;
     height: auto;
     flex: 1;
     min-height: calc(100% - 60px);
