@@ -95,13 +95,13 @@ document.addEventListener("DOMContentLoaded", function() {
     ClassicEditor
         .create(document.querySelector('#reviewEditor'), {
             language: 'ko',
-            enterMode: 'paragraph', // 엔터 키 동작을 문단 생성으로 설정
-            ckfinder : {
-                uploadUrl : 'http://localhost:8080/write?from=review/imgUpload'
-            }
+            enterMode: 'paragraph' // 엔터 키 동작을 문단 생성으로 설정
         })
         .then(editor => {
             ckEditorInstanceReview = editor; // CKEditor 인스턴스 할당
+
+            // ck에디터 커스텀 .. 어댑터 만지는 거
+            
         });
 
     // qna 관한 ckeditor

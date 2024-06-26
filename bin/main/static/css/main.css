@@ -79,7 +79,7 @@ div.background .right-side a{
 }
 .top-bar {
     display: flex;
-    padding: 10px 20px;
+    padding: 3px 20px;
     align-items: center;
 }
 
@@ -88,10 +88,10 @@ div.background .right-side a{
     width: 23%;
 }
 
-.right-side {
+/* .right-side {
     position: relative;
     right: 12%;
-}
+} */
 
 .right-side ul{
     display: flex;
@@ -99,7 +99,7 @@ div.background .right-side a{
 
 .right-side li {
     /* min-width: 52%; */
-    margin: 0 20px;
+    margin: 0 29px;
     font-size: 19px;
 }
 

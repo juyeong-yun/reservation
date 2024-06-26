@@ -11,17 +11,18 @@
 
 div.map{
 	float:left;
-	width:47%;
+	width:50%;
 	height:50%
 }
 
 .map img {
-    width: 86%;
+    margin-left: 100px;
+    width: 56%;
 }
 
 div.explain{
 	float:right;
-	width:47%;
+	width:50%;
 	height:50%
 }
 
@@ -42,7 +43,8 @@ div.explain{
 }
 
 .explain p {
-	margin: 18px 0;
+	margin: 40px 0 15px 0;
+    font-size: 18px;
 }	
 	
 

@@ -1,6 +1,10 @@
 package seon.gallery.reservation.controller;
 
+import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,12 +21,19 @@ import seon.gallery.reservation.service.ReserveService;
 import seon.gallery.reservation.service.ReviewService;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Slf4j
 @Controller
@@ -111,6 +122,8 @@ public class GuestController {
             
         return "/guest/write";
     }
+
+
     
     /**
      * 리뷰 / 질문글 작성
@@ -192,5 +205,7 @@ public class GuestController {
     //========================= 첨부파일 다운로드 ======================
     @Value("${spring.servlet.multipart.location}")
     String uploadPath;
+    
+    
     
 }

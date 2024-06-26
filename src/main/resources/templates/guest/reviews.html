@@ -47,7 +47,7 @@
                     <h4>후기이벤트</h4>
                     <div class="explain">
                         Review 게시판은 8월 16일 부터 오픈되며, 이벤트 기간이 지나도 후기 작성은 가능합니다. <br>
-                        예약할 때 기재한 이름과 전화번호 뒷자리와 동일하게 기재하셔야 이벤트에 응모됩니다.
+                        예약시 기재한 이름과 전화번호 뒷자리가 동일하게 기재되어야 이벤트에 응모됩니다.
                     </div>
                     <div class="event-info">
                         <span>이벤트 기간 : 8월 16일(금) ~ 8월 19일(일)</span>
@@ -63,6 +63,7 @@
 
                 <ul class="gallery">
                     <!-- 리뷰 디테일 페이지 만들어야함 -->
+                    <!-- 4*2 리스트로 만들고 넘어가면 페이징하기 -->
                     <li  th:each="review : ${reviewList}">
                         <a th:href="@{/reservation/reviewsDetail(reviewId=${review.reviewId})}">
                         <div th:if="${review.originalFileName != null}">
