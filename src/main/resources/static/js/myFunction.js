@@ -34,41 +34,62 @@ $(function() {
 
 // qna 질문 사항 답변 위한 모달창
 $(function(){
-    let targetHref;
-    let contextPath = $('#contextPath').val();
-    let answer = $('#answer').val();
-    let qnaId = $('#qnaId').val();
-    let qnaName = $('#qnaName').val();
 
-    $(document).on("click", "#qnaModal", function(e) {
-        e.preventDefault(); // Prevent the default action
+    $(document).on("click", "[id^=qnaModal_]", function(e) {
+        e.preventDefault(); 
 
-        targetHref = $(this).data("href"); // Store the href for later
-        $("#popup").css('display', 'flex').hide().fadeIn(); // Show the modal
+        let qnaId = $(this).data("id");
+        console.log(qnaId);
+
+        $("#qna-popup").css('display', 'flex').hide().fadeIn();
 
         $.ajax({
-            url: contextPath + 'qna/AnswerInsert',
-            method: 'post',
-            data : {
-                'qnaId' : qnaId,
-                'qnaName' : qnaName,
-                'title' : 
+            url: '/admin/qnaDetail',
+            method: 'get',
+            data : {'qnaId' : qnaId},
+            success : function(res) {
+                $('#q_title').text(res.title);
+                $('#q_writeDate').text(res.writeDate);
+                $('#q_detail').text(res.detail);
+                if (res.answer) {
+                    $('#q_answer_row').show(); // 답변이 있으면 보이기
+                    $('#q_answer').val(res.answer); // 기존 답변 데이터 textarea에 채우기
+                } else {
+                    $('#q_answer_row').hide(); // 답변이 없으면 숨기기
+                    $('#q_answer').val(''); // textarea 비우기
+                }
             }
-            success : 
-            }
-        })
+        });
     });
 
-     // When the close button is clicked
-    $("#submit").click(function() {
+    $(document).on("click", "[id^=noticeModal_]", function(e) {
+        e.preventDefault(); // Prevent the default action
+        
+        let noticeId = $(this).data("id");
+
+        $("#notice-popup").css('display', 'flex').hide().fadeIn(); // Show the modal
+        
+        $.ajax({
+            url: '/admin/noticeDetail',
+            method: 'get',
+            data : {'noticeId' : noticeId},
+            success : function(res) {
+                $('#n_title').text(res.title);
+                $('#n_writeDate').text(res.writeDate);
+                $('#n_detail').text(res.detail);
+            }
+        });
+    });
+
+    // Modal close function
+    $(".popup-wrap").on("click", ".submit", function() {
         modalClose();
     });
 
     // Modal close function
     function modalClose() {
-        $("#popup").fadeOut(); // Fade out effect for closing modal
+        $(".popup-wrap").fadeOut(); // Fade out effect for closing modal
     }
-
 });
 
 

@@ -1,12 +1,14 @@
 package seon.gallery.reservation.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -65,15 +67,12 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/writeManage")
-	public String writeManage(HttpServletRequest request ,Model model) {
+	public String writeManage(Model model) {
 		List<QnaDTO> qnaList = qnaService.selectAll();
 		List<NoticeDTO> noticeList = noticeService.selectAll();
 
-		String contextPath = request.getContextPath();
-
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("noticeList", noticeList);
-		model.addAttribute("contextPath", contextPath);
 
 		return "admin/writeManage";
 	}
@@ -102,5 +101,37 @@ public class AdminController {
             return "redirect:/admin/writeManage"; // 오류 발생 시에도 동일한 경로로 리다이렉트
 		}
 	}
+
+	/**
+	 * @ResponseBody를 사용하여 컨트롤러가 반환하는 데이터를 HTTP 응답의 본문으로 변환하여 클라이언트에게 전송할 수 있습니다.
+	 */
+
+	/**
+	 * ajax 로 notice  detail 보기
+	 * @param noticeId
+	 * @return
+	 */
+	@GetMapping("/noticeDetail")
+	@ResponseBody
+	public NoticeDTO noticeDetail(@RequestParam(name = "noticeId") Long noticeId) {
+		NoticeDTO noticeDTO = noticeService.selectOne(noticeId);
+
+		return noticeDTO;
+	} 
+
+	/**
+	 * ajax 로 qna detail 보기
+	 * @param qnaId
+	 * @return
+	 */
+	@GetMapping("/qnaDetail")
+	@ResponseBody
+	public QnaDTO qnaDetail(@RequestParam(name = "qnaId")Long qnaId) {
+		QnaDTO qnaDTO = qnaService.selectOne(qnaId);
+		log.info("DTO" +qnaDTO);
+		return qnaDTO;
+	}
+	
+	
 
 }

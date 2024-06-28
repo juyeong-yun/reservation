@@ -18,10 +18,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     
     <script th:src="@{/js/myFunction.js}"></script>
-    <script th:src="@{/js/myAjax.js}"></script>
-    <script>
-        
-    </script>
 </head>
 <body>
 	<div class="header">
@@ -41,65 +37,71 @@
     </div>
     
     <div class="content">
-        <!-- ajax 전송 위한 -->
-        <!-- qnaId 는 왜 안되지? -->
-        <!-- <input type="hidden" id="qnaId" th:value="${qna.qnaId}"> -->
-        <input type="hidden" id="contextPath" th:value="${contextPath}">
         <h2>공지사항, 답변 관리</h2>
         <!-- 수정 삭제는 각자 해야하니까 폼 두개로 만들 수 있다는 점 기억하기 -->
         <form action="">
             <!-- 공지글 쓰기 화면으로 -->
             <div class="notice" id="notice">
-                <div class="write"><a th:href="@{/reservation/adminWrite}"><i class="fa-solid fa-plus"></i></a></div>
+                <div class="write"><a th:href="@{/admin/adminWrite}"><i class="fa-solid fa-plus"></i></a></div>
                 <h3>Notice</h3>
                 <table  th:each="notice:${noticeList}">
                     <tr>
                         <th class="category">공지</th>
-                        <td class="title"  th:text="${notice.title}">냠냠</td>
+                        <td class="title"><a th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" th:text="${notice.title}">냠냠</a></td>
                         <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
-                        <td style="width: 70px;">
-                            <button class="delete">삭제</button>
-                            <button class="update">수정</button>
-                        </td>
                     </tr>
-                    <tr>
-                        <td colspan="4" class="detail" th:utext="${notice.detail}"></td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="qna" id="qna">
-                <h3>QnA</h3>
-                <table th:each="qna:${qnaList}">
-                    <!-- 질문을 클릭하면 인풋 박스가 나와서 거기에 글을 쓰게하기 -->
-                    <tr>
-                        <th class="name" th:text="${qna.qnaName}">질문자</th>
-                        <td class="question"><a id="qnaModal" th:data-id="${qna.qnaId}" th:text="${qna.title}">질문</a></td>
-                        <td class="date" th:text="${#temporals.format(qna.writeDate, 'yyyy/MM/dd HH:mm:ss')}">날짜</td>
-                    </tr>
-                    <!-- 답변이 있으면 펼쳐지게 안되면 안 펼쳐지게 하기가 나을까 새로운 페이지를 팔까? -->
-                    <tr>
-                        <!-- 글씨를 쓰면 완료 버튼이 나오게 -->
-                        <td colspan="2" th:if="${qna.answer!=null}">
-                            <p class="haveAnswer" th:text="${qna.answer}" >답변이 있는 경우</p>
-                        </td>
-                    </tr>                    
+                    <!-- <tr>
+                        <td colspan="3" class="detail" th:utext="${notice.detail}"></td>
+                    </tr> -->
                 </table>
             </div>
             
-            <div class="popup-wrap" id="popup">
+            <div class="qna" id="qna">
+                <h3>QnA</h3>
+                <table th:each="qna:${qnaList}">
+                    <tr>
+                        <th class="name" th:text="${qna.qnaName}">질문자</th>
+                        <td class="question"><a th:id="'qnaModal_' + ${qna.qnaId}" th:data-id="${qna.qnaId}">질문</a></td>
+                        <td class="date" th:text="${#temporals.format(qna.writeDate, 'yyyy/MM/dd HH:mm:ss')}">날짜</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="popup-wrap" id="qna-popup">
                 <div class="popup">
                     <div class="contentbox">
-                        <ul id="qnaDetail">
-                        </ul>
+                        <table>
+                            <tr><th id="q_title"></th></tr>
+                            <tr><td id="q_writeDate"></td></tr>
+                            <tr><td id="q_detail"></td></tr>
+                            <tr id="q_answer_row"><td><textarea name="answer" id="q_answer"></textarea></td></tr>
+                        </table>
                     </div>
                     <div class="popup-foot">
                             <button class="submit">완료</button>
-                            <!-- <button class="delete">삭제</button>
-                            <button class="update">수정</button> -->
+                            <button class="update">수정</button>
+                            <button class="delete">삭제</button>
                     </div>
                 </div>
             </div>
+
+            <div class="popup-wrap" id="notice-popup">
+                <div class="popup">
+                    <div class="contentbox">
+                        <table>
+                            <tr><th id="n_title"></th></tr>
+                            <tr><td id="n_writeDate"></td></tr>
+                            <tr><td id="n_detail"></td></tr>
+                        </table>
+                    </div>
+                    <div class="popup-foot">
+                        <button class="submit">완료</button>
+                        <button class="update">수정</button>
+                        <button class="delete">삭제</button>
+                    </div>
+                </div>
+            </div>
+            
         </form>
     </div>
     

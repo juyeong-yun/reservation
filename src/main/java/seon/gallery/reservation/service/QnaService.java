@@ -2,6 +2,7 @@ package seon.gallery.reservation.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,19 @@ public class QnaService {
         } else {
             log.error("저장 실패");
         }
+    }
+
+
+    public QnaDTO selectOne(Long qnaId) {
+        Optional<QnaEntity> entity = qnaRepository.findById(qnaId);
+
+        if (entity.isPresent()) {
+            QnaEntity qnaEntity = entity.get();
+            return QnaDTO.toDTO(qnaEntity);
+        } else {
+            return null;
+        }
+
     }
 
 

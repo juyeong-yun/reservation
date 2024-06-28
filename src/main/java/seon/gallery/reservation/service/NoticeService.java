@@ -2,6 +2,7 @@ package seon.gallery.reservation.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -68,6 +69,18 @@ public class NoticeService {
             log.info("저장 완료");
         } else {
             log.error("저장 실패");
+        }
+    }
+
+    public NoticeDTO selectOne(Long noticeId) {
+        Optional<NoticeEntity> entity = noticeRepository.findById(noticeId);
+    
+        if (entity.isPresent()) {
+            NoticeEntity noticeEntity = entity.get();
+            return NoticeDTO.toDTO(noticeEntity);
+        } else {
+            // Optional에서 값이 존재하지 않는 경우 처리 (예외처리, 기본값 설정 등)
+            return null; // 또는 기본값을 리턴하거나 예외를 던지는 등의 처리를 추가할 수 있습니다.
         }
     }
 

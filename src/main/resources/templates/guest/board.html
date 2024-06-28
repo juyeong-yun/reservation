@@ -45,6 +45,7 @@
             <!-- 어떻게 보이는 형식이 좋을지 생각해보기 -->
             <!-- 게시판이 두개라서 두개의 맥스 사이즈 설정할 수 있는지 알아봐야겠다 ..
                     그럼 페이징도 필요할듯 -->
+            <!-- 둘 다 누를 수 있게 -->
             <div class="notice" id="notice">
                 <h3>Notice</h3>
                 <table th:each="notice:${noticeList}">
@@ -72,9 +73,11 @@
                     </tr>
                     <!-- 답변이 있으면 펼쳐지게 안되면 안 펼쳐지게 하기가 나을까 새로운 페이지를 팔까? -->
                     <tr>
-                        <td colspan="3" class="detail"><p name="detail" th:utext="${qna.detail}"></p></td>
-                        <td colspan="3" class="answer"><p name="answer" th:utext="${qna.answer}"></p></td>
-                    </tr>
+                        <td colspan="3" th:utext="${qna.detail}"></td>
+                        <td colspan="3" th:if="${qna.answer!=null}">
+                            <p class="haveAnswer" th:text="${qna.answer}" >답변이 있는 경우</p>
+                        </td>
+                    </tr>                    
                 </table>
             </div>
         </form>
