@@ -47,11 +47,14 @@
                     그럼 페이징도 필요할듯 -->
             <div class="notice" id="notice">
                 <h3>Notice</h3>
-                <table >
+                <table th:each="notice:${noticeList}">
                     <tr>
-                        <th class="title">공지</th>
-                        <td class="detail">냠냠</td>
-                        <td class="date">날짜</td>
+                        <th class="category">공지</th>
+                        <td class="title" th:text="${notice.title}">냠냠</td>
+                        <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="detail" th:utext="${notice.detail}"></td>
                     </tr>
                 </table>
             </div>

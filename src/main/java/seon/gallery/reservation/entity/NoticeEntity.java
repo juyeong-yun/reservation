@@ -2,6 +2,8 @@ package seon.gallery.reservation.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -47,11 +49,19 @@ public class NoticeEntity {
 	private String detail;
 	
 	@Column(name="write_date")
+	@CreationTimestamp
 	private LocalDateTime writeDate;
 	
 	@Column(name="is_post")
 	@Enumerated(EnumType.STRING)
 	private YesorNo isPost;
+
+	// 첨부파일이 있을때
+	@Column(name="original_file_name")
+	private String originalFileName;
+
+	@Column(name = "saved_file_name")
+	private String savedFileName;
 	
 	public static NoticeEntity toEntity(NoticeDTO dto) {
 		return NoticeEntity.builder()
@@ -60,6 +70,8 @@ public class NoticeEntity {
 				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
 				.isPost(dto.getIsPost())
+				.originalFileName(dto.getOriginalFileName())
+				.savedFileName(dto.getSavedFileName())
 				.build();
 		
 	}

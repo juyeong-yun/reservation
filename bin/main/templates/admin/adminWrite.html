@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온실(溫室) | 관리자 예약확인</title>
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
+    
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" th:href="@{/css/admin/manage.css}">
+    
+    <!--ckeditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    
+    <!-- js -->
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/myFunction.js}"></script>
+</head>
+<body>
+	<div class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
+            </div>
+            
+            <div class="right-side">
+                <ul id="menu">
+                    <li><a th:href="@{/reservation/adminMain}"><i class="fa-solid fa-house-user"></i></a></li>
+                    <li><a id="" th:href="@{/reservation/reserveCheck}">예약 관리</a></li>
+                    <li><a th:href="@{/reservation/writeManage}">글 작성</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <form th:action="@{/reservation/noticeWrite}" method="post" id="noticeSubmitForm" enctype="multipart/form-data" >
+            <table>
+                <tr>
+					<td colspan="4"><input type="text" name="title" id="noticeTitle" placeholder="제목을 입력해주세요." required></td>
+				</tr>
+                <tr>
+					<td colspan="4">
+                        <div name="editor" id="noticeEditor">
+                            <img name="noticeImage" id="noticeImage" src="#" alt="">
+                        </div>
+                    </td>
+                    <input type="hidden" name="detail" id="noticeDetail">
+				</tr>
+            </table>
+            <div class="button">
+                <button class="submit" id="noticeSubmit" type="submit">제출</button>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

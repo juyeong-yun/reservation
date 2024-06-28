@@ -33,21 +33,21 @@ table tr {
 }
 
 
-table th.title, th.name {
+table th.category, th.name {
     width: 165px;
     text-align: center;
     padding: 5px 0;
     height: 47px;
 }
 
-table td.detail, td.question {
+table td.title, td.question {
     height: 47px;
     width: 800px;
     text-align: start;
     padding: 5px 0;
 }
 
-table td.detail:hover, td.question a:hover{
+table td.title:hover, td.question a:hover{
     color: rgb(116, 116, 116);;
 
 }

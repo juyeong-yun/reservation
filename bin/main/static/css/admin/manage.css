@@ -1,12 +1,17 @@
 @import "../main.css";
-@import "../admin/admin.css";
+@import "../write.css";
+
+.top-bar .logo { flex: 1.5;}
+.top-bar .right-side { flex: 2;}
+.right-side ul {justify-content: flex-end;}
+.right-side a { padding-right: 0%;}
 
 /*********
 ckeditor
 **********/
 .ck-editor__editable[role="textbox"] {
 	/* Editing area */
-	min-height: 200px;
+	min-height: 50vh;
 }
 
 .ck-content .image {

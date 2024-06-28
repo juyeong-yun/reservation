@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
+import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
 import seon.gallery.reservation.service.EventService;
+import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
 import seon.gallery.reservation.service.ReviewService;
@@ -42,13 +44,15 @@ public class GuestController {
 
 	private QnaService qnaService;
     private ReviewService reviewService;
+    private NoticeService noticeService;
     private ReserveService reserveService;
     private EventService eventService;
 
     public GuestController(QnaService qnaService, ReviewService reviewService,
-    ReserveService reserveService, EventService eventService){
+    ReserveService reserveService, EventService eventService, NoticeService noticeService){
         this.qnaService = qnaService;
         this.reviewService = reviewService;
+        this.noticeService = noticeService;
         this.reserveService = reserveService;
         this.eventService = eventService;
     }
@@ -60,9 +64,10 @@ public class GuestController {
 	 */
     @GetMapping("/board")
     public String board(HttpServletRequest request, Model model) {
-
+        List<NoticeDTO> noticeList = noticeService.selectAll();
         List<QnaDTO> qnaList = qnaService.selectAll();
 
+        model.addAttribute("noticeList", noticeList);
         model.addAttribute("qnaList", qnaList);
         
         return "guest/board";
@@ -114,10 +119,13 @@ public class GuestController {
     @GetMapping("/write")
     public String write(
         @RequestParam(value="from", required = false) String from, Model model ) {
-
-            if ("qna".equals(from)) {  log.info("qna 글쓰기");
-            } else if ("review".equals(from)) { log.info("review 글쓰기"); }
-
+            
+            if ("qna".equals(from)) {  
+                log.info("qna 글쓰기");
+            } else if ("review".equals(from)) { 
+                log.info("review 글쓰기"); 
+            }
+            
             model.addAttribute("from", from);
             
         return "/guest/write";
@@ -137,7 +145,7 @@ public class GuestController {
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
         @RequestParam(value = "detail", required = false) String detail,
         @ModelAttribute QnaDTO qnaDTO, 
-        @ModelAttribute ReviewDTO reviewDTO, 
+        @ModelAttribute ReviewDTO reviewDTO,
         RedirectAttributes attr) {
 
             if ("qna".equals(from)) {

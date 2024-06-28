@@ -27,6 +27,8 @@ public class NoticeDTO {
 	private LocalDateTime writeDate;
 	private MultipartFile noticeImage;
 	private YesorNo isPost;
+	private String originalFileName;
+	private String savedFileName;
 	
 	public static NoticeDTO toDTO(NoticeEntity entity) {
 		return NoticeDTO.builder()
@@ -35,6 +37,8 @@ public class NoticeDTO {
 				.detail(entity.getDetail())
 				.writeDate(entity.getWriteDate())
 				.isPost(entity.getIsPost())
+				.originalFileName(entity.getOriginalFileName())
+				.savedFileName(entity.getSavedFileName())
 				.build();
 	}
 }

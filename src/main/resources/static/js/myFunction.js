@@ -80,29 +80,55 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let ckEditorInstanceQna; // CKEditor 인스턴스 변수 선언
     let ckEditorInstanceReview; // CKEditor 인스턴스 변수 선언
+    let ckEditorInstanceNotice;
 
-    // 질문글 에디터
-    ClassicEditor
-        .create(document.querySelector('#qnaEditor'), {
-            language: 'ko',
-            enterMode: 'paragraph' // 엔터 키 동작을 문단 생성으로 설정
-        })
-        .then(editor => {
-            ckEditorInstanceQna = editor; // CKEditor 인스턴스 할당
-        });
+    // qnaEditor 초기화
+    const qnaEditorElement = document.querySelector('#qnaEditor');
+    if (qnaEditorElement) {
+            ClassicEditor
+                .create(qnaEditorElement, {
+                    language: 'ko',
+                    enterMode: 'paragraph'
+                })
+                .then(editor => {
+                    ckEditorInstanceQna = editor;
+                })
+                .catch(error => {
+                    console.error('Error initializing qnaEditor:', error);
+                });
+        }
 
-    // 리뷰 에디터
-    ClassicEditor
-        .create(document.querySelector('#reviewEditor'), {
-            language: 'ko',
-            enterMode: 'paragraph' // 엔터 키 동작을 문단 생성으로 설정
-        })
-        .then(editor => {
-            ckEditorInstanceReview = editor; // CKEditor 인스턴스 할당
+        // reviewEditor 초기화
+        const reviewEditorElement = document.querySelector('#reviewEditor');
+        if (reviewEditorElement) {
+            ClassicEditor
+                .create(reviewEditorElement, {
+                    language: 'ko',
+                    enterMode: 'paragraph'
+                })
+                .then(editor => {
+                    ckEditorInstanceReview = editor;
+                })
+                .catch(error => {
+                    console.error('Error initializing reviewEditor:', error);
+                });
+        }
 
-            // ck에디터 커스텀 .. 어댑터 만지는 거
-            
-        });
+        // noticeEditor 초기화
+        const noticeEditorElement = document.querySelector('#noticeEditor');
+        if (noticeEditorElement) {
+            ClassicEditor
+                .create(noticeEditorElement, {
+                    language: 'ko',
+                    enterMode: 'paragraph'
+                })
+                .then(editor => {
+                    ckEditorInstanceNotice = editor;
+                })
+                .catch(error => {
+                    console.error('Error initializing noticeEditor:', error);
+                });
+        }
 
     // qna 관한 ckeditor
     $("#qnaSubmit").click(function(e) {
@@ -178,6 +204,38 @@ document.addEventListener("DOMContentLoaded", function() {
             $('#reviewSubmitForm').submit(); // 폼 제출
         }
     });
+
+    $('#noticeSubmit').click(function(e) {
+        e.preventDefault(); // 기본 제출 동작 방지
+
+        if (!ckEditorInstanceNotice) {
+            console.error("CKEditor 인스턴스가 초기화되지 않았습니다.");
+            return;
+        }
+
+        let title = document.getElementById('noticeTitle').value.trim();
+
+        if (title.length == 0) {
+            alert("제목을 작성해주세요."); // 사용자에게 경고 메시지 표시
+            document.getElementById('noticeTitle').focus(); 
+            return
+        }
+
+        // CKEditor에서 텍스트 가져오기
+        let contents = ckEditorInstanceNotice.getData().trim();
+        // console.log(contents);
+
+        if (!contents) {
+            alert("내용을 작성해주세요.");// 필드가 비어있으면 제출 방지
+            return;
+        }
+
+        // 숨겨진 필드에 값 설정
+        $("#noticeDetail").val(contents);
+
+        if (confirm("제출하시겠습니까?")) { // 사용자 확인 요청
+            $('#noticeSubmitForm').submit(); // 폼 제출
+        }
+
+    });
 });
-
-
