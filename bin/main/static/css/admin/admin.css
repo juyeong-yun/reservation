@@ -3,7 +3,7 @@
 
 
 /*********
-admin_main 화면
+adminMain 화면
 **********/
 
 .top-bar .logo { flex: 1.5;}
@@ -11,6 +11,17 @@ admin_main 화면
 .right-side ul {justify-content: flex-end;}
 .right-side a { padding-right: 0%;}
 
+div.addEvent {
+    float: left;
+    width: 30%;
+    height: 50%;
+}
+
+div.eventGraph{
+    float: right;
+    width: 65%;
+    height: 50%;
+}
 
 .progress-bar {
     width: 100%;
@@ -31,7 +42,7 @@ admin_main 화면
 
 
 /*********
-admin_write 화면
+adminManage 화면
 **********/
 textarea{
 	resize: none;

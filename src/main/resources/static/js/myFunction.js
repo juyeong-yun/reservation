@@ -1,12 +1,16 @@
 /**
  * 목차 설정
- * 1. reserve 예약시간 누르면 나오는 모달과 관련된 js
- * 2. 리뷰페이지 글쓰기 버튼 기간 설정
- * 3. board 페이지에서 isLock 에 체크하면 input 박스 보이도록
+ * 1. reserve 예약시간을 누르면 모달이 나오게
+ * 2. 관리자 페이지에서 qna, notice detail 볼 수 있는 모달
+ * 3. 리뷰페이지 글쓰기 버튼 기간 설정
+ * 4. board 페이지에서 isLock 에 체크하면 input 박스 보이도록
+ * 5. notice, review, qna ckeditor 불러오는 api
  */
 
 
-//// modal 창과 연결된 js
+/*****************
+ * 1.reserve 예약시간을 누르면 모달이 나오게
+ ******************/
 $(function() {
     // Variable to store the href to navigate to upon confirmation
     let targetHref;
@@ -32,14 +36,15 @@ $(function() {
     }
 });
 
-// qna 질문 사항 답변 위한 모달창
-$(function(){
 
+/*****************
+ * 2. notice 보기 , qna 질문 사항 답변 위한 모달창
+ ******************/
+$(function(){
     $(document).on("click", "[id^=qnaModal_]", function(e) {
         e.preventDefault(); 
 
         let qnaId = $(this).data("id");
-        console.log(qnaId);
 
         $("#qna-popup").css('display', 'flex').hide().fadeIn();
 
@@ -93,7 +98,9 @@ $(function(){
 });
 
 
-//// 리뷰페이지 글쓰기 버튼 기간 지정
+/*****************
+ * 3. 리뷰페이지 글쓰기 버튼 기간 지정
+ ******************/
 function checkDate() {
     // 지정된 날짜 (이벤트 시작 날짜)
     // 날짜는 여기서 지정 하면 될 거 같다.
@@ -109,7 +116,9 @@ function checkDate() {
 }
 
 
-// board 페이지에서 isLock 에 체크하면 input 박스 보이도록
+/*****************
+ * 4. board 페이지에서 isLock 에 체크하면 input 박스 보이도록
+ ******************/
 document.addEventListener('DOMContentLoaded', function(){
     var ischeck = document.getElementById('isLock');
     var pwdinput = document.getElementById('qnaPwd');
@@ -124,8 +133,9 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 });
 
-
-//// ckeditor 불러오는 api
+/*****************
+ * 5. notice, review, qna ckeditor 불러오는 api , 유효값 
+ ******************/
 document.addEventListener("DOMContentLoaded", function() {
 
     let ckEditorInstanceQna; // CKEditor 인스턴스 변수 선언

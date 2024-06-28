@@ -13,6 +13,7 @@
     
     <!-- js -->
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    
 </head>
 <body>
     <div class="header">
@@ -31,8 +32,25 @@
     </div>
     
     <div class="content">
+        <!-- 여기서 예약 추가 -->
+        <div class="addEvent">
+            <form action="">
+                <input type="date">
+                <input type="time">
+                <button class="submit" type="submit"></button>
+            </form>
+            <table>
+                <tr>
+                    <th>8/16</th>
+                </tr>
+                <tr>
+                    <td>12:00</td>
+                </tr>
+            </table>
+        </div>
+        
         <!-- 예약 날짜와 시간에 맞게 막대 그래프 그리기 -->
-        <form action="">
+        <div class="eventGraph">
             <table>
                 <tr>
                     <th>날짜</th>
@@ -56,8 +74,7 @@
                     </td>
                 </tr>
             </table>
-        </form>
+        </div>
     </div>
-    
 </body>
 </html>

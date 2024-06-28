@@ -61,7 +61,9 @@
                 <table th:each="qna:${qnaList}">
                     <tr>
                         <th class="name" th:text="${qna.qnaName}">질문자</th>
-                        <td class="question"><a th:id="'qnaModal_' + ${qna.qnaId}" th:data-id="${qna.qnaId}">질문</a></td>
+                        <td class="question">
+                            <a th:id="'qnaModal_' + ${qna.qnaId}" th:data-id="${qna.qnaId}" th:text="${qna.title}">질문</a>
+                        </td>
                         <td class="date" th:text="${#temporals.format(qna.writeDate, 'yyyy/MM/dd HH:mm:ss')}">날짜</td>
                     </tr>
                 </table>
