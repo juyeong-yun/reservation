@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @Controller
-@RequestMapping("/reservation")
+@RequestMapping("/guest")
 public class GuestController {
 
 	private QnaService qnaService;

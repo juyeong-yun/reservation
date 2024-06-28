@@ -32,31 +32,60 @@ $(function() {
     }
 });
 
+// qna 질문 사항 답변 위한 모달창
+$(function(){
+    let targetHref;
+    let contextPath = $('#contextPath').val();
+    let answer = $('#answer').val();
+    let qnaId = $('#qnaId').val();
+    let qnaName = $('#qnaName').val();
+
+    $(document).on("click", "#qnaModal", function(e) {
+        e.preventDefault(); // Prevent the default action
+
+        targetHref = $(this).data("href"); // Store the href for later
+        $("#popup").css('display', 'flex').hide().fadeIn(); // Show the modal
+
+        $.ajax({
+            url: contextPath + 'qna/AnswerInsert',
+            method: 'post',
+            data : {
+                'qnaId' : qnaId,
+                'qnaName' : qnaName,
+                'title' : 
+            }
+            success : 
+            }
+        })
+    });
+
+     // When the close button is clicked
+    $("#submit").click(function() {
+        modalClose();
+    });
+
+    // Modal close function
+    function modalClose() {
+        $("#popup").fadeOut(); // Fade out effect for closing modal
+    }
+
+});
+
 
 //// 리뷰페이지 글쓰기 버튼 기간 지정
 function checkDate() {
     // 지정된 날짜 (이벤트 시작 날짜)
     // 날짜는 여기서 지정 하면 될 거 같다.
-    var startDate = new Date('2024-06-21'); // 이벤트 시작 날짜를 여기에 설정
+    var startDate = new Date('2024-06-28'); // 이벤트 시작 날짜를 여기에 설정
     var currentDate = new Date();
 
     if (currentDate < startDate) {
-        alert('이벤트 참여 기간이 아닙니다. 이벤트는 2024년 8월 1일부터 시작됩니다.');
+        alert('이벤트 참여 기간이 아닙니다. 이벤트는 2024년 8월 16일부터 시작됩니다.');
     } else {
         // 이벤트 시작 후 링크 활성화
         document.getElementById('reviewLink').href = '/reservation/write?from=review';
     }
 }
-
-// 페이지 로드 시 날짜를 체크하여 링크를 활성화하거나 비활성화
-document.addEventListener('DOMContentLoaded', function() {
-    var startDate = new Date('2024-08-01');
-    var currentDate = new Date();
-    
-    if (currentDate >= startDate) {
-        document.getElementById('reviewLink').href = '/reservation/write?from=review';
-    }
-});
 
 
 // board 페이지에서 isLock 에 체크하면 input 박스 보이도록

@@ -75,48 +75,42 @@ td li {
 /* modal css */
 
 .popup-wrap {
-  background-color: rgba(0,0,0,.5);
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: none;
-  padding: 15px;
+    background-color: rgba(0,0,0,.5);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: none;
+    padding: 15px;
 }
 
 .popup {
-  width: 100%;
-  max-width: 400px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* Center content vertically */
+    width: 100%; max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
 }
 
 .popup-foot {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
+    width: 100%; height: 50px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .body-contentbox {
-  word-break: break-word;
-  overflow-y: auto;
-  min-height: 10em;
-  max-height: 20em;
-  text-align: center;
-  padding: 10px; /* Added for better spacing */
-  display: flex;
-  align-items: center;
+    word-break: break-word;
+    overflow-y: auto;
+    min-height: 10em; max-height: 20em;
+    text-align: center;
+    padding: 10px; /* Added for better spacing */
+    display: flex;
+    align-items: center;
 }
 
 .body-contentbox span{

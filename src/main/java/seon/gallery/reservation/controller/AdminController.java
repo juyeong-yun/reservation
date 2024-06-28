@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
+import seon.gallery.reservation.entity.QnaEntity;
 import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
@@ -21,7 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/reservation")
+@RequestMapping("/admin")
 public class AdminController {
 	private NoticeService noticeService;
 	private EventService eventService;
@@ -61,12 +65,15 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/writeManage")
-	public String writeManage(Model model) {
+	public String writeManage(HttpServletRequest request ,Model model) {
 		List<QnaDTO> qnaList = qnaService.selectAll();
 		List<NoticeDTO> noticeList = noticeService.selectAll();
 
+		String contextPath = request.getContextPath();
+
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("contextPath", contextPath);
 
 		return "admin/writeManage";
 	}
