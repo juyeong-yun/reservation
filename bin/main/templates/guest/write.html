@@ -29,11 +29,11 @@
             
             <div class="right-side">
                 <ul id="menu">
-                    <li><a id="" th:href="@{/reservation/about}">About</a></li>
-                    <li><a th:href="@{/reservation/board}">Board</a></li>
-                    <li><a id="" th:href="@{/reservation/reserve}">Reserve</a></li>
-                    <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
-                    <li><a th:href="@{/reservation/location}">Location</a></li>
+                    <li><a id="" th:href="@{/guest/about}">About</a></li>
+                    <li><a th:href="@{/guest/board}">Board</a></li>
+                    <li><a id="" th:href="@{/guest/reserve}">Reserve</a></li>
+                    <li><a id="" th:href="@{/guest/reviews}">Review</a></li>
+                    <li><a th:href="@{/guest/location}">Location</a></li>
                 </ul>
             </div>
         </div>
@@ -43,7 +43,7 @@
     
     <div class="content">
         <!-- qna 관련 폼 -->
-        <form th:action="@{/reservation/writeInsert(from=${from})}" id="qnaSubmitForm" method="post">
+        <form th:action="@{/guest/writeInsert(from=${from})}" id="qnaSubmitForm" method="post">
             <!-- <h4>본인 확인을 위해 개인 정보를 입력해주세요.</h4> -->
             <table  th:if="${from == 'qna'}">
 				<tr>
@@ -67,7 +67,7 @@
             </form>
 
             <!-- 리뷰 관련 폼 -->
-            <form th:action="@{/reservation/writeInsert(from=${from})}" id="reviewSubmitForm" method="post" enctype="multipart/form-data" >
+            <form th:action="@{/guest/writeInsert(from=${from})}" id="reviewSubmitForm" method="post" enctype="multipart/form-data" >
             <table th:if="${from=='review'}">
                 <tr>
                     <td>이름<span>*</span></td>

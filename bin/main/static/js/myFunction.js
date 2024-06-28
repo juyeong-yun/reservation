@@ -83,7 +83,7 @@ function checkDate() {
         alert('이벤트 참여 기간이 아닙니다. 이벤트는 2024년 8월 16일부터 시작됩니다.');
     } else {
         // 이벤트 시작 후 링크 활성화
-        document.getElementById('reviewLink').href = '/reservation/write?from=review';
+        document.getElementById('reviewLink').href = '/guest/write?from=review';
     }
 }
 

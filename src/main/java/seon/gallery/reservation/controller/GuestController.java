@@ -154,12 +154,12 @@ public class GuestController {
                     qnaDTO.setDetail(detail);
                     qnaService.writeQna(qnaDTO);
                     attr.addFlashAttribute("message", "Q&A 작성이 완료되었습니다."); 
-                    return "redirect:/reservation/board";
+                    return "redirect:/guest/board";
                 
                 } catch (Exception e) {
                     attr.addFlashAttribute("error", "Q&A 작성 중 오류가 발생했습니다.");
                     log.error("Q&A 작성 중 오류 발생", e);
-                    return "redirect:/reservation/board"; // 오류 발생 시에도 동일한 경로로 리다이렉트
+                    return "redirect:/guest/board"; // 오류 발생 시에도 동일한 경로로 리다이렉트
                 }
             } else if ("review".equals(from)) {
                 
@@ -168,12 +168,12 @@ public class GuestController {
                     reviewDTO.setDetail(detail);
                     reviewService.writeReview(reviewDTO);
                     attr.addFlashAttribute("message", "리뷰 작성이 완료되었습니다."); 
-                    return "redirect:/reservation/reviews";
+                    return "redirect:/guest/reviews";
 
                 } catch (Exception e) {
                     attr.addFlashAttribute("error", "리뷰 작성 중 오류가 발생했습니다.");
                     log.error("리뷰 작성 중 오류 발생", e);
-                    return "redirect:/reservation/reviews"; // 오류 발생 시에도 동일한 경로로 리다이렉트
+                    return "redirect:/guest/reviews"; // 오류 발생 시에도 동일한 경로로 리다이렉트
                 }
             } else {
                 attr.addFlashAttribute("error", "잘못된 요청입니다.");

@@ -23,17 +23,11 @@
             
             <div class="right-side">
                 <ul id="menu">
-                    <li>
-                        <a id="" th:href="@{/reservation/about}">About</a>
-                        <ul>
-                            <li><a th:href="@{/reservation/about#introduce}">온실 溫室</a></li>
-                            <li><a th:href="@{/reservation/about#directions}">Directions</a></li>
-                        </ul>
-                    </li>
-                    <li><a th:href="@{/reservation/board}">Board</a></li>
-                    <li><a id="" th:href="@{/reservation/reserve}">Reserve</a></li>
-                    <li><a id="" th:href="@{/reservation/reviews}">Review</a></li>
-                    <li><a th:href="@{/reservation/location}">Location</a></li>
+                    <li><a id="" th:href="@{/guest/about}">About</a></li>
+                    <li><a th:href="@{/guest/board}">Board</a></li>
+                    <li><a id="" th:href="@{/guest/reserve}">Reserve</a></li>
+                    <li><a id="" th:href="@{/guest/reviews}">Review</a></li>
+                    <li><a th:href="@{/guest/location}">Location</a></li>
                 </ul>
             </div>
         </div>
@@ -65,7 +59,7 @@
                     <!-- 리뷰 디테일 페이지 만들어야함 -->
                     <!-- 4*2 리스트로 만들고 넘어가면 페이징하기 -->
                     <li  th:each="review : ${reviewList}">
-                        <a th:href="@{/reservation/reviewsDetail(reviewId=${review.reviewId})}">
+                        <a th:href="@{/guest/reviewsDetail(reviewId=${review.reviewId})}">
                         <div th:if="${review.originalFileName != null}">
                             <img th:src="@{${review.originalFileName}}" alt="Review Image">
                         </div>

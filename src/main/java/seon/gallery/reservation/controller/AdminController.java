@@ -94,12 +94,12 @@ public class AdminController {
 			noticeDTO.setDetail(details);
 			noticeService.writeNotice(noticeDTO);
 			attr.addFlashAttribute("message", "notice 작성 완료");
-			return "redirect:/reservation/writeManage";
+			return "redirect:/admin/writeManage";
 		
 		} catch (Exception e) {
 			attr.addFlashAttribute("message", "notice 작성 중 오류가 발생했습니다.");
             log.error("notice 작성 중 오류 발생", e);
-            return "redirect:/reservation/writeManage"; // 오류 발생 시에도 동일한 경로로 리다이렉트
+            return "redirect:/admin/writeManage"; // 오류 발생 시에도 동일한 경로로 리다이렉트
 		}
 	}
 
