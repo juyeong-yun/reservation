@@ -5,7 +5,7 @@ drop sequence notice_seq;
 create sequence notice_seq;
 create table notice(
     notice_id number constraint notice_seq primary key
-    -- ckeditor 로 변경할 예정
+    ,notice_category varchar2(30)
     ,title varchar2(200) default '제목없음'
     ,detail clob
     ,write_date date default sysdate
