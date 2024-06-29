@@ -25,6 +25,9 @@ public class ReserveDTO {
 	private String reserver;
 	private String phone;
 	private LocalDateTime reserveDate;
+	private String request;
+	private int numberOfReserve;
+	private int keyring;
 	private YesorNo isPay;
 	private YesorNo isConfirm;
 	private YesorNo isCancle;
@@ -38,6 +41,9 @@ public class ReserveDTO {
 				.reserver(entity.getReserver())
 				.phone(entity.getPhone())
 				.reserveDate(entity.getReserveDate())
+				.request(entity.getRequest())
+				.numberOfReserve(entity.getNumberOfReserve())
+				.keyring(entity.getKeyring())
 				.isPay(entity.getIsPay())
 				.isConfirm(entity.getIsConfirm())
 				.isCancle(entity.getIsCancle())

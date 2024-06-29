@@ -1,70 +1,138 @@
 @import "main.css";
 
-table {
-	width: 90%;
-	
+.content {
+	background-color: #f3f3f3;
+	height: inherit;
 }
 
-.reserve-form {
-	background-color: bisque;
+/* 전체 */
+.reserveForm{position: relative;top: 20px;}
+
+.reserveForm div {
+	background-color: white;
+    border: none;
+    margin: 7px;
+    padding: 10px;
 }
 
-.reserve-form div {
-	border: 0.72px solid;
-    margin: 30px 15px;
-    box-shadow: 2px 2px 3px rgb(22 22 22 / 47%);
-    border-radius: 15px;
-    padding: 9px;
-}
-
-div.ticket{
-	float:left;
-	width:47%;
-	height:50%
-}
-
-div.reserve-info {
-	clear: left;
-	float: left;
-	width:47%;
-	height:50%
-}
-
-div.amount {
-	float:right;
-	width:47%;
-	height:50%
-}
-
-div.agree{
-	clear: right;
-	float: right;
-	width:47%;
-	height:50%
-}
-
-.reserve-form span {
+.reserveForm span {
 	font-weight: 400;
     font-size: 18px;
     display: block;
 }
 
-.ticket img {
-	display: block;
-    margin: 30px;
-    width: 20%;
-    height: auto;
+/* 티켓 관련 div */
+div.ticket{
+	float:left;
+	width:49%;
+	height:50%
 }
 
-.amount input {
-	display: inline-block;
-    width: 35em;
-    margin: 10px;
-    height: 3.6em;
+/* 예약 정보 관련 div */
+div.reserve-info {
+	clear: left;
+	float: left;
+	width:49%;
+	height:50%
 }
 
 .reserve-info input {
-    width: 25em;
-    margin: 10px;
-    height: 3.6em;
+    width: 20em;
+    margin: 6px;
+	padding: 4px;
+    height: 2.6em;
+	border: 1px solid;
+    border-radius: 7px;
 }
+
+.request input { width: 41em;}
+.people-count { display: flex; align-items: center;}
+
+/* 결제 금액 관련 div */
+div.total-amount {
+	float:right;
+	width:48%;
+	height:50%
+}
+
+#amount{
+    width: 32em;
+    margin: 0px 13px;
+    height: 3.6em;
+    border: none;
+    background: white;
+}
+
+div.amount {
+    margin: 0px;
+	display: inline-flex;
+	align-items: center;
+	border-bottom: 1px solid;
+}
+
+/* 동의사항 관련 div */
+div.agree{
+	clear: right;
+	float: right;
+	width:48%;
+	height:50%
+}
+
+.agree .personal-1,
+.agree .personal-2,
+.agree .all {
+	display: flex;
+    align-items: center;
+}
+
+
+.agree .personal-1 input,
+.agree .personal-2 input,
+.agree .all input {
+	margin-right: 10px;
+}
+
+/* 입금 계좌 관련 div */
+.withdraw-info {
+	clear: right;
+	float: right;
+	width:48%;
+	height:50%
+}
+
+.withdraw-info input {
+	width: 41em;
+    height: 2.6em;
+    padding: 4px;
+	border: 1px solid;
+    border-radius: 7px;
+}
+span.account {
+	width: 30.3em;
+    height: 1.95em;
+    padding: 4px;
+	border: 1px solid;
+	border-radius: 7px;
+}
+
+.withdraw-info .account,
+.withdraw-info .withdrawer { margin: 6px;}
+
+/* 키링 관련 div */
+.keyring {
+	clear: left;
+	float: left;
+	width: 49%;
+	height: 50%;
+}
+
+/* 취소동의 관련 div */
+.about-cancle {
+	clear: left;
+	float: left;
+	width: 49%;
+	height: 50%;
+}
+
+.about-cancle .personal-3 {display: flex; align-items: center;}
+.about-cancle .personal-3 input{ margin-right: 10px;}

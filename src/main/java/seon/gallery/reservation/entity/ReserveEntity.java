@@ -55,6 +55,15 @@ public class ReserveEntity {
 	@Column(name="reserve_date")
 	@CreationTimestamp
 	private LocalDateTime reserveDate;
+
+	@Column(name = "requsrt")
+	private String request;
+
+	@Column(name = "number_of_reserve")
+	private int numberOfReserve;
+
+	@Column(name = "keyring")
+	private int keyring;
 	
 	@Column(name="is_pay")
 	private YesorNo isPay;
@@ -75,6 +84,9 @@ public class ReserveEntity {
 				.reserver(dto.getReserver())
 				.phone(dto.getPhone())
 				.reserveDate(dto.getReserveDate())
+				.request(dto.getRequest())
+				.numberOfReserve(dto.getNumberOfReserve())
+				.keyring(dto.getKeyring())
 				.isPay(dto.getIsPay())
 				.isConfirm(dto.getIsConfirm())
 				.isCancle(dto.getIsCancle())

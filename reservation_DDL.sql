@@ -4,14 +4,18 @@ drop sequence notice_seq;
 -- 1) 공지사항 게시판
 create sequence notice_seq;
 create table notice(
-    notice_num number constraint notice_seq primary key
+    notice_id number constraint notice_seq primary key
     -- ckeditor 로 변경할 예정
     ,title varchar2(200) default '제목없음'
     ,detail clob
     ,write_date date default sysdate
     ,notice_image clob
+    ,original_file_name varchar2(200)
+    ,saved_file_name varchar2(200)
     ,is_post char(1) check(is_post in ('N','Y'))
 );
+
+select * from notice;
 
 --2)qna 게시판
 drop table qna;
@@ -40,7 +44,7 @@ create sequence event_seq;
 create table event(
     event_id number constraint event_seq primary key,
     event_time DATE,
-    is_full char(1) default 'N' check(is_full in ('N','Y'))
+    is_full number(1) default 0 check(is_full in (1,0))
 );
 
 select * from event;
@@ -54,11 +58,12 @@ drop sequence reserve_seq;
 create sequence reserve_seq;
 create table reserve(
     reserve_id number constraint reserve_seq primary key
-    ,reserve_time date
+    ,event_time date
     ,reserver varchar2(10) not null
     ,phone varchar2(20) not null
     ,reserve_date date default sysdate
     ,request varchar2(500) default '요청 없음'
+    ,number_of_reserve number(2) default 1
     ,keyring number(2) default 0
     ,is_pay char(1) default 0 check(is_pay in (1,0))
     ,is_confirm char(1) check(is_confirm in ('N','Y'))
