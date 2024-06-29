@@ -42,6 +42,9 @@ public class NoticeEntity {
 	@Column(name="notice_id")
 	private Long noticeId;
 	
+	@Column(name = "notice_category")
+	private String category;
+
 	@Column(name="title")
 	private String title;
 	
@@ -66,6 +69,7 @@ public class NoticeEntity {
 	public static NoticeEntity toEntity(NoticeDTO dto) {
 		return NoticeEntity.builder()
 				.noticeId(dto.getNoticeId())
+				.category(dto.getCategory())
 				.title(dto.getTitle())
 				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())

@@ -45,12 +45,12 @@
             <!-- 어떻게 보이는 형식이 좋을지 생각해보기 -->
             <!-- 게시판이 두개라서 두개의 맥스 사이즈 설정할 수 있는지 알아봐야겠다 ..
                     그럼 페이징도 필요할듯 -->
-            <!-- 둘 다 누를 수 있게 -->
+            <!-- 있으면 펼쳐지게 할 것 -->
             <div class="notice" id="notice">
                 <h3>Notice</h3>
                 <table th:each="notice:${noticeList}">
                     <tr>
-                        <th class="category">공지</th>
+                        <th class="category" th:text="${notice.category}">공지</th>
                         <td class="title" th:text="${notice.title}">냠냠</td>
                         <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
                     </tr>
@@ -69,9 +69,10 @@
                     <tr>
                         <th class="name" th:text="${qna.qnaName}">질문자</th>
                         <td class="question" th:text="${qna.title}">질문</a></td>
-                        <td class="date" th:text="${#temporals.format(qna.writeDate, 'yyyy/MM/dd HH:mm:ss')}">날짜</td>
+                        <td class="date" th:text="${#temporals.format(qna.writeDate, 'yyyy/MM/dd')}">날짜</td>
                     </tr>
                     <!-- 답변이 있으면 펼쳐지게 안되면 안 펼쳐지게 하기가 나을까 새로운 페이지를 팔까? -->
+                    <!-- 답변이 있으면 펼쳐지게 할 것 -->
                     <tr>
                         <td colspan="3" th:utext="${qna.detail}"></td>
                         <td colspan="3" th:if="${qna.answer!=null}">

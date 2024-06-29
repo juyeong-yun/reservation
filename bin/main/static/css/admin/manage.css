@@ -6,6 +6,14 @@
 .right-side ul {justify-content: flex-end;}
 .right-side a { padding-right: 0%;}
 
+#category {
+	float: inline-start;
+    width: 98%;
+    height: 40px;
+    font-size: 17px;
+    padding: 4px;
+}
+
 /*********
 ckeditor
 **********/

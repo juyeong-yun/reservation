@@ -22,6 +22,7 @@ import seon.gallery.reservation.entity.NoticeEntity;
 public class NoticeDTO {
 
 	private Long noticeId;
+	private String category;
 	private String title;
 	private String detail;
 	private LocalDateTime writeDate;
@@ -33,6 +34,7 @@ public class NoticeDTO {
 	public static NoticeDTO toDTO(NoticeEntity entity) {
 		return NoticeDTO.builder()
 				.noticeId(entity.getNoticeId())
+				.category(entity.getCategory())
 				.title(entity.getTitle())
 				.detail(entity.getDetail())
 				.writeDate(entity.getWriteDate())

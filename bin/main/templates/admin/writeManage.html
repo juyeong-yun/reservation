@@ -46,7 +46,7 @@
                 <h3>Notice</h3>
                 <table  th:each="notice:${noticeList}">
                     <tr>
-                        <th class="category">공지</th>
+                        <th class="category" th:text="${notice.category}">공지</th>
                         <td class="title"><a th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" th:text="${notice.title}">냠냠</a></td>
                         <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
                     </tr>
