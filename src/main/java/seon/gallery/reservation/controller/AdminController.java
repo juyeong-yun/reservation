@@ -86,7 +86,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/noticeWrite")
-	public String noticeWrite(@RequestParam(value = "detail", required = false) String details, 
+	public String noticeWrite(@RequestParam(value = "detail", required = false) String details,
 	@ModelAttribute NoticeDTO noticeDTO,RedirectAttributes attr) {
 		
 		try{

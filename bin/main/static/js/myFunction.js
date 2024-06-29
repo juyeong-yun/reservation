@@ -274,6 +274,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         let title = document.getElementById('noticeTitle').value.trim();
+        let ctg = document.getElementById('category').value.trim();
+        
+        if(ctg.length == 0) {
+            alert("카테고리를 작성해주세요.")
+            document.getElementById('category').focus();
+            return
+        }
 
         if (title.length == 0) {
             alert("제목을 작성해주세요."); // 사용자에게 경고 메시지 표시

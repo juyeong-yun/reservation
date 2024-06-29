@@ -6,12 +6,21 @@
 .right-side ul {justify-content: flex-end;}
 .right-side a { padding-right: 0%;}
 
-#category {
+.category {
 	float: inline-start;
-    width: 98%;
+    width: 20%;
     height: 40px;
-    font-size: 17px;
     padding: 4px;
+}
+
+.title {
+	float: inline-start;
+    width: 80%;
+}
+
+#noticeTitle {
+    width: 100%; /* 또는 원하는 너비를 지정하세요 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 너비를 계산합니다 */
 }
 
 /*********

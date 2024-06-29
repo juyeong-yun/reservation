@@ -39,13 +39,10 @@
         <form th:action="@{/admin/noticeWrite}" method="post" id="noticeSubmitForm" enctype="multipart/form-data" >
             <table>
                 <tr>
-                    <td colspan="2">
-                        <select name="category" id="category">
-                            <option value="티켓">티켓</option>
-                            <option value=""></option>
-                        </select>
+                    <td colspan="1" class="category">
+                        <input type="text" name="category" id="category" placeholder="카테고리" required>
                     </td>
-					<td colspan="2"><input type="text" name="title" id="noticeTitle" placeholder="제목을 입력해주세요." required></td>
+					<td colspan="3" class="title"><input type="text" name="title" id="noticeTitle" placeholder="제목을 입력해주세요." required></td>
 				</tr>
                 <tr>
 					<td colspan="4">
