@@ -1,6 +1,8 @@
 package seon.gallery.reservation.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import seon.gallery.reservation.dto.EventDTO;
-import seon.gallery.reservation.dto.check.YesorNo;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,21 +30,24 @@ import seon.gallery.reservation.dto.check.YesorNo;
 public class EventEntity {
 	@Id
 	@Column(name="event_id")
-	private Long eventId;
+	private String eventId;
+
+	@Column(name = "event_date")
+	private LocalDate eventDate;
 	
 	@Column(name="event_time")
-	private LocalDateTime eventTime;
+	private String eventTime;
 	
 	@Column(name="is_full")
-	@Enumerated(EnumType.STRING)
-	private YesorNo isFull;
+	private boolean isFull;
 	
 	
 	public static EventEntity toEntity(EventDTO dto) {
 		return EventEntity.builder()
 				.eventId(dto.getEventId())
+				.eventDate(dto.getEventDate())
 				.eventTime(dto.getEventTime())
-				.isFull(dto.getIsFull())
+				.isFull(dto.isFull())
 				.build();
 	}
 

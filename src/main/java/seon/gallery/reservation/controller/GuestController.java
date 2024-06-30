@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
+import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
@@ -97,8 +98,12 @@ public class GuestController {
      * @return
      */
     @GetMapping("/reserve")
-    public String reserve() {
-        return "/guest/reserve";
+    public String reserve(HttpServletRequest request,Model model) {
+        List<EventDTO> eventList = eventService.selectAll();
+
+        model.addAttribute("eventList", eventList);
+
+        return "guest/reserve";
     }
     
     /**

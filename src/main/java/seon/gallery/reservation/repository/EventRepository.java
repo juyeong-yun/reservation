@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import seon.gallery.reservation.entity.EventEntity;
 
 @Repository
-public interface EventRepository extends JpaRepository<EventEntity,Long> {
+public interface EventRepository extends JpaRepository<EventEntity,String> {
     
 }

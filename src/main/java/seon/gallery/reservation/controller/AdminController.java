@@ -1,5 +1,8 @@
 package seon.gallery.reservation.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,8 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 import lombok.extern.slf4j.Slf4j;
+import seon.gallery.reservation.dto.EventDTO;
+import seon.gallery.reservation.dto.EventFormDTO;
 import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.entity.QnaEntity;
@@ -23,6 +28,8 @@ import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -47,9 +54,51 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/adminMain")
-	public String adminMain() {
+	public String adminMain(Model model) {
+		List<EventDTO> eventList = eventService.selectAll();
+
+		model.addAttribute("eventList", eventList);
 		
-		return "/admin/adminMain";
+		return "admin/adminMain";
+	}
+
+	/**
+	 * event 추가 하는 
+	 * @param eventDTO
+	 * @param attr
+	 * @return
+	 */
+	@PostMapping("/eventInsert")
+	public String eventInsert(@ModelAttribute EventFormDTO formDTO, RedirectAttributes attr) {
+		try {
+
+			LocalDate eventDate = formDTO.getEventDate();
+            LocalTime startTime = LocalTime.parse(formDTO.getStartTime());
+            LocalTime endTime = LocalTime.parse(formDTO.getEndTime());
+
+			log.info("event 등록중"); 
+			while (!startTime.isAfter(endTime)) {
+				// 30분 간격으로 이벤트 생성
+				EventDTO eventDTO = new EventDTO();
+				eventDTO.setEventDate(eventDate);
+				
+				// 다시 문자열로 만들기
+				String formatter = startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+				eventDTO.setEventTime(formatter);
+
+				eventService.eventInsert(eventDTO);
+
+				startTime = startTime.plusMinutes(30);
+			}
+			attr.addFlashAttribute("message","event 등록 성공");
+			return "redirect:/admin/adminMain";
+
+		} catch (Exception e) {
+			attr.addFlashAttribute("error", "event 등록 중 오류가 발생했습니다.");
+			log.error("event 등록 중 오류 발생", e);
+			return "redirect:/admin/adminMain"; // 오류 발생 시에도 동일한 경로로 리다이렉트
+
+		}
 	}
 	
 	/**

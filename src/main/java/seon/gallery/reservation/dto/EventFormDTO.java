@@ -1,6 +1,8 @@
 package seon.gallery.reservation.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,21 +20,20 @@ import seon.gallery.reservation.entity.EventEntity;
 @Setter
 @ToString
 @Builder
-public class EventDTO {
+public class EventFormDTO {
 
-	private String eventId;
-	// LocalDateTime 으로 저장하기 위한 패턴 설정
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	/**
+	 * 이벤트 생성 30분 마다 자동 저장을 위한 DTO
+	 */
 	private LocalDate eventDate;
-	private String eventTime;
-	private boolean isFull;
-	
-	public static EventDTO toDTO(EventEntity entity) {
-		return EventDTO.builder()
-				.eventId(entity.getEventId())
-				.eventDate(entity.getEventDate())
-				.eventTime(entity.getEventTime())
-				.isFull(entity.isFull())
+	private String startTime;
+	private String endTime;
+
+	public static EventEntity toEntity(EventFormDTO formDTO) {
+		return EventEntity.builder()
+				.eventDate(formDTO.getEventDate())
+				.eventTime(formDTO.getStartTime())
+				.eventTime(formDTO.getEndTime())
 				.build();
 	}
 }

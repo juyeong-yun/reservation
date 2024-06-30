@@ -34,17 +34,20 @@
     <div class="content">
         <!-- 여기서 예약 추가 -->
         <div class="addEvent">
-            <form action="">
-                <input type="date">
-                <input type="time">
-                <button class="submit" type="submit"></button>
+            <form th:action="@{/admin/eventInsert}" method="post">
+                <ul>
+                    <li>이벤트 날짜<input name="eventDate" type="date"></li>
+                    <li>시작 시간<input name="startTime" type="time"></li>
+                    <li>종료 시간<input name="endTime" type="time"></li>
+                </ul>
+                <button class="submit" type="submit">등록</button>
             </form>
-            <table>
+            <table th:each="event:${eventList}">
                 <tr>
-                    <th>8/16</th>
+                    <th th:text="${event.eventDate}">8/16</th>
                 </tr>
                 <tr>
-                    <td>12:00</td>
+                    <td th:text="${event.eventTime}">12:00</td>
                 </tr>
             </table>
         </div>
