@@ -51,16 +51,16 @@
                     <th>상태</th>
                     <th>관리</th>
                 </tr>
-                <tr>
-                    <td>윤선애</td>
-                    <td>6/19</td>
-                    <td>8/16</td>
-                    <td>18:00</td>
-                    <td>010-1111-1111</td>
-                    <td>1</td>
-                    <td>없음</td>
-                    <td>0</td>
-                    <td>입금대기</td>
+                <tr th:each="reserve: ${reserveList}">
+                    <td th:text="${reserve.reserver}">윤선애</td>
+                    <td th:text="${reserve.reserveDate}">6/19</td>
+                    <td th:text="${reserve.eventDate}">8/16</td>
+                    <td th:text="${reserve.event.eventTime}">18:00</td>
+                    <td th:text="${reserve.phone}">010-1111-1111</td>
+                    <td th:text="${reserve.numberOfReserve}">1</td>
+                    <td th:text="${reserve.request}">없음</td>
+                    <td th:text="${reserve.keyring}">0</td>
+                    <td th:text="${reserve.isPay == 0 ? '입금대기' : '입금완료'}">입금대기</td>
                     <td>
                         <button class="">입금 완료</button>
                         <button class="">예약 취소</button>

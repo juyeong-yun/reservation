@@ -22,6 +22,7 @@ import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.dto.EventFormDTO;
 import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
+import seon.gallery.reservation.dto.ReserveDTO;
 import seon.gallery.reservation.entity.QnaEntity;
 import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.NoticeService;
@@ -106,8 +107,12 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/reserveCheck")
-	public String reserveCheck() {
-		return "/admin/reserveCheck";
+	public String reserveCheck(@ModelAttribute ReserveDTO reserveDTO, Model model) {
+		List<ReserveDTO> reserveList = reserveService.selectAll(reserveDTO.getEventId());
+
+		model.addAttribute("reserveList", reserveList);
+		
+		return "admin/reserveCheck";
 	}
 	
 

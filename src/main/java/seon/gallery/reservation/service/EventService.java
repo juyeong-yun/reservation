@@ -70,6 +70,11 @@ public class EventService {
         }
     }
 
+    /**
+     * 해당하는 eventId 를 dto로 변경
+     * @param eventId
+     * @return
+     */
     public EventDTO selectOne(String eventId) {
         Optional<EventEntity> entity = eventRepository.findById(eventId);
 
@@ -80,4 +85,6 @@ public class EventService {
             return null;
         }
     }
+
+    
 }

@@ -8,8 +8,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -42,11 +45,10 @@ public class ReserveEntity {
 	@Column(name="reserve_id")
 	private Long reserveId;
 	
-	@Column(name="event_id")
-	private String eventId;
-	
-	@Column(name="event_time")
-	private String eventTime;
+	//FK
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="event_id")
+	private EventEntity eventEntity;
 	
 	@Column(name="reserver", nullable = false)
 	private String reserver;
@@ -81,11 +83,10 @@ public class ReserveEntity {
 	@Column(name="cancle_reason")
 	private String cancleReason;
 	
-	public static ReserveEntity toEntitiy (ReserveDTO dto) {
+	public static ReserveEntity toEntitiy (ReserveDTO dto, EventEntity eventEntity) {
 		return ReserveEntity.builder()
 				.reserveId(dto.getReserveId())
-				.eventId(dto.getEventId())
-				.eventTime(dto.getEventTime())
+				.eventEntity(eventEntity)
 				.reserver(dto.getReserver())
 				.phone(dto.getPhone())
 				.reserveDate(dto.getReserveDate())

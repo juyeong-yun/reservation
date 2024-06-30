@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import seon.gallery.reservation.dto.check.YesorNo;
+import seon.gallery.reservation.entity.EventEntity;
 import seon.gallery.reservation.entity.ReserveEntity;
 
 @NoArgsConstructor
@@ -20,8 +21,7 @@ import seon.gallery.reservation.entity.ReserveEntity;
 public class ReserveDTO {
 	
 	private Long reserveId;
-	private String eventId;
-	private String eventTime;
+	private String eventId; //FK
 	private String reserver;
 	private String phone;
 	private LocalDateTime reserveDate;
@@ -33,11 +33,10 @@ public class ReserveDTO {
 	private YesorNo isCancle;
 	private String cancleReason;
 	
-	public static ReserveDTO toDTO (ReserveEntity entity) {
+	public static ReserveDTO toDTO (ReserveEntity entity, String eventId) {
 		return ReserveDTO.builder()
 				.reserveId(entity.getReserveId())
-				.eventId(entity.getEventId())
-				.eventTime(entity.getEventTime())
+				.eventId(eventId)
 				.reserver(entity.getReserver())
 				.phone(entity.getPhone())
 				.reserveDate(entity.getReserveDate())

@@ -129,8 +129,11 @@ public class GuestController {
      * @return
      */
     @PostMapping("/reserveInsert")
-    public String reserveInsert(@ModelAttribute ReserveDTO reserveDTO, RedirectAttributes attr) {
+    public String reserveInsert(@RequestParam(name = "eventId") String eventId, @ModelAttribute ReserveDTO reserveDTO, 
+    RedirectAttributes attr) {
+
         try {
+            reserveDTO.setEventId(eventId);
             reserveService.reserveInsert(reserveDTO);
             attr.addFlashAttribute("message","예약 성공");
             return "redirect:/guest/location";
