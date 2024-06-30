@@ -25,10 +25,10 @@
                 
             <div class="right-side">
                 <ul id="menu">
-                    <li><a id="" th:href="@{/guest/about}">About</a></li>
+                    <li><a th:href="@{/guest/about}">About</a></li>
                     <li><a th:href="@{/guest/board}">Board</a></li>
-                    <li><a id="" th:href="@{/guest/reserve}">Reserve</a></li>
-                    <li><a id="" th:href="@{/guest/reviews}">Review</a></li>
+                    <li><a th:href="@{/guest/reserve}">Reserve</a></li>
+                    <li><a th:href="@{/guest/reviews}">Review</a></li>
                     <li><a th:href="@{/guest/location}">Location</a></li>
                 </ul>
             </div>
@@ -43,8 +43,12 @@
                 <div class="ticket">
                     <span>예약 상품 정보</span>
                     <span>leeseungyoon birthday exhibition [ 溫室 ]</span>
-                    <span>일시</span>
-                    <p name="reserveTime"></p>
+                    <div class="event" th:if="${event}">
+                        <span>일시</span>
+                        <p th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd')}">날짜</p>
+                        <p th:text="${event.eventTime}">시간</p>
+                    </div>
+
                 </div>
 
                 <div class="total-amount">

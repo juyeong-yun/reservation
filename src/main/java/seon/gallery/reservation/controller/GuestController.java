@@ -115,7 +115,6 @@ public class GuestController {
         EventDTO event = eventService.selectOne(eventId);
 
         model.addAttribute("event", event);
-
         return "guest/booking";
     }
     

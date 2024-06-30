@@ -28,6 +28,16 @@ div.ticket{
 	height:50%
 }
 
+.ticket .event {
+	display: inline-flex;
+    align-items: center;
+}
+
+.ticket .event span,
+.ticket .event p {
+	margin-right: 15px;
+}
+
 /* 예약 정보 관련 div */
 div.reserve-info {
 	clear: left;
