@@ -2,6 +2,7 @@ package seon.gallery.reservation.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,6 +73,17 @@ public class ReviewService {
             log.error("저장 실패");
         }
         
+    }
+
+    public ReviewDTO selectOne(Long reviewId) {
+        Optional<ReviewEntity> entity = reviewRepository.findById(reviewId);
+
+        if (entity.isPresent()) {
+            ReviewEntity reviewEntity = entity.get();
+            return ReviewDTO.toDTO(reviewEntity);            
+        } else {
+            return null;
+        }
     }
     
 }

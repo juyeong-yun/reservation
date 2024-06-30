@@ -1,6 +1,7 @@
 /**
  * 목차 설정
  * 1. reserve 예약시간을 누르면 모달이 나오게
+ * 1-1. booking 에서 eventId, EventTime 같이 보내기
  * 2. 관리자 페이지에서 qna, notice detail 볼 수 있는 모달
  * 3. 리뷰페이지 글쓰기 버튼 기간 설정
  * 4. board 페이지에서 isLock 에 체크하면 input 박스 보이도록
@@ -38,6 +39,26 @@ $(function() {
     function modalClose() {
         $("#popup").fadeOut(); // Fade out effect for closing modal
     }
+});
+
+/*****************
+ * 1-1.booking 에서 eventId, EventTime 같이 보내기
+ ******************/
+
+$(document).ready(function() {
+    // 예약 버튼 클릭 시
+    $("#reserve").click(function(e) {
+        e.preventDefault(); // 기본 동작(페이지 이동) 방지
+        
+        // 폼 데이터에 eventId와 eventTime 추가
+        var eventId = $("input[name='eventId']").val();
+        var eventTime = $("input[name='eventTime']").val();
+        $("#reserveSubmitForm").append(eventId);
+        $("#reserveSubmitForm").append(eventTime);
+        
+        // 폼 제출
+        $("#reserveSubmitForm").submit();
+    });
 });
 
 

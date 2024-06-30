@@ -20,15 +20,15 @@ import seon.gallery.reservation.entity.ReserveEntity;
 public class ReserveDTO {
 	
 	private Long reserveId;
-	private Long eventId;
-	private LocalDateTime eventTime;
+	private String eventId;
+	private String eventTime;
 	private String reserver;
 	private String phone;
 	private LocalDateTime reserveDate;
 	private String request;
 	private int numberOfReserve;
 	private int keyring;
-	private YesorNo isPay;
+	private boolean isPay;
 	private YesorNo isConfirm;
 	private YesorNo isCancle;
 	private String cancleReason;
@@ -44,7 +44,7 @@ public class ReserveDTO {
 				.request(entity.getRequest())
 				.numberOfReserve(entity.getNumberOfReserve())
 				.keyring(entity.getKeyring())
-				.isPay(entity.getIsPay())
+				.isPay(entity.isPay())
 				.isConfirm(entity.getIsConfirm())
 				.isCancle(entity.getIsCancle())
 				.cancleReason(entity.getCancleReason())

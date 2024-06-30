@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
+import seon.gallery.reservation.dto.ReserveDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
 import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.NoticeService;
@@ -106,8 +107,11 @@ public class GuestController {
         return "guest/reserve";
     }
     
+
     /**
-     * 예약 과정 페이지
+     * 예약 form 작성 페이지
+     * @param eventId
+     * @param model
      * @return
      */
     @GetMapping("/booking")
@@ -117,6 +121,28 @@ public class GuestController {
         model.addAttribute("event", event);
         return "guest/booking";
     }
+
+    /**
+     * booking -> 폼 보내는
+     * @param reserveDTO
+     * @param attr
+     * @return
+     */
+    @PostMapping("/reserveInsert")
+    public String reserveInsert(@ModelAttribute ReserveDTO reserveDTO, RedirectAttributes attr) {
+        try {
+            reserveService.reserveInsert(reserveDTO);
+            attr.addFlashAttribute("message","예약 성공");
+            return "redirect:/guest/location";
+
+        } catch(Exception e) {
+            attr.addFlashAttribute("message","예약 실패");
+            return "redirect:/guest/reserve";
+        }
+    }
+    
+
+
     
     /**
      * 들어오는 페이지에 따른 글쓰기 페이지
@@ -208,13 +234,17 @@ public class GuestController {
     
     
     /**
-     * 리뷰 페이지에서 눌렀을때 해당하는 내용의 리뷰 세부페이지로 이동
-     * 여기서는 확실히 @requestParam 필요
+     * 아이디의 리뷰 detail
+     * @param reviewId
+     * @param model
      * @return
      */
     @GetMapping("/reviewsDetail")
-    public String reviewsDetail() {
-        
+    public String reviewsDetail(@RequestParam(name="reviewId") Long reviewId, Model model) {
+
+        ReviewDTO review = reviewService.selectOne(reviewId);
+
+        model.addAttribute("review", review);
         return "/guest/reviewsDetail";
     }
 

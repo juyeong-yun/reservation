@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
@@ -41,10 +43,10 @@ public class ReserveEntity {
 	private Long reserveId;
 	
 	@Column(name="event_id")
-	private Long eventId;
+	private String eventId;
 	
 	@Column(name="event_time")
-	private LocalDateTime eventTime;
+	private String eventTime;
 	
 	@Column(name="reserver", nullable = false)
 	private String reserver;
@@ -56,7 +58,7 @@ public class ReserveEntity {
 	@CreationTimestamp
 	private LocalDateTime reserveDate;
 
-	@Column(name = "requsrt")
+	@Column(name = "request")
 	private String request;
 
 	@Column(name = "number_of_reserve")
@@ -66,12 +68,14 @@ public class ReserveEntity {
 	private int keyring;
 	
 	@Column(name="is_pay")
-	private YesorNo isPay;
+	private boolean isPay;
 	
 	@Column(name="is_confirm")
+	@Enumerated(EnumType.STRING)
 	private YesorNo isConfirm;
 	
 	@Column(name="is_cancle")
+	@Enumerated(EnumType.STRING)
 	private YesorNo isCancle;
 	
 	@Column(name="cancle_reason")
@@ -80,6 +84,7 @@ public class ReserveEntity {
 	public static ReserveEntity toEntitiy (ReserveDTO dto) {
 		return ReserveEntity.builder()
 				.reserveId(dto.getReserveId())
+				.eventId(dto.getEventId())
 				.eventTime(dto.getEventTime())
 				.reserver(dto.getReserver())
 				.phone(dto.getPhone())
@@ -87,7 +92,7 @@ public class ReserveEntity {
 				.request(dto.getRequest())
 				.numberOfReserve(dto.getNumberOfReserve())
 				.keyring(dto.getKeyring())
-				.isPay(dto.getIsPay())
+				.isPay(dto.isPay())
 				.isConfirm(dto.getIsConfirm())
 				.isCancle(dto.getIsCancle())
 				.cancleReason(dto.getCancleReason())
