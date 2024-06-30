@@ -3,6 +3,8 @@ package seon.gallery.reservation.service;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -65,6 +67,17 @@ public class EventService {
         } catch (Exception e) {
             log.error("저장 실패: " + e.getMessage());
             // 예외 처리 또는 로깅 등 필요한 추가 작업
+        }
+    }
+
+    public EventDTO selectOne(String eventId) {
+        Optional<EventEntity> entity = eventRepository.findById(eventId);
+
+        if (entity.isPresent()) {
+            EventEntity eventEntity = entity.get();
+            return EventDTO.toDTO(eventEntity);
+        } else {
+            return null;
         }
     }
 }

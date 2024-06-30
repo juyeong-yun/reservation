@@ -98,7 +98,7 @@ public class GuestController {
      * @return
      */
     @GetMapping("/reserve")
-    public String reserve(HttpServletRequest request,Model model) {
+    public String reserve(HttpServletRequest request, Model model) {
         List<EventDTO> eventList = eventService.selectAll();
 
         model.addAttribute("eventList", eventList);
@@ -111,8 +111,12 @@ public class GuestController {
      * @return
      */
     @GetMapping("/booking")
-    public String booking() {
-        return "/guest/booking";
+    public String booking(@RequestParam(name="eventId") String eventId, Model model){
+        EventDTO event = eventService.selectOne(eventId);
+
+        model.addAttribute("event", event);
+
+        return "guest/booking";
     }
     
     /**

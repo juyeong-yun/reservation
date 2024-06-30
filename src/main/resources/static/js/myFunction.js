@@ -12,22 +12,26 @@
  * 1.reserve 예약시간을 누르면 모달이 나오게
  ******************/
 $(function() {
-    // Variable to store the href to navigate to upon confirmation
     let targetHref;
 
-    // When modal-open link is clicked
     $(document).on("click", "#modal-open", function(e) {
 		
         e.preventDefault(); // Prevent the default action
+        
         targetHref = $(this).data("href"); // Store the href for later
+        // targetHref = $(this).attr("data-href");
+        console.log("주소 :", targetHref);
+
+        // $("#popup").fadeIn(); // Show the modal
         $("#popup").css('display', 'flex').hide().fadeIn(); // Show the modal
     });
 
     // When the close button is clicked
     $("#close").click(function() {
         modalClose(); // Call the modal close function
-        // window.location.href = targetHref; // Redirect to the stored href
-        // 이거에 대한 가는 게 필요한 거구나
+        if (targetHref) {
+            window.location.href = targetHref; // 저장된 href로 페이지를 리디렉션합니다.
+        }
     });
 
     // Modal close function
