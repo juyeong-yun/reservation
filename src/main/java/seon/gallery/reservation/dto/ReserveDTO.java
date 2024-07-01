@@ -1,5 +1,6 @@
 package seon.gallery.reservation.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import seon.gallery.reservation.dto.check.YesorNo;
-import seon.gallery.reservation.entity.EventEntity;
 import seon.gallery.reservation.entity.ReserveEntity;
 
 @NoArgsConstructor
@@ -28,12 +28,15 @@ public class ReserveDTO {
 	private String request;
 	private int numberOfReserve;
 	private int keyring;
+	private String depositor;
 	private boolean isPay;
 	private YesorNo isConfirm;
 	private YesorNo isCancle;
 	private String cancleReason;
+	private LocalDate evenDate;
+	private String eventTime;
 	
-	public static ReserveDTO toDTO (ReserveEntity entity, String eventId) {
+	public static ReserveDTO toDTO (ReserveEntity entity, String eventId, LocalDate eventDate, String eventTime) {
 		return ReserveDTO.builder()
 				.reserveId(entity.getReserveId())
 				.eventId(eventId)
@@ -43,10 +46,13 @@ public class ReserveDTO {
 				.request(entity.getRequest())
 				.numberOfReserve(entity.getNumberOfReserve())
 				.keyring(entity.getKeyring())
+				.depositor(entity.getDepositor())
 				.isPay(entity.isPay())
 				.isConfirm(entity.getIsConfirm())
 				.isCancle(entity.getIsCancle())
 				.cancleReason(entity.getCancleReason())
+				.evenDate(eventDate)
+				.eventTime(eventTime)
 				.build();
 	}
 

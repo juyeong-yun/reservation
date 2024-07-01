@@ -4,11 +4,21 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import java.util.List;
+
+import org.springframework.core.annotation.Order;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -41,6 +51,9 @@ public class EventEntity {
 	@Column(name="is_full")
 	private boolean isFull;
 	
+	@OneToMany(mappedBy = "eventEntity", fetch = FetchType.LAZY)
+	@OrderBy("event_id")
+	private List<ReserveEntity> reserveList;
 	
 	public static EventEntity toEntity(EventDTO dto) {
 		return EventEntity.builder()

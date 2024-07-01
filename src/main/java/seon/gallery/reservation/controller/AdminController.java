@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 import lombok.extern.slf4j.Slf4j;
@@ -107,9 +106,14 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/reserveCheck")
-	public String reserveCheck(@ModelAttribute ReserveDTO reserveDTO, Model model) {
-		List<ReserveDTO> reserveList = reserveService.selectAll(reserveDTO.getEventId());
-
+	public String reserveCheck(@ModelAttribute ReserveDTO reserveDTO //@RequestParam(value = "eventId", required = false) String eventId
+	, Model model) {
+		String eventId = reserveDTO.getEventId(); // reserveDTO에서 eventId 가져오기
+    
+		List<ReserveDTO> reserveList = reserveService.selectAll(eventId);
+		log.info("Controller - eventId: {}", eventId);
+		
+		model.addAttribute("eventId", eventId);
 		model.addAttribute("reserveList", reserveList);
 		
 		return "admin/reserveCheck";

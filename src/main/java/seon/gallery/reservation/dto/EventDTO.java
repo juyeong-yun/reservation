@@ -22,7 +22,6 @@ public class EventDTO {
 
 	private String eventId;
 	// LocalDateTime 으로 저장하기 위한 패턴 설정
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate eventDate;
 	private String eventTime;
 	private boolean isFull;

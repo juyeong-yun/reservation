@@ -103,14 +103,14 @@ div.agree{
 }
 
 /* 입금 계좌 관련 div */
-.withdraw-info {
+.deposit-info {
 	clear: right;
 	float: right;
 	width:48%;
 	height:50%
 }
 
-.withdraw-info input {
+.deposit-info input {
 	width: 41em;
     height: 2.6em;
     padding: 4px;
@@ -125,8 +125,8 @@ span.account {
 	border-radius: 7px;
 }
 
-.withdraw-info .account,
-.withdraw-info .withdrawer { margin: 6px;}
+.deposit-info .account,
+.deposit-info .depositor { margin: 6px;}
 
 /* 키링 관련 div */
 .keyring {

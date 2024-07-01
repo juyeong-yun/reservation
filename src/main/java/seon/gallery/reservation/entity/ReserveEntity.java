@@ -21,6 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 import seon.gallery.reservation.dto.ReserveDTO;
 import seon.gallery.reservation.dto.check.YesorNo;
 
@@ -46,7 +47,7 @@ public class ReserveEntity {
 	private Long reserveId;
 	
 	//FK
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="event_id")
 	private EventEntity eventEntity;
 	
@@ -68,6 +69,9 @@ public class ReserveEntity {
 
 	@Column(name = "keyring")
 	private int keyring;
+
+	@Column(name = "depositor")
+	private String depositor;
 	
 	@Column(name="is_pay")
 	private boolean isPay;
@@ -93,6 +97,7 @@ public class ReserveEntity {
 				.request(dto.getRequest())
 				.numberOfReserve(dto.getNumberOfReserve())
 				.keyring(dto.getKeyring())
+				.depositor(dto.getDepositor())
 				.isPay(dto.isPay())
 				.isConfirm(dto.getIsConfirm())
 				.isCancle(dto.getIsCancle())
