@@ -59,7 +59,7 @@
             <!-- 비밀번호 설정..? -->
             <!-- 모두가 질문사항 작성할 수있게 -->
             <div class="qna" id="qna">
-                <div class="write"><a th:href="@{/reservation/write?from=qna}"><i class="fa-solid fa-plus"></i></a></div>
+                <div class="write"><a th:href="@{/guest/write?from=qna}"><i class="fa-solid fa-plus"></i></a></div>
                 <h3>QnA</h3>
                 <table th:each="qna:${qnaList}">
                     <tr>

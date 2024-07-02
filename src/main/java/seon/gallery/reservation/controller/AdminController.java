@@ -102,18 +102,13 @@ public class AdminController {
 	}
 	
 	/**
-	 * 관리자 예약 확인 화면
+	 * 관리자 예약관리 화면
 	 * @return
 	 */
 	@GetMapping("/reserveCheck")
-	public String reserveCheck(@ModelAttribute ReserveDTO reserveDTO //@RequestParam(value = "eventId", required = false) String eventId
-	, Model model) {
-		String eventId = reserveDTO.getEventId(); // reserveDTO에서 eventId 가져오기
-    
-		List<ReserveDTO> reserveList = reserveService.selectAll(eventId);
-		log.info("Controller - eventId: {}", eventId);
+	public String reserveCheck(Model model) {
+		List<ReserveDTO> reserveList = reserveService.selectAll();
 		
-		model.addAttribute("eventId", eventId);
 		model.addAttribute("reserveList", reserveList);
 		
 		return "admin/reserveCheck";

@@ -55,10 +55,11 @@
                 <tr th:each="reserve: ${reserveList}">
                     <td th:text="${reserve.reserver}">윤선애</td>
                     <td th:text="${reserve.depositor}">윤주영</td>
-                    <td th:text="${reserve.reserveDate}">6/19</td>
-                    <td th:text="${#temporals.format(reserve.eventDate, 'MM/dd')}">8/16</td>
+                    <td th:text="${#temporals.format(reserve.reserveDate,'MM/dd')}">6/19</td>
+                    <td th:text="${#temporals.format(reserve.eventDate,'MM/dd')}">8/16</td>
                     <td th:text="${reserve.eventTime}">18:00</td>
-                    <td th:text="${reserve.phone}">010-1111-1111</td>
+                    <td th:text="${#strings.substring(reserve.phone, 0, 3) + '-' 
+                    + #strings.substring(reserve.phone, 3, 7) + '-' + #strings.substring(reserve.phone, 7)}">010-1111-1111</td>
                     <td th:text="${reserve.numberOfReserve}">1</td>
                     <td th:text="${reserve.request}">없음</td>
                     <td th:text="${reserve.keyring}">0</td>

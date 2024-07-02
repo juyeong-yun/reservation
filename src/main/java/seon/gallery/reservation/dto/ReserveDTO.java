@@ -33,10 +33,27 @@ public class ReserveDTO {
 	private YesorNo isConfirm;
 	private YesorNo isCancle;
 	private String cancleReason;
-	private LocalDate evenDate;
+	private LocalDate eventDate;
 	private String eventTime;
+
+	// Getter 및 Setter 메서드 추가
+// 	public LocalDate getEventDate() {
+// 		return this.eventDate;
+// 	}
+
+// 	public void setEventDate(LocalDate eventDate) {
+// 		this.eventDate = eventDate;
+// 	}
+
+// 	public String getEventTime() {
+// 		return this.eventTime;
+// 	}
+
+// 	public void setEventTime(String eventTime) {
+// 		this.eventTime = eventTime;
+// }
 	
-	public static ReserveDTO toDTO (ReserveEntity entity, String eventId, LocalDate eventDate, String eventTime) {
+	public static ReserveDTO toDTO (ReserveEntity entity,String eventId, LocalDate eventDate, String eventTime) {
 		return ReserveDTO.builder()
 				.reserveId(entity.getReserveId())
 				.eventId(eventId)
@@ -51,7 +68,7 @@ public class ReserveDTO {
 				.isConfirm(entity.getIsConfirm())
 				.isCancle(entity.getIsCancle())
 				.cancleReason(entity.getCancleReason())
-				.evenDate(eventDate)
+				.eventDate(eventDate)
 				.eventTime(eventTime)
 				.build();
 	}
