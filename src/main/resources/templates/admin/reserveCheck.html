@@ -47,7 +47,7 @@
                     <th>전화 번호</th>
                     <th>예약 인원</th>
                     <!-- 클릭하면 크게 보이게 -->
-                    <th>요청 사항</th>
+                    <th style="width: 22%">요청 사항</th>
                     <th>키링</th>
                     <th>상태</th>
                     <th>관리</th>
@@ -63,7 +63,7 @@
                     <td th:text="${reserve.numberOfReserve}">1</td>
                     <td th:text="${reserve.request}">없음</td>
                     <td th:text="${reserve.keyring}">0</td>
-                    <td th:text="${reserve.isPay == 0 ? '입금대기' : '입금완료'}">입금대기</td>
+                    <td th:text="${reserve.isPay==False ? '입금대기' : '예약완료'}">입금대기</td>
                     <td>
                         <button class="">입금 완료</button>
                         <button class="">예약 취소</button>
