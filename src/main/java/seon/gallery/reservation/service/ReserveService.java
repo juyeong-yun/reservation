@@ -3,6 +3,7 @@ package seon.gallery.reservation.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.event.spi.EventManager;
 import org.springframework.cglib.core.Local;
@@ -16,6 +17,7 @@ import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.dto.ReserveDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
 import seon.gallery.reservation.dto.check.YesorNo;
+import seon.gallery.reservation.dto.check.reserveState;
 import seon.gallery.reservation.entity.EventEntity;
 import seon.gallery.reservation.entity.ReserveEntity;
 import seon.gallery.reservation.entity.ReviewEntity;
@@ -65,7 +67,7 @@ public class ReserveService {
             reserveDTO.setRequest("요청 없음");
         }
         reserveDTO.setIsCancle(YesorNo.N);
-        reserveDTO.setIsConfirm(YesorNo.N);
+        reserveDTO.setReserveState(reserveState.waiting);
         
         if (reserveDTO.getDepositor()==null || reserveDTO.getDepositor().isEmpty()){
             reserveDTO.setDepositor(reserveDTO.getReserver());
@@ -80,6 +82,53 @@ public class ReserveService {
             log.info("저장 실패");
         }
     }
+
+
+    /**
+     * 하나만 고르기
+     * @param reserveId
+     * @return
+     */
+    public ReserveDTO selectOne(Long reserveId) {
+        Optional<ReserveEntity> entity = reserveRepository.findById(reserveId);
+
+        if (entity.isPresent()) {
+            ReserveEntity reserveEntity = entity.get();
+            return ReserveDTO.toDTO(reserveEntity, reserveEntity.getEventEntity().getEventId(),
+            reserveEntity.getEventEntity().getEventDate(), reserveEntity.getEventEntity().getEventTime());
+            
+        } else {
+            return null;
+        }
+    }
+
+
+    public void completeReservation(Long reserveId) {
+        ReserveEntity reserveEntity = reserveRepository.findById(reserveId)
+            .orElseThrow(() -> new IllegalArgumentException("해당 예약이 존재하지 않습니다: " + reserveId));
+        
+        reserveEntity.setReserveState(reserveState.payed);
+        reserveEntity.setPay(true);
+        reserveEntity.setIsCancle(YesorNo.N);
+        reserveRepository.save(reserveEntity);
+
+        log.info("입금 수정 완료");
+    }
+
+    public void cancelReservation(Long reserveId) {
+        ReserveEntity reserveEntity = reserveRepository.findById(reserveId)
+            .orElseThrow(() -> new IllegalArgumentException("해당 예약이 존재하지 않습니다: " + reserveId));
+        
+        reserveEntity.setReserveState(reserveState.cancel);
+        reserveEntity.setIsCancle(YesorNo.Y);
+        reserveRepository.save(reserveEntity);
+
+        log.info("입금 수정 완료");
+    }
+
+    
+
+
     
     
 }

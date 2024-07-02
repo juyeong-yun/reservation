@@ -100,7 +100,7 @@ public class AdminController {
 
 		}
 	}
-	
+
 	/**
 	 * 관리자 예약관리 화면
 	 * @return
@@ -114,6 +114,37 @@ public class AdminController {
 		return "admin/reserveCheck";
 	}
 	
+	/**
+	 * 
+	 * @param reserveId
+	 * @return
+	 */
+	@PostMapping("/reservationProc")
+	public String reservationProc(@RequestParam(value = "reserveId", required = false) Long reserveId, 
+	@RequestParam(value = "action", required = false) String action, RedirectAttributes attr){
+		
+		if ("complete".equals(action)) {
+			try{
+				// ReserveDTO reserveDTO = reserveService.selectOne(reserveId);
+				reserveService.completeReservation(reserveId);
+				attr.addFlashAttribute("message", "예약 완료 처리");
+
+			} catch(Exception e) {
+				log.info("입금완료 처리중 오류 발생");
+			}
+				
+		} else if("cancel".equals(action)) {
+			try {
+				ReserveDTO reserveDTO = reserveService.selectOne(reserveId);
+				reserveService.cancelReservation(reserveId);
+				attr.addFlashAttribute("message", "예약 취소 처리");
+			} catch (Exception e) {
+				log.info("예약 취소 중 오류 발생");
+			}
+		} 
+            
+		return "redirect:/admin/reserveCheck";
+	}
 
 	/**
 	 * 관리자 글작성 화면
@@ -130,6 +161,10 @@ public class AdminController {
 		return "admin/writeManage";
 	}
 
+	/**
+	 * 글쓰기 화면
+	 * @return
+	 */
 	@GetMapping("/adminWrite")
 	public String adminWrite(){
 
@@ -138,6 +173,13 @@ public class AdminController {
 		return "admin/adminWrite";
 	}
 
+	/**
+	 * 공지 글쓰기
+	 * @param details
+	 * @param noticeDTO
+	 * @param attr
+	 * @return
+	 */
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(@RequestParam(value = "detail", required = false) String details,
 	@ModelAttribute NoticeDTO noticeDTO,RedirectAttributes attr) {
@@ -183,8 +225,7 @@ public class AdminController {
 		QnaDTO qnaDTO = qnaService.selectOne(qnaId);
 		log.info("DTO" +qnaDTO);
 		return qnaDTO;
-	}
-	
+	}	
 	
 
 }

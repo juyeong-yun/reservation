@@ -24,6 +24,7 @@ import lombok.ToString;
 
 import seon.gallery.reservation.dto.ReserveDTO;
 import seon.gallery.reservation.dto.check.YesorNo;
+import seon.gallery.reservation.dto.check.reserveState;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -76,14 +77,14 @@ public class ReserveEntity {
 	@Column(name="is_pay")
 	private boolean isPay;
 	
-	@Column(name="is_confirm")
-	@Enumerated(EnumType.STRING)
-	private YesorNo isConfirm;
-	
 	@Column(name="is_cancle")
 	@Enumerated(EnumType.STRING)
 	private YesorNo isCancle;
 	
+	@Column(name = "reserve_state")
+	@Enumerated(EnumType.STRING)
+	private reserveState reserveState;
+
 	@Column(name="cancle_reason")
 	private String cancleReason;
 	
@@ -99,8 +100,8 @@ public class ReserveEntity {
 				.keyring(dto.getKeyring())
 				.depositor(dto.getDepositor())
 				.isPay(dto.isPay())
-				.isConfirm(dto.getIsConfirm())
 				.isCancle(dto.getIsCancle())
+				.reserveState(dto.getReserveState())
 				.cancleReason(dto.getCancleReason())
 				.build();
 	}

@@ -33,8 +33,6 @@
     
     <div class="content">
         <h2>예약 관리</h2>
-        <form action="" method="post">
-            <!-- 날짜별로 정렬 할 수 있게 -->
             <!-- 예약자 이름 / 날짜 별로 검색할 수 있게 -->
             <!-- 예약 변경도 넣어야 하나? -->
             <table border="1">
@@ -63,16 +61,17 @@
                     <td th:text="${reserve.numberOfReserve}">1</td>
                     <td th:text="${reserve.request}">없음</td>
                     <td th:text="${reserve.keyring}">0</td>
-                    <td th:text="${reserve.isPay==False ? '입금대기' : '예약완료'}">입금대기</td>
+                    <td th:text="${reserve.reserveState}">입금대기</td>
                     <td>
-                        <button class="">입금 완료</button>
-                        <button class="">예약 취소</button>
+                        <form th:action="@{/admin/reservationProc}" method="post">
+                            <input type="hidden" name="reserveId" th:value="${reserve.reserveId}">
+                            <button type="submit" name="action" th:value="complete">입금 완료</button>
+                            <button type="submit" name="action" th:value="cancel">예약 취소</button>
+                        </form>
                     </td>
                 </tr>
             </table>
-
-        </form>
-    </div>
+        </div>
         
     
 </body>

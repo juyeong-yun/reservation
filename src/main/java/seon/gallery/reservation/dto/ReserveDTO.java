@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import seon.gallery.reservation.dto.check.YesorNo;
+import seon.gallery.reservation.dto.check.reserveState;
 import seon.gallery.reservation.entity.ReserveEntity;
 
 @NoArgsConstructor
@@ -30,28 +31,12 @@ public class ReserveDTO {
 	private int keyring;
 	private String depositor;
 	private boolean isPay;
-	private YesorNo isConfirm;
 	private YesorNo isCancle;
+	private reserveState reserveState;
 	private String cancleReason;
 	private LocalDate eventDate;
 	private String eventTime;
 
-	// Getter 및 Setter 메서드 추가
-// 	public LocalDate getEventDate() {
-// 		return this.eventDate;
-// 	}
-
-// 	public void setEventDate(LocalDate eventDate) {
-// 		this.eventDate = eventDate;
-// 	}
-
-// 	public String getEventTime() {
-// 		return this.eventTime;
-// 	}
-
-// 	public void setEventTime(String eventTime) {
-// 		this.eventTime = eventTime;
-// }
 	
 	public static ReserveDTO toDTO (ReserveEntity entity,String eventId, LocalDate eventDate, String eventTime) {
 		return ReserveDTO.builder()
@@ -65,8 +50,8 @@ public class ReserveDTO {
 				.keyring(entity.getKeyring())
 				.depositor(entity.getDepositor())
 				.isPay(entity.isPay())
-				.isConfirm(entity.getIsConfirm())
 				.isCancle(entity.getIsCancle())
+				.reserveState(entity.getReserveState())
 				.cancleReason(entity.getCancleReason())
 				.eventDate(eventDate)
 				.eventTime(eventTime)

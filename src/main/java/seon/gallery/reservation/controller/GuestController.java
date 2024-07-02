@@ -182,22 +182,19 @@ public class GuestController {
     @PostMapping("/writeInsert")
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
         @RequestParam(value = "detail", required = false) String detail,
-        @RequestParam(value = "qnaPwd", required = false) String qnaPwd,
         @ModelAttribute QnaDTO qnaDTO, 
         @ModelAttribute ReviewDTO reviewDTO,
         RedirectAttributes attr) {
 
             if ("qna".equals(from)) {
-                log.info("pwd {}", qnaPwd);
+                
                 // 비밀글 여부 처리
-                if (qnaPwd == null || qnaPwd.isEmpty()) {
+                if (qnaDTO.getQnaPwd() == null || qnaDTO.getQnaPwd() .isEmpty()) {
                     qnaDTO.setLock(false);
                 } else {
                     qnaDTO.setLock(true);
                 }
                 
-                // 비밀번호 설정
-                qnaDTO.setQnaPwd(qnaPwd);
                 qnaDTO.setDetail(detail);
                 
                 try {    
@@ -230,6 +227,7 @@ public class GuestController {
                 return "redirect:/"; // 잘못된 요청의 경우 에러 페이지로 리다이렉트
             }
     }
+    
     
     /**
      * 리뷰 페이지

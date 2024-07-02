@@ -85,7 +85,7 @@
                             <ul th:each="event : ${eventList}" th:if="${#temporals.format(event.eventDate, 'yy/MM/dd') == '24/08/17'}">
                                 <li>
                                     <a th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open">
-                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill">0</span><span>/20)</span>
+                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" >0</span><span>/20)</span>
                                     </a>
                                 </li>
                             </ul>

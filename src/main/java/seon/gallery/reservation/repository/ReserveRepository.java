@@ -13,8 +13,5 @@ public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
     
     @Query("SELECT r FROM ReserveEntity r INNER JOIN r.eventEntity")
     List<ReserveEntity> findAllWithEvent();
-
-    // @Query("SELECT r FROM ReserveEntity r JOIN FETCH r.eventEntity e WHERE e.eventId = :eventId")
-    // List<ReserveEntity> findByEventIdWithEvent(@Param("eventId") String eventId);
-
+    
 }
