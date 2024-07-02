@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -65,6 +67,7 @@ public class QnaEntity {
 	private boolean isLock;
 	
 	@Column(name="is_answer")
+	@Enumerated(EnumType.STRING)
 	private YesorNo isAnswer;
 	
 	public static QnaEntity toEntity(QnaDTO dto) {
@@ -74,6 +77,7 @@ public class QnaEntity {
 				.title(dto.getTitle())
 				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
+				.qnaPwd(dto.getQnaPwd())
 				.answer(dto.getAnswer())
 				.isLock(dto.isLock())
 				.isAnswer(dto.getIsAnswer())

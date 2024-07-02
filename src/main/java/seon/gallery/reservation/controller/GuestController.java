@@ -18,6 +18,7 @@ import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.dto.ReserveDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
+import seon.gallery.reservation.dto.check.YesorNo;
 import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
@@ -181,14 +182,25 @@ public class GuestController {
     @PostMapping("/writeInsert")
     public String writeInsert(@RequestParam(value = "from", required = false) String from, 
         @RequestParam(value = "detail", required = false) String detail,
+        @RequestParam(value = "qnaPwd", required = false) String qnaPwd,
         @ModelAttribute QnaDTO qnaDTO, 
         @ModelAttribute ReviewDTO reviewDTO,
         RedirectAttributes attr) {
 
             if ("qna".equals(from)) {
+                log.info("pwd {}", qnaPwd);
+                // 비밀글 여부 처리
+                if (qnaPwd == null || qnaPwd.isEmpty()) {
+                    qnaDTO.setLock(false);
+                } else {
+                    qnaDTO.setLock(true);
+                }
                 
-                try {
-                    qnaDTO.setDetail(detail);
+                // 비밀번호 설정
+                qnaDTO.setQnaPwd(qnaPwd);
+                qnaDTO.setDetail(detail);
+                
+                try {    
                     qnaService.writeQna(qnaDTO);
                     attr.addFlashAttribute("message", "Q&A 작성이 완료되었습니다."); 
                     return "redirect:/guest/board";

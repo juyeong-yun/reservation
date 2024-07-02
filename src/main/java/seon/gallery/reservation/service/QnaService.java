@@ -58,7 +58,9 @@ public class QnaService {
      * @param qnaDTO
      */
     public void writeQna(QnaDTO qnaDTO) {
-    
+        // 답변 여부
+        qnaDTO.setIsAnswer(YesorNo.N);
+
         QnaEntity qnaEntity = QnaEntity.toEntity(qnaDTO);
         qnaRepository.save(qnaEntity);
         

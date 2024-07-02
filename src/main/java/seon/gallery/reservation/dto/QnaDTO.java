@@ -37,6 +37,7 @@ public class QnaDTO {
 				.qnaName(entity.getQnaName())
 				.title(entity.getTitle())
 				.detail(entity.getDetail())
+				.qnaPwd(entity.getQnaPwd())
 				.writeDate(entity.getWriteDate())
 				.answer(entity.getAnswer())
 				.isLock(entity.isLock())
