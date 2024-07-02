@@ -102,7 +102,10 @@ public class ReserveService {
         }
     }
 
-
+    /**
+     * 해당하는 아이디를 입금완료로 상태변경
+     * @param reserveId
+     */
     public void completeReservation(Long reserveId) {
         ReserveEntity reserveEntity = reserveRepository.findById(reserveId)
             .orElseThrow(() -> new IllegalArgumentException("해당 예약이 존재하지 않습니다: " + reserveId));
@@ -115,6 +118,11 @@ public class ReserveService {
         log.info("입금 수정 완료");
     }
 
+
+    /**
+     * 해당하는 id의 예약취소로 상태 변경
+     * @param reserveId
+     */
     public void cancelReservation(Long reserveId) {
         ReserveEntity reserveEntity = reserveRepository.findById(reserveId)
             .orElseThrow(() -> new IllegalArgumentException("해당 예약이 존재하지 않습니다: " + reserveId));
@@ -124,6 +132,16 @@ public class ReserveService {
         reserveRepository.save(reserveEntity);
 
         log.info("입금 수정 완료");
+    }
+
+    public ReserveDTO searchReserver(String reserver, String phone) {
+        // List<ReserveEntity> entity = reserveRepository.findAllSearchReserver(reserver, phone);
+
+        // if (!entity.isEmpty()) {
+        //     ReserveDTO reserveDTO = new ReserveDTO();
+        //     reserveDTO.setReserver(entity.getReserver());
+        // }
+        return null;
     }
 
     

@@ -144,6 +144,20 @@ public class GuestController {
             return "redirect:/guest/reserve";
         }
     }
+
+    @GetMapping("/reserveCheck")
+    public String reserveCheck(@RequestParam(value = "reserver") String reserver,
+    @RequestParam(value = "phone") String phone, Model model){
+
+        ReserveDTO dto = reserveService.searchReserver(reserver, phone);
+
+        if (dto != null) {
+            model.addAttribute("dto", dto);
+        } else {
+            log.info("검색되지 않음");
+        }
+        return "guest/reserve";
+    }
     
 
 

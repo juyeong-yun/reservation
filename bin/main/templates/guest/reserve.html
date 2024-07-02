@@ -101,8 +101,19 @@
                 </table>
             </div>
         </form>
+        <!-- 여기쯤에 예약 확인 있으면 괜찮을 듯 모달로 빼면 딱 무난할 거 같은데 -->
+        <div class="reservationCheck">
+            <form th:action="@{/guest/searchReserve}">
+                <input type="text" name="reserver" id="reserver-check">
+                <input type="text" name="phone" id="reserver-phone-check">
+                <button type="submit" id="search">검색</button>
+                <button type="reset">취소</button>
+            </form>
+            <div class="reserve-result">
+                
+            </div>
+        </div>
     </div>
-    <!-- 여기쯤에 예약 확인 있으면 괜찮을 듯 모달로 빼면 딱 무난할 거 같은데 -->
     
     <div class="popup-wrap" id="popup">
         <div class="popup">

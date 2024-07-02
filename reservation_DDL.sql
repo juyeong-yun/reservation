@@ -28,13 +28,17 @@ create table qna(
     ,title varchar2(200) default '제목없음'
     ,detail clob
     ,write_date date default sysdate
-    ,qna_pwd varchar2(4)
+    ,qna_pwd varchar2(30)
     ,qna_answer varchar2(4000)
     ,is_lock number(1) default 0 check(is_lock in (1,0))
     ,is_answer char(1) default 'N' check(is_answer in ('N','Y'))
 );
 
 select * from qna;
+
+SELECT constraint_name, search_condition
+FROM user_constraints
+WHERE constraint_name = 'SYS_C008172';
 
 
 drop table event;
@@ -60,22 +64,27 @@ drop sequence reserve_seq;
 create sequence reserve_seq;
 create table reserve(
     reserve_id number constraint reserve_seq primary key
-    ,event_time varchar2(10)
     ,reserver varchar2(20) not null
     ,phone varchar2(20) not null
     ,reserve_date date default sysdate
     ,request varchar2(500) default '요청 없음'
     ,number_of_reserve number(2) default 1
     ,keyring number(2) default 0
+    ,depositor varchar2(20)
     ,is_pay char(1) default 0 check(is_pay in (1,0))
-    ,is_confirm char(1) check(is_confirm in ('N','Y'))
     ,is_cancle char(1) default 'N' check(is_cancle in ('N','Y'))
+    ,reserve_state varchar2(10) default 'waiting' check (reserve_state in('waiting', 'payed', 'cancel')) 
     ,cancle_reason varchar2(1000)
     ,event_id varchar2(50)
     , constraint event_pk foreign key(event_id) REFERENCES event(event_id)
 );
 
 select * from reserve;
+
+select * 
+from reserve r
+inner join event e
+on r.event_id = e.event_id;
 
 -- 4) 리뷰 게시판
 drop table review;

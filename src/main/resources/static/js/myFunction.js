@@ -332,3 +332,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+/***************
+ * 6. 예약 페이지에서 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정
+ **************/
+
+$(function(){
+    $('document').on("click", "#search", function(searchEvent){ 
+        searchEvent.preventDefault();
+
+        let name = document.getElementById("reserver-check").val().trim();
+        let phone = document.getElementById("reserver-phone-check").val().trim();
+
+        console.log(name, phone);
+
+        $.ajax({
+            type:"Get",
+            url: "/guest/reserveCheck",
+            data : {
+                reserver : name,
+                phone : phone
+            },
+            success: function (res) {
+                $(".reserve-result").html(res);
+            }, error: function(){
+                alert("요청 도중 오류가 발생했습니다. 디엠으로 문의 주세요.");
+            }
+        })
+    }); 
+});
