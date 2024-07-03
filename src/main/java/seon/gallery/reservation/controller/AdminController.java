@@ -119,11 +119,12 @@ public class AdminController {
 	public String reserveCheck(Model model, 
 	@RequestParam(value = "searchWord", required = false) String searchWord,
 	@PageableDefault(page = 1) Pageable pageable) {
+
 		// List<ReserveDTO> reserveList = reserveService.selectAll();
 		Page<ReserveDTO> reserveList = reserveService.selectAll(pageable, searchWord);
 
 		int totalPages = (int) reserveList.getTotalPages();
-		int page =pageable.getPageNumber();
+		int page = pageable.getPageNumber();
 
 		PageNevigator nevi = new PageNevigator(pageLimit, page, totalPages);
 
@@ -155,7 +156,6 @@ public class AdminController {
 				
 		} else if("cancel".equals(action)) {
 			try {
-				ReserveDTO reserveDTO = reserveService.selectOne(reserveId);
 				reserveService.cancelReservation(reserveId);
 				attr.addFlashAttribute("message", "예약 취소 처리");
 			} catch (Exception e) {

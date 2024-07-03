@@ -46,7 +46,7 @@ public class ReserveService {
      * @return
      */
     public Page<ReserveDTO> selectAll(Pageable pageable, String searchWord) {
-        int page = pageable.getPageNumber()-1; //페이지의 위치값은 0부터 시작하기 때문
+        int page = pageable.getPageNumber() - 1; //페이지의 위치값은 0부터 시작하기 때문
 
         Page<ReserveEntity> entityList = null;
 
