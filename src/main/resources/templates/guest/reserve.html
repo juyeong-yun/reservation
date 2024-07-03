@@ -77,23 +77,36 @@
 							<!-- 모달창 뜨게 해놓았고 추후 확인을 누르면 해당 정보를 가지고 예약페이지에 가서 정보 보여주면 됨 --> 
                             <ul th:each="event : ${eventList}" th:if="${#temporals.format(event.eventDate, 'yy/MM/dd') == '24/08/16'}">
                                 <li >
-                                    <a th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open"><span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill">0</span><span>/20)</span></a>
+                                    <a th:if="${event.reserveCount<20}" th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open">
+                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
+                                    </a>
+                                    <span th:if="${event.reserveCount>=20}">
+                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
+                                    </span>
                                 </li>
                             </ul>
                         </td>
                         <td class="available-sat">
                             <ul th:each="event : ${eventList}" th:if="${#temporals.format(event.eventDate, 'yy/MM/dd') == '24/08/17'}">
                                 <li>
-                                    <a th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open">
-                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" >0</span><span>/20)</span>
+                                    <a th:if="${event.reserveCount<20}" th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open">
+                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
                                     </a>
+                                    <span th:if="${event.reserveCount>=20}">
+                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
+                                    </span>
                                 </li>
                             </ul>
                         </td>
                         <td class="available-sun">
                             <ul th:each="event : ${eventList}" th:if="${#temporals.format(event.eventDate, 'yy/MM/dd') == '24/08/18'}">
-                                <li >
-                                    <a th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open"><span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill">0</span><span>/20)</span></a>
+                                <li>
+                                    <a th:if="${event.reserveCount<20}" th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open">
+                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
+                                    </a>
+                                    <span th:if="${event.reserveCount>=20}">
+                                        <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
+                                    </span>
                                 </li>
                             </ul>
                         </td>

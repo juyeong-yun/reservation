@@ -66,7 +66,7 @@ public class ReserveService {
         if (reserveDTO.getRequest().isEmpty()) {
             reserveDTO.setRequest("요청 없음");
         }
-        reserveDTO.setIsCancle(YesorNo.N);
+        reserveDTO.setIsCancel(YesorNo.N);
         reserveDTO.setReserveState(reserveState.waiting);
         
         if (reserveDTO.getDepositor()==null || reserveDTO.getDepositor().isEmpty()){
@@ -112,7 +112,7 @@ public class ReserveService {
         
         reserveEntity.setReserveState(reserveState.payed);
         reserveEntity.setPay(true);
-        reserveEntity.setIsCancle(YesorNo.N);
+        reserveEntity.setIsCancel(YesorNo.N);
         reserveRepository.save(reserveEntity);
 
         log.info("입금 수정 완료");
@@ -128,7 +128,7 @@ public class ReserveService {
             .orElseThrow(() -> new IllegalArgumentException("해당 예약이 존재하지 않습니다: " + reserveId));
         
         reserveEntity.setReserveState(reserveState.cancel);
-        reserveEntity.setIsCancle(YesorNo.Y);
+        reserveEntity.setIsCancel(YesorNo.Y);
         reserveRepository.save(reserveEntity);
 
         log.info("입금 수정 완료");

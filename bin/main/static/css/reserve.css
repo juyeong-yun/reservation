@@ -44,7 +44,7 @@
 
 #calendar td[class*="available"] {
     text-align: center;
-    letter-spacing: 6px;
+    letter-spacing: 5px;
 	color: #000000;
 	background: #ffffff;
     border: 1px solid;

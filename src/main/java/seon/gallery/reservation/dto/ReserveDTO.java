@@ -31,9 +31,9 @@ public class ReserveDTO {
 	private int keyring;
 	private String depositor;
 	private boolean isPay;
-	private YesorNo isCancle;
+	private YesorNo isCancel;
 	private reserveState reserveState;
-	private String cancleReason;
+	private String cancelReason;
 	private LocalDate eventDate;
 	private String eventTime;
 
@@ -50,9 +50,9 @@ public class ReserveDTO {
 				.keyring(entity.getKeyring())
 				.depositor(entity.getDepositor())
 				.isPay(entity.isPay())
-				.isCancle(entity.getIsCancle())
+				.isCancel(entity.getIsCancel())
 				.reserveState(entity.getReserveState())
-				.cancleReason(entity.getCancleReason())
+				.cancelReason(entity.getCancelReason())
 				.eventDate(eventDate)
 				.eventTime(eventTime)
 				.build();

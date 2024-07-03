@@ -12,12 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.entity.EventEntity;
 import seon.gallery.reservation.repository.EventRepository;
+import seon.gallery.reservation.repository.ReserveRepository;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class EventService {
 
+    private final ReserveRepository reserveRepository;
     private final EventRepository eventRepository;
 
     /**
@@ -29,14 +31,10 @@ public class EventService {
 
         List<EventEntity> entityList = eventRepository.findAll();
         List<EventDTO> dtoList = new ArrayList<>();
-
-        for (EventEntity event : entityList) {
-            EventDTO dto = new EventDTO(
-                event.getEventId(),
-                event.getEventDate(),
-                event.getEventTime(),
-                event.isFull()
-            );
+        
+        for (EventEntity entity : entityList) {
+            int reserveCount = reserveRepository.countEventByReserveId(entity.getEventId());
+            EventDTO dto = EventDTO.toDTO(entity, reserveCount);
             dtoList.add(dto);
         }
         return dtoList;

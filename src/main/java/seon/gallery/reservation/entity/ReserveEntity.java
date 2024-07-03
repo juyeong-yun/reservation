@@ -77,16 +77,16 @@ public class ReserveEntity {
 	@Column(name="is_pay")
 	private boolean isPay;
 	
-	@Column(name="is_cancle")
+	@Column(name="is_cancel")
 	@Enumerated(EnumType.STRING)
-	private YesorNo isCancle;
+	private YesorNo isCancel;
 	
 	@Column(name = "reserve_state")
 	@Enumerated(EnumType.STRING)
 	private reserveState reserveState;
 
-	@Column(name="cancle_reason")
-	private String cancleReason;
+	@Column(name="cancel_reason")
+	private String cancelReason;
 	
 	public static ReserveEntity toEntitiy (ReserveDTO dto, EventEntity eventEntity) {
 		return ReserveEntity.builder()
@@ -100,9 +100,9 @@ public class ReserveEntity {
 				.keyring(dto.getKeyring())
 				.depositor(dto.getDepositor())
 				.isPay(dto.isPay())
-				.isCancle(dto.getIsCancle())
+				.isCancel(dto.getIsCancel())
 				.reserveState(dto.getReserveState())
-				.cancleReason(dto.getCancleReason())
+				.cancelReason(dto.getCancelReason())
 				.build();
 	}
 
