@@ -37,17 +37,14 @@
             <div class="search">
                 <form id="searchForm" th:action="@{/admin/reserveCheck}">
                     <input type="hidden" name="page" id="requestPage" th:value = "${page}">
-                    <select name="searchItem">
-                        <option value="reserver" th:selected="${searchItem == 'reserver'}">예약자</option>
-                    </select>
-                    <input type="text" name="searchWord" th:value="${searchWord}">
-                    <button type="submit" value="검색"></button>
+                    <input type="text" name="searchWord" id="searchWord" th:value="${searchWord}" placeholder="예약자명만">
+                    <button type="submit">검색</button>
                 </form>
             </div>
             <!-- 예약 변경도 넣어야 하나? -->
             
             <table border="1">
-                <tr>
+                <tr th:if="${reserveList!=null}">
                     <th>이름</th>
                     <th>입금자명</th>
                     <th>예약 날짜</th>
@@ -136,9 +133,18 @@
         </div>
         
         <script>
-            function pageFormSubmit(page){
-                document.getElementById("requestPage").value = page; 
-                document.getElementById("searchForm").submit(); 
+            function pageFormSubmit(page) {
+                document.getElementById("requestPage").value = page;  // 페이지 번호 설정
+                document.getElementById("searchForm").submit();  // 폼 제출
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // 페이지가 로드된 후 실행될 JavaScript 코드
+                init();
+            });
+
+            function init() {
+                document.getElementById("searchWord").value = "";  // 검색어 입력란 초기화
             }
         </script>
     

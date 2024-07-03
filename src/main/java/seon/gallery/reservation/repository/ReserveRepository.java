@@ -22,6 +22,15 @@ public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
      */
     @Query("SELECT r FROM ReserveEntity r INNER JOIN r.eventEntity")
     Page<ReserveEntity> findAllWithEvent(PageRequest pageRequest);
+    
+    /**
+     * 예약자 이름과 비교하여 해당하는 아이디 조회
+     * @param searchWord
+     * @param pageRequest
+     * @return
+     */
+    @Query("SELECT r FROM ReserveEntity r INNER JOIN r.eventEntity e WHERE r.reserver LIKE %:searchWord%")
+    Page<ReserveEntity> findAllWithEventAndSearchWord(@Param("searchWord") String searchWord, PageRequest pageRequest);
     // List<ReserveEntity> findAllWithEvent();
 
     /**

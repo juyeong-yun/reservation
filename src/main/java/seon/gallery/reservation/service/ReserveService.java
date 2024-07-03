@@ -45,22 +45,19 @@ public class ReserveService {
      * @param eventId
      * @return
      */
-    public Page<ReserveDTO> selectAll(Pageable pageable) {
+    public Page<ReserveDTO> selectAll(Pageable pageable, String searchWord) {
         int page = pageable.getPageNumber()-1; //페이지의 위치값은 0부터 시작하기 때문
 
-        // List<ReserveEntity> entityList = reserveRepository.findAllWithEvent();
-        // List<ReserveDTO> dtoList = new ArrayList<>();
-        Page<ReserveEntity> entityList = reserveRepository.findAllWithEvent(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "reserveDate")));
-        Page<ReserveDTO> dtoList = null;
+        Page<ReserveEntity> entityList = null;
+
+        if (searchWord == null || searchWord.isEmpty()) {
+            entityList = reserveRepository.findAllWithEvent(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "reserveDate")));
         
-        // for (ReserveEntity reserve : entityList) {
-        //     String eventId = reserve.getEventEntity().getEventId();
-        //     LocalDate eventDate = reserve.getEventEntity().getEventDate();
-        //     String eventTime = reserve.getEventEntity().getEventTime();
-        //     ReserveDTO dto = ReserveDTO.toDTO(reserve, eventId, eventDate, eventTime);
-            
-        //     dtoList.add(dto);
-        // }
+        } else {
+            entityList = reserveRepository.findAllWithEventAndSearchWord(searchWord, PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "reserveDate")));
+        }
+        
+        Page<ReserveDTO> dtoList = null;
 
         dtoList = entityList.map(reserve -> new ReserveDTO(
             reserve.getReserveId(),
@@ -78,7 +75,7 @@ public class ReserveService {
         );
         return dtoList;
     }
-    
+
     /**
      * 예약폼 추가
      * @param reserveDTO

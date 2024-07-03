@@ -116,9 +116,11 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/reserveCheck")
-	public String reserveCheck(Model model, @PageableDefault(page = 1) Pageable pageable) {
+	public String reserveCheck(Model model, 
+	@RequestParam(value = "searchWord", required = false) String searchWord,
+	@PageableDefault(page = 1) Pageable pageable) {
 		// List<ReserveDTO> reserveList = reserveService.selectAll();
-		Page<ReserveDTO> reserveList = reserveService.selectAll(pageable);
+		Page<ReserveDTO> reserveList = reserveService.selectAll(pageable, searchWord);
 
 		int totalPages = (int) reserveList.getTotalPages();
 		int page =pageable.getPageNumber();
@@ -126,6 +128,7 @@ public class AdminController {
 		PageNevigator nevi = new PageNevigator(pageLimit, page, totalPages);
 
 		model.addAttribute("reserveList", reserveList);
+		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("nevi", nevi);
 		
 		return "admin/reserveCheck";

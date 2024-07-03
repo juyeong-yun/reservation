@@ -332,6 +332,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
 /***************
  * 6. 예약 페이지에서 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정
  **************/
