@@ -158,6 +158,25 @@ div.background .right-side a{
     margin: 35px 0px;
 }
 
+/* 페이징 */
+nav.pageNavigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    padding: 27px;
+}
+
+.page-no {
+    margin-right: 11px;
+    font-family: "WorkSans";
+}
+
+b.page-no{
+    font-family: "WorkSans";
+    font-weight: 600;
+}
+
 footer {
     position: relative;
     /*padding: 10px 0;*/

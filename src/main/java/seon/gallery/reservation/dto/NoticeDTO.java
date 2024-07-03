@@ -30,6 +30,18 @@ public class NoticeDTO {
 	private YesorNo isPost;
 	private String originalFileName;
 	private String savedFileName;
+
+	// 페이징 위한 생성자
+	public NoticeDTO(Long noticeId, String category, String title, String detail, LocalDateTime writeDate,
+            String originalFileName, String savedFileName) {
+				this.noticeId = noticeId;
+				this.category = category;
+				this.title = title;
+				this.detail = detail;
+				this.writeDate = writeDate;
+				this.originalFileName = originalFileName;
+				this.savedFileName = savedFileName;
+    }
 	
 	public static NoticeDTO toDTO(NoticeEntity entity) {
 		return NoticeDTO.builder()
@@ -43,4 +55,6 @@ public class NoticeDTO {
 				.savedFileName(entity.getSavedFileName())
 				.build();
 	}
+
+    
 }

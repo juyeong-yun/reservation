@@ -30,6 +30,19 @@ public class QnaDTO {
 	private String answer;
 	private boolean isLock;
 	private YesorNo isAnswer;
+
+	// 페이징 위한 생성자
+	public QnaDTO(Long qnaId, String qnaName, String title, String detail, LocalDateTime writeDate, 
+	String qnaPwd, String answer, boolean isLock) {
+		this.qnaId = qnaId;
+		this.qnaName = qnaName;
+		this.title = title;
+		this.detail = detail;
+		this.writeDate = writeDate;
+		this.qnaPwd = qnaPwd;
+		this.answer = answer;
+		this.isLock = isLock;
+    }
 	
 	public static QnaDTO toDTO(QnaEntity entity) {
 		return QnaDTO.builder()
@@ -44,4 +57,6 @@ public class QnaDTO {
 				.isAnswer(entity.getIsAnswer())
 				.build();
 	}
+
+    
 }

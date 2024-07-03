@@ -6,7 +6,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +28,7 @@ import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
 import seon.gallery.reservation.service.ReviewService;
+import seon.gallery.reservation.util.PageNevigator;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,18 +65,35 @@ public class GuestController {
         this.eventService = eventService;
     }
 
+    @Value("${user.board.pageLimit}")
+	int pageLimit = 5;
+
 
 	/**
 	 * board 로 가는
 	 * @return
 	 */
     @GetMapping("/board")
-    public String board(HttpServletRequest request, Model model) {
-        List<NoticeDTO> noticeList = noticeService.selectAll();
-        List<QnaDTO> qnaList = qnaService.selectAll();
+    public String board(Model model,@Qualifier("q_pageable")@PageableDefault(page = 1) Pageable q_pageable,
+    @Qualifier("n_pageable")@PageableDefault(page = 1) Pageable n_pageable ) {
+        
+        Page<NoticeDTO> noticeList = noticeService.selectAll(n_pageable);
+        Page<QnaDTO> qnaList = qnaService.selectAll(q_pageable);
+        // List<NoticeDTO> noticeList = noticeService.selectAll();
+        // List<QnaDTO> qnaList = qnaService.selectAll();
+
+        int n_totalPages = (int) noticeList.getTotalPages();
+		int n_page = n_pageable.getPageNumber();
+        PageNevigator n_nevi = new PageNevigator(pageLimit, n_page, n_totalPages);
+
+        int q_totalPages = (int) qnaList.getTotalPages();
+		int q_page = q_pageable.getPageNumber();
+        PageNevigator q_nevi = new PageNevigator(pageLimit, q_page, q_totalPages);
 
         model.addAttribute("noticeList", noticeList);
+        model.addAttribute("nnevi", n_nevi);
         model.addAttribute("qnaList", qnaList);
+        model.addAttribute("qnevi", q_nevi);
         
         return "guest/board";
     }
@@ -92,6 +114,7 @@ public class GuestController {
      */
     @GetMapping("/location")
     public String location() {
+
         return "/guest/location";
     }
     

@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -20,18 +24,36 @@ import seon.gallery.reservation.util.FileService;
 public class NoticeService {
     private final NoticeRepository noticeRepository;
     
+    @Value("${user.board.pageLimit}")
+	int pageLimit;
+
     /**
      * notice 저장 된걸 불러오는
      * @return
      */
-    public List<NoticeDTO> selectAll() {
-        List<NoticeEntity> entityList = noticeRepository.findAll();
-        List<NoticeDTO> dtoList = new ArrayList<>();
+    public Page<NoticeDTO> selectAll(Pageable pageable) {
+        int page = pageable.getPageNumber() - 1;
 
-        for (NoticeEntity notice : entityList){
-            NoticeDTO dto = NoticeDTO.toDTO(notice);
-            dtoList.add(dto);
-        }
+        Page<NoticeEntity> entityList = noticeRepository.findAll(PageRequest.of(page, pageLimit,Sort.Direction.DESC,"writeDate"));
+        Page<NoticeDTO> dtoList = null;
+
+        dtoList = entityList.map(notice -> new NoticeDTO(
+            notice.getNoticeId(),
+            notice.getCategory(),
+            notice.getTitle(),
+            notice.getDetail(),
+            notice.getWriteDate(),
+            notice.getOriginalFileName(),
+            notice.getSavedFileName())
+        );
+
+        // List<NoticeEntity> entityList = noticeRepository.findAll();
+        // List<NoticeDTO> dtoList = new ArrayList<>();
+
+        // for (NoticeEntity notice : entityList){
+        //     NoticeDTO dto = NoticeDTO.toDTO(notice);
+        //     dtoList.add(dto);
+        // }
         return dtoList;
     }
 
@@ -80,7 +102,7 @@ public class NoticeService {
             return NoticeDTO.toDTO(noticeEntity);
         } else {
             // Optional에서 값이 존재하지 않는 경우 처리 (예외처리, 기본값 설정 등)
-            return null; // 또는 기본값을 리턴하거나 예외를 던지는 등의 처리를 추가할 수 있습니다.
+            return null;
         }
     }
 

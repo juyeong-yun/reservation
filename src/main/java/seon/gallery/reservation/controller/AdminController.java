@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -171,12 +172,26 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/writeManage")
-	public String writeManage(Model model) {
-		List<QnaDTO> qnaList = qnaService.selectAll();
-		List<NoticeDTO> noticeList = noticeService.selectAll();
+	public String writeManage(Model model, @Qualifier("q_pageable")@PageableDefault(page = 1) Pageable q_pageable,
+    @Qualifier("n_pageable")@PageableDefault(page = 1) Pageable n_pageable ) {
 
-		model.addAttribute("qnaList", qnaList);
-		model.addAttribute("noticeList", noticeList);
+		Page<NoticeDTO> noticeList = noticeService.selectAll(n_pageable);
+        Page<QnaDTO> qnaList = qnaService.selectAll(q_pageable);
+        // List<NoticeDTO> noticeList = noticeService.selectAll();
+        // List<QnaDTO> qnaList = qnaService.selectAll();
+
+        int n_totalPages = (int) noticeList.getTotalPages();
+        int q_totalPages = (int) qnaList.getTotalPages();
+		int n_page = n_pageable.getPageNumber();
+		int q_page = q_pageable.getPageNumber();
+
+        PageNevigator n_nevi = new PageNevigator(pageLimit, n_page, n_totalPages);
+        PageNevigator q_nevi = new PageNevigator(pageLimit, q_page, q_totalPages);
+
+        model.addAttribute("noticeList", noticeList);
+        model.addAttribute("qnaList", qnaList);
+        model.addAttribute("qnevi", q_nevi);
+        model.addAttribute("nnevi", n_nevi);
 
 		return "admin/writeManage";
 	}

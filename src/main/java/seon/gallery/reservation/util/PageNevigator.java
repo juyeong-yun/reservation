@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class PageNevigator {
     private final int pagePerGroup = 10; //그룹당 몇페이지의 수
+    // private int pagePerGroup;
     private int pageLimit; // 한 페이지 당 글의 개수
     private int page; // 사용자가 요청한 페이지
     private int totalPages; // 총 페이지 수
@@ -23,14 +24,20 @@ public class PageNevigator {
         this.totalPages = totalPages;
 
         // 총 그룹수 계산 (10페이지가 한 그룹)
-        totalGroupCount = (totalPages / pagePerGroup);
-        totalPages += (totalPages % pagePerGroup == 0) ? 0 : 1;
+        // totalGroupCount = (totalPages / pagePerGroup);
+        // totalPages += (totalPages % pagePerGroup == 0) ? 0 : 1;
+
+        if (this.totalPages == 0) {
+            this.totalPages = 1; // totalPages가 0일 경우 1로 설정
+        }
+        totalGroupCount = (int) Math.ceil((double) totalPages / pagePerGroup);
 
         // 사용자가 요청한 페이지의 첫 번째 글번호와 마지막 글번호 계산
         startPageGroup = ((int)(Math.ceil(((double)page / pageLimit))) - 1) * pageLimit + 1;
 
         endPageGroup = (startPageGroup + pageLimit -1) < totalPages ? 
         (startPageGroup + pageLimit -1) : totalPages;
+        // endPageGroup = Math.min(startPageGroup + pagePerGroup - 1, totalPages);
 
         // 검색과 함께 사용했을때 검색결과가 하나도 없다면
         // startPageGroup = 1이고 endPageGrouop = 0이 되므로 이런 경우 endPageGrouop = 1로 한다. 
@@ -40,5 +47,7 @@ public class PageNevigator {
         currentGroup = (page - 1) / pagePerGroup + 1 ;
     
     }
+
+    
 
 }

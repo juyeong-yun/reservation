@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -23,31 +28,46 @@ public class QnaService {
     
     private final QnaRepository qnaRepository;
 
+    @Value("${user.board.pageLimit}")
+	int pageLimit;
+
+
     /**
      * 모든 질문글 불러오기
      * @return
      */
-    public List<QnaDTO> selectAll() {
+    public Page<QnaDTO> selectAll(Pageable pageable) {
+        int page = pageable.getPageNumber() - 1; 
 
-        List<QnaEntity> entityList = qnaRepository.findAll();
-        List<QnaDTO> dtoList = new ArrayList<>();
+        Page<QnaEntity> entityList = qnaRepository.findAll(PageRequest.of(page, pageLimit,Sort.by(Sort.Direction.DESC, "writeDate")));
+        Page<QnaDTO> dtoList = entityList.map(qna -> 
+        new QnaDTO(
+            qna.getQnaId(),
+            qna.getQnaName(),
+            qna.getTitle(),
+            qna.getDetail(),
+            qna.getWriteDate(),
+            qna.getQnaPwd(),
+            qna.getAnswer(),
+            qna.isLock()  
+        ));
+        // List<QnaEntity> entityList = qnaRepository.findAll();
+        // List<QnaDTO> dtoList = new ArrayList<>();
 
-        for (QnaEntity qna : entityList) {
-            QnaDTO dto = new QnaDTO(
-                qna.getQnaId(),
-                qna.getQnaName(),
-                qna.getTitle(),
-                qna.getDetail(),
-                qna.getWriteDate(),
-                qna.getQnaPwd(),
-                qna.getAnswer(),
-                qna.isLock(),
-                qna.getIsAnswer()
-            );
-            dtoList.add(dto);
-        }
-
-        log.info("여기는 list service");
+        // for (QnaEntity qna : entityList) {
+        //     QnaDTO dto = new QnaDTO(
+        //         qna.getQnaId(),
+        //         qna.getQnaName(),
+        //         qna.getTitle(),
+        //         qna.getDetail(),
+        //         qna.getWriteDate(),
+        //         qna.getQnaPwd(),
+        //         qna.getAnswer(),
+        //         qna.isLock(),
+        //         qna.getIsAnswer()
+        //     );
+        //     dtoList.add(dto);
+        // }
 
         return dtoList;
     }
