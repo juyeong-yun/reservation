@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.event.spi.EventManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.core.Local;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -28,6 +33,10 @@ import seon.gallery.reservation.repository.ReserveRepository;
 @Slf4j
 @RequiredArgsConstructor
 public class ReserveService {
+
+    @Value("${user.board.pageLimit}")
+	int pageLimit;
+    
     private final EventRepository eventRepository;
     private final ReserveRepository reserveRepository;
 
@@ -36,20 +45,37 @@ public class ReserveService {
      * @param eventId
      * @return
      */
-    public List<ReserveDTO> selectAll() {
+    public Page<ReserveDTO> selectAll(Pageable pageable) {
+        int page = pageable.getPageNumber()-1; //페이지의 위치값은 0부터 시작하기 때문
 
-        List<ReserveEntity> entityList = reserveRepository.findAllWithEvent();
-        List<ReserveDTO> dtoList = new ArrayList<>();
+        // List<ReserveEntity> entityList = reserveRepository.findAllWithEvent();
+        // List<ReserveDTO> dtoList = new ArrayList<>();
+        Page<ReserveEntity> entityList = reserveRepository.findAllWithEvent(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "reserveDate")));
+        Page<ReserveDTO> dtoList = null;
         
-        for (ReserveEntity reserve : entityList) {
-            String eventId = reserve.getEventEntity().getEventId();
-            LocalDate eventDate = reserve.getEventEntity().getEventDate();
-            String eventTime = reserve.getEventEntity().getEventTime();
-            ReserveDTO dto = ReserveDTO.toDTO(reserve, eventId, eventDate, eventTime);
+        // for (ReserveEntity reserve : entityList) {
+        //     String eventId = reserve.getEventEntity().getEventId();
+        //     LocalDate eventDate = reserve.getEventEntity().getEventDate();
+        //     String eventTime = reserve.getEventEntity().getEventTime();
+        //     ReserveDTO dto = ReserveDTO.toDTO(reserve, eventId, eventDate, eventTime);
             
-            dtoList.add(dto);
-        }
-        
+        //     dtoList.add(dto);
+        // }
+
+        dtoList = entityList.map(reserve -> new ReserveDTO(
+            reserve.getReserveId(),
+            reserve.getEventEntity().getEventId(),
+            reserve.getReserver(),
+            reserve.getPhone(),
+            reserve.getReserveDate(),
+            reserve.getRequest(),
+            reserve.getNumberOfReserve(),
+            reserve.getKeyring(),
+            reserve.getDepositor(),
+            reserve.getReserveState(),
+            reserve.getEventEntity().getEventDate(),
+            reserve.getEventEntity().getEventTime())
+        );
         return dtoList;
     }
     

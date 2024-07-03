@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +31,8 @@ import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
+import seon.gallery.reservation.util.PageNevigator;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Slf4j
 @RequestMapping("/admin")
 public class AdminController {
+
 	private NoticeService noticeService;
 	private EventService eventService;
 	private QnaService qnaService;
@@ -48,6 +55,9 @@ public class AdminController {
 		this.qnaService = qnaService;
 		this.reserveService = reserveService;
 	}
+
+	@Value("${user.board.pageLimit}")
+	int pageLimit; 
 	
 	/**   
 	 * 관리자 메인화면	
@@ -55,8 +65,8 @@ public class AdminController {
 	 */
 	@GetMapping("/adminMain")
 	public String adminMain(Model model) {
-		List<EventDTO> eventList = eventService.selectAll();
 
+		List<EventDTO> eventList = eventService.selectAll();
 		model.addAttribute("eventList", eventList);
 		
 		return "admin/adminMain";
@@ -106,10 +116,17 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/reserveCheck")
-	public String reserveCheck(Model model) {
-		List<ReserveDTO> reserveList = reserveService.selectAll();
-		
+	public String reserveCheck(Model model, @PageableDefault(page = 1) Pageable pageable) {
+		// List<ReserveDTO> reserveList = reserveService.selectAll();
+		Page<ReserveDTO> reserveList = reserveService.selectAll(pageable);
+
+		int totalPages = (int) reserveList.getTotalPages();
+		int page =pageable.getPageNumber();
+
+		PageNevigator nevi = new PageNevigator(pageLimit, page, totalPages);
+
 		model.addAttribute("reserveList", reserveList);
+		model.addAttribute("nevi", nevi);
 		
 		return "admin/reserveCheck";
 	}

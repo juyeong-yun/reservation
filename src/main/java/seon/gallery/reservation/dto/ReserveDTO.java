@@ -37,6 +37,26 @@ public class ReserveDTO {
 	private LocalDate eventDate;
 	private String eventTime;
 
+
+	// 페이징을 위한 생성자
+	public ReserveDTO (Long reserveId, String eventId, String reserver, String phone, LocalDateTime reserveDate, 
+	String request, int numberOfReserve, int keyring, String depositor, reserveState reserveState,
+	LocalDate eventDate, String eventTime){
+		super();
+		this.reserveId = reserveId;
+		this.eventId = eventId;
+		this.reserver = reserver;
+		this.phone = phone;
+		this.reserveDate = reserveDate;
+		this.request = request;
+		this.numberOfReserve = numberOfReserve;
+		this.keyring = keyring;
+		this.depositor = depositor;
+		this.reserveState = reserveState;
+		this.eventDate = eventDate;
+		this.eventTime = eventTime;
+	}
+
 	
 	public static ReserveDTO toDTO (ReserveEntity entity,String eventId, LocalDate eventDate, String eventTime) {
 		return ReserveDTO.builder()
