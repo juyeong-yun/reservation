@@ -35,150 +35,98 @@
     </div>
         
     <div class="content">
-        <h2>board</h2>
-        <form th:action="@{/guest/board}">            
+    <h2>board</h2>
+        <form th:action="@{/guest/board}" id="pagingForm">
+            <input type="hidden" name="page" id="requestPage" th:value = "${page}">
+        </form>
             <!-- 관리자만이 적을 수 있게 하려면? -->
             <!-- 어떻게 보이는 형식이 좋을지 생각해보기 -->
             <!-- 게시판이 두개라서 두개의 맥스 사이즈 설정할 수 있는지 알아봐야겠다 ..
-                    그럼 페이징도 필요할듯 -->
+            그럼 페이징도 필요할듯 -->
             <!-- 있으면 펼쳐지게 할 것 -->
-                <div class="notice" id="notice">
-                    <h3>Notice</h3>
-                <table th:each="notice:${noticeList}">
+        <div class="notice" id="notice">
+            <h3>Notice</h3>
+            <table th:each="notice:${noticeList}">
+                <thead>
                     <tr>
-                        <th class="category" th:text="${notice.category}">공지</th>
-                        <td class="title" th:text="${notice.title}">냠냠</td>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="noticeTitle">
+                        <td class="category" th:text="${notice.category}">공지</td>
+                        <td class="title"><a id="dropdown-notice" th:text="${notice.title}">냠냠</a></td>
                         <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="detail" th:utext="${notice.detail}"></td>
+                        <!--구체적인 css 곧 잡기 -->
+                        <td colspan="3" class="detail" id="dropdown-detail" th:utext="${notice.detail}"></td>
                     </tr>
-                </table>
-                <!-- pageNavigation -->
-                <nav class="pageNavigation">
-                    <!-- 앞 그룹 -->
-                    <th:block th:if="${nnevi.startPageGroup > 1}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${nnevi.startPageGroup-1})}"><i class="fa-solid fa-backward-fast"></i></a>
-                    </th:block>
-                    
-                    <th:block th:unless="${nnevi.startPageGroup > 1}">
-                        <span class="page-no navi"><i class="fa-solid fa-backward-fast"></i></span>
-                    </th:block>
-                    
-                    <!-- 앞페이지  -->
-                    <th:block th:if="${nnevi.page > 1}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${nnevi.page-1})}"><i class="fa-solid fa-backward"></i></a>
-                    </th:block>
-                    
-                    <th:block th:unless="${nnevi.page > 1}">
-                        <span class="page-no navi"><i class="fa-solid fa-backward"></i></span>
-                    </th:block>
-                    
-                    <!-- 페이지 번호 출력 -->
-                    <span th:each="count:${#numbers.sequence(nnevi.startPageGroup, nnevi.endPageGroup)}">
-                        <span th:if="${count == nnevi.page}">
-                            <b class="page-no current" th:text="${count}"></b>
-                        </span>
-                        <span th:unless="${count == nnevi.page}">
-                            <a class="page-no" th:href="@{/guest/board'(page=${count})}" th:text="${count}"></a>
-                        </span>
-                    </span>
-                    
-                    <!-- 뒤 페이지 -->
-                    <th:block th:if = "${(nnevi.totalPages) > (nnevi.page)}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${nnevi.page+1})}"><i class="fa-solid fa-forward"></i></a>
-                    </th:block> 
+                </tbody>
+            </table>
 
-                    <th:block th:unless = "${nnevi.totalPages > (nnevi.page)}">
-                        <span class="page-no navi" ><i class="fa-solid fa-forward"></i></span>
-                    </th:block>
-                    
-                    <!-- 뒤 그룹 -->
-                    <!--다음 그룹이 있으면 링크가 생겨야함-->
-                    <th:block th:if="${(nnevi.currentGroup) < (nnevi.totalGroupCount)}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${nnevi.endPageGroup+1})}"><i class="fa-solid fa-forward-fast"></i></a>
-                    </th:block>
-                    
-                    <!-- 마지막 그룹을 보고 있다면 링크가 생기지 않음-->
-                    <th:block th:unless="${(nnevi.currentGroup) < (nnevi.totalGroupCount)}">
-                        <span class="page-no navi"><i class="fa-solid fa-forward-fast"></i></span>
-                    </th:block>
-                </nav>
-            </div>
-            
-            <!-- 비밀번호 설정..? -->
-            <!-- 모두가 질문사항 작성할 수있게 -->
-            <div class="qna" id="qna">
-                <div class="write"><a th:href="@{/guest/write?from=qna}"><i class="fa-solid fa-plus"></i></a></div>
-                <h3>QnA</h3>
-                <table th:each="qna:${qnaList}">
-                    <tr>
-                        <th class="name" th:text="${qna.qnaName}">질문자</th>
-                        <td class="question" th:text="${qna.title}">질문</a></td>
-                        <td class="date" th:text="${#temporals.format(qna.writeDate, 'yyyy/MM/dd')}">날짜</td>
-                    </tr>
-                    <!-- 답변이 있으면 펼쳐지게 안되면 안 펼쳐지게 하기가 나을까 새로운 페이지를 팔까? -->
-                    <!-- 답변이 있으면 펼쳐지게 할 것 -->
-                    <tr>
-                        <td colspan="3" class="detail" th:utext="${qna.detail}"></td>
-                        <td colspan="3" th:if="${qna.answer!=null}">
-                            <p class="haveAnswer" th:text="${qna.answer}" >답변이 있는 경우</p>
-                        </td>
-                    </tr>                    
-                </table>
-                <!-- pageNavigation -->
-                <nav class="pageNavigation">
-                    <!-- 앞 그룹 -->
-                    <th:block th:if="${qnevi.startPageGroup > 1}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${qnevi.startPageGroup-1})}"><i class="fa-solid fa-backward-fast"></i></a>
-                    </th:block>
-                    
-                    <th:block th:unless="${qnevi.startPageGroup > 1}">
-                        <span class="page-no navi"><i class="fa-solid fa-backward-fast"></i></span>
-                    </th:block>
-                    
-                    <!-- 앞페이지  -->
-                    <th:block th:if="${qnevi.page > 1}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${qnevi.page-1})}"><i class="fa-solid fa-backward"></i></a>
-                    </th:block>
-                    
-                    <th:block th:unless="${qnevi.page > 1}">
-                        <span class="page-no navi"><i class="fa-solid fa-backward"></i></span>
-                    </th:block>
-                    
-                    <!-- 페이지 번호 출력 -->
-                    <span th:each="count:${#numbers.sequence(qnevi.startPageGroup, qnevi.endPageGroup)}">
-                        <span th:if="${count == qnevi.page}">
-                            <b class="page-no current" th:text="${count}"></b>
-                        </span>
-                        <span th:unless="${count == qnevi.page}">
-                            <a class="page-no" th:href="@{/guest/board(page=${count})}" th:text="${count}"></a>
-                        </span>
+            <!-- pageNavigation -->
+            <nav class="pageNavigation">
+                <!-- 앞 그룹 -->
+                <th:block th:if="${nevi.startPageGroup > 1}">
+                    <a class="page-no navi" th:href="|javascript:pageFormSubmit(${nevi.startPageGroup-1})|"><i class="fa-solid fa-backward-fast"></i></a>
+                </th:block>
+                
+                <th:block th:unless="${nevi.startPageGroup > 1}">
+                    <span class="page-no navi"><i class="fa-solid fa-backward-fast"></i></span>
+                </th:block>
+                
+                <!-- 앞페이지  -->
+                <th:block th:if="${nevi.page > 1}">
+                    <a class="page-no navi" th:href="|javascript:pageFormSubmit(${nevi.page-1})|"><i class="fa-solid fa-backward"></i></a>
+                </th:block>
+                
+                <th:block th:unless="${nevi.page > 1}">
+                    <span class="page-no navi"><i class="fa-solid fa-backward"></i></span>
+                </th:block>
+                
+                <!-- 페이지 번호 출력 -->
+                <span th:each="count:${#numbers.sequence(nevi.startPageGroup, nevi.endPageGroup)}">
+                    <span th:if="${count == nevi.page}">
+                        <b class="page-no current" th:text="${count}"></b>
                     </span>
-                    
-                    <!-- 뒤 페이지 -->
-                    <th:block th:if = "${(qnevi.totalPages) > (qnevi.page)}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${qnevi.page+1})}"><i class="fa-solid fa-forward"></i></a>
-                    </th:block> 
-                    
-                    <th:block th:unless = "${qnevi.totalPages > (qnevi.page)}">
-                        <span class="page-no navi"><i class="fa-solid fa-forward"></i></span>
-                    </th:block>
-                    
-                    <!-- 뒤 그룹 -->
-                    <!--다음 그룹이 있으면 링크가 생겨야함-->
-                    <th:block th:if="${(qnevi.currentGroup) < (qnevi.totalGroupCount)}">
-                        <a class="page-no navi" th:href="@{/guest/board(page=${qnevi.endPageGroup+1})}"><i class="fa-solid fa-forward-fast"></i></a>
-                    </th:block>
-                    
-                    <!-- 마지막 그룹을 보고 있다면 링크가 생기지 않음-->
-                    <th:block th:unless="${(qnevi.currentGroup) < (qnevi.totalGroupCount)}">
-                        <span class="page-no navi"><i class="fa-solid fa-forward-fast"></i></span>
-                    </th:block>
-                </nav>
-            </div>
-        </form>
+                    <span th:unless="${count == nevi.page}">
+                        <a class="page-no" th:href="|javascript:pageFormSubmit(${count})|" th:text="${count}"></a>
+                    </span>
+                </span>
+                
+                <!-- 뒤 페이지 -->
+                <th:block th:if = "${(nevi.totalPages) > (nevi.page)}">
+                    <a class="page-no navi" th:href="|javascript:pageFormSubmit(${nevi.page+1})|"><i class="fa-solid fa-forward"></i></a>
+                </th:block> 
+                
+                <th:block th:unless = "${nevi.totalPages > (nevi.page)}">
+                    <span class="page-no navi" ><i class="fa-solid fa-forward"></i></span>
+                </th:block>
+                
+                <!-- 뒤 그룹 -->
+                <!--다음 그룹이 있으면 링크가 생겨야함-->
+                <th:block th:if="${(nevi.currentGroup) < (nevi.totalGroupCount)}">
+                    <a class="page-no navi" th:href="|javascript:pageFormSubmit(' + ${nevi.endPageGroup+1} + ')|"><i class="fa-solid fa-forward-fast"></i></a>
+                </th:block>
+                
+                <!-- 마지막 그룹을 보고 있다면 링크가 생기지 않음-->
+                <th:block th:unless="${(nevi.currentGroup) < (nevi.totalGroupCount)}">
+                    <span class="page-no navi"><i class="fa-solid fa-forward-fast"></i></span>
+                </th:block>
+            </nav>
+        </div>
     </div>
+
+    <script>
+
+        function pageFormSubmit(page) {
+            document.getElementById("requestPage").value = page;  // 페이지 번호 설정
+            document.getElementById("pagingForm").submit();  // 페이지 번호 설정
+        }
+    </script>
     
     <footer>
         <div class="sns">
@@ -196,5 +144,7 @@
 			</div>			
 		</div>
     </footer>
+
+
 </body>
 </html>

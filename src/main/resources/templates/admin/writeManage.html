@@ -37,58 +37,35 @@
     </div>
     
     <div class="content">
-        <h2>공지사항, 답변 관리</h2>
-        <!-- 수정 삭제는 각자 해야하니까 폼 두개로 만들 수 있다는 점 기억하기 -->
+        <h2>공지사항 관리</h2>
         <form action="">
             <!-- 공지글 쓰기 화면으로 -->
             <div class="notice" id="notice">
                 <div class="write"><a th:href="@{/admin/adminWrite}"><i class="fa-solid fa-plus"></i></a></div>
                 <h3>Notice</h3>
                 <table  th:each="notice:${noticeList}">
-                    <tr>
-                        <th class="category" th:text="${notice.category}">공지</th>
-                        <td class="title"><a th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" th:text="${notice.title}">냠냠</a></td>
-                        <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
-                    </tr>
-                    <!-- <tr>
-                        <td colspan="3" class="detail" th:utext="${notice.detail}"></td>
-                    </tr> -->
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category" th:text="${notice.category}">공지</td>
+                            <td class="title">
+                                <a th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" id="title" th:text="${notice.title}">냠냠</a>
+                            </td>
+                            <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="detail" th:utext="${notice.detail}"></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             
-            <div class="qna" id="qna">
-                <h3>QnA</h3>
-                <table th:each="qna:${qnaList}">
-                    <tr>
-                        <th class="name" th:text="${qna.qnaName}">질문자</th>
-                        <td class="question">
-                            <a th:id="'qnaModal_' + ${qna.qnaId}" th:data-id="${qna.qnaId}" th:text="${qna.title}">질문</a>
-                        </td>
-                        <td class="date" th:text="${#temporals.format(qna.writeDate, 'yyyy/MM/dd HH:mm:ss')}">날짜</td>
-                    </tr>
-                </table>
-            </div>
-            
-            <div class="popup-wrap" id="qna-popup">
-                <div class="popup">
-                    <div class="contentbox">
-                        <table>
-                            <tr><th id="q_title"></th></tr>
-                            <tr><td id="q_writeDate"></td></tr>
-                            <tr><td id="q_detail"></td></tr>
-                            <tr id="q_answer_row">
-                                <td><textarea name="answer" id="q_answer"></textarea></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="popup-foot">
-                            <button class="submit">완료</button>
-                            <button class="update">수정</button>
-                            <button class="delete">삭제</button>
-                    </div>
-                </div>
-            </div>
-
             <div class="popup-wrap" id="notice-popup">
                 <div class="popup">
                     <div class="contentbox">

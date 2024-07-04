@@ -36,12 +36,11 @@ public class QnaService {
      * 모든 질문글 불러오기
      * @return
      */
-    public Page<QnaDTO> selectAll(Pageable pageable) {
-        int page = pageable.getPageNumber() - 1; 
+    public Page<QnaDTO> selectAll(Pageable q_pageable) {
+        int page = q_pageable.getPageNumber() - 1; 
 
         Page<QnaEntity> entityList = qnaRepository.findAll(PageRequest.of(page, pageLimit,Sort.by(Sort.Direction.DESC, "writeDate")));
-        Page<QnaDTO> dtoList = entityList.map(qna -> 
-        new QnaDTO(
+        Page<QnaDTO> dtoList = entityList.map(qna -> new QnaDTO(
             qna.getQnaId(),
             qna.getQnaName(),
             qna.getTitle(),

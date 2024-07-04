@@ -35,9 +35,7 @@ public class NoticeService {
         int page = pageable.getPageNumber() - 1;
 
         Page<NoticeEntity> entityList = noticeRepository.findAll(PageRequest.of(page, pageLimit,Sort.Direction.DESC,"writeDate"));
-        Page<NoticeDTO> dtoList = null;
-
-        dtoList = entityList.map(notice -> new NoticeDTO(
+        Page<NoticeDTO> dtoList = entityList.map(notice -> new NoticeDTO(
             notice.getNoticeId(),
             notice.getCategory(),
             notice.getTitle(),

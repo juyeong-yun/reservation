@@ -56,10 +56,8 @@ public class NoticeEntity {
 	private LocalDateTime writeDate;
 	
 	@Column(name="is_post")
-	@Enumerated(EnumType.STRING)
-	private YesorNo isPost;
+	private boolean isPost;
 
-	// 첨부파일이 있을때
 	@Column(name="original_file_name")
 	private String originalFileName;
 
@@ -73,11 +71,10 @@ public class NoticeEntity {
 				.title(dto.getTitle())
 				.detail(dto.getDetail())
 				.writeDate(dto.getWriteDate())
-				.isPost(dto.getIsPost())
+				.isPost(dto.isPost())
 				.originalFileName(dto.getOriginalFileName())
 				.savedFileName(dto.getSavedFileName())
-				.build();
-		
+				.build();	
 	}
 
 }

@@ -7,75 +7,27 @@
     border-bottom: 1px solid;
 }
 
-div.notice {
-    float: left;
-    width:47%;
-	height:50%
-}
-
-div.qna {
-    float: right;
-    width:47%;
-	height:50%
-}
-
-table {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: auto;
-    align-items: center;
-}
+table {width: 100%; border-bottom: 1px solid #ccc;}
 
 table tr {
     margin: 5px 0;
     font-size: 17px;
 }
 
+.noticeTitle { height: 47px;}
+.category, .date { text-align: center; width: 115px;}
 
-table th.category, th.name {
-    width: 80px;
-    text-align: center;
-    padding: 5px 0;
-    height: 47px;
-}
+.title { text-align: start;}
 
-table td.title, td.question {
-    height: 47px;
-    width: 370px;
-    text-align: start;
-    padding: 5px 0;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-inline-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1; /* 줄 수 설정 */
-    white-space: nowrap; /* 텍스트 줄 바꿈 허용 */
-}
+.detail { padding: 0 10%; }
 
-table td.title:hover, td.question a:hover{
-    color: rgb(116, 116, 116);;
-
-}
-
-table td.date {
-    width: 110px;
-    text-align: center;
-    padding: 5px 0;
-}
-
-tbody{
-    border-bottom: 1px solid #ccc; /* 선 스타일 지정 */
+.detail p {
+    background: #f3f3f3;
+    padding: 6px 10px 3px 20px;
+    font-size: 16px;
 }
 
 
-.notice {
-    margin-bottom: 32%;
-}
-
-.notice .write,
-.qna .write {
-    float: right;
-    padding: 0 14px 10px;
-}
+/* 관리자 */
+.notice .write { float: right; padding: 0 14px 10px; }
 

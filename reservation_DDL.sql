@@ -72,9 +72,9 @@ create table reserve(
     ,keyring number(2) default 0
     ,depositor varchar2(20)
     ,is_pay char(1) default 0 check(is_pay in (1,0))
-    ,is_cancle char(1) default 'N' check(is_cancle in ('N','Y'))
+    ,is_cancel char(1) default 'N' check(is_cancel in ('N','Y'))
     ,reserve_state varchar2(10) default 'waiting' check (reserve_state in('waiting', 'payed', 'cancel')) 
-    ,cancle_reason varchar2(1000)
+    ,cancel_reason varchar2(1000)
     ,event_id varchar2(50)
     , constraint event_pk foreign key(event_id) REFERENCES event(event_id)
 );

@@ -95,7 +95,6 @@ reserveCheck
 
 table.reserveCheck {
 	width: 100%;
-    max-width: 400px;
     margin-top: 45px;
     text-align: center;
 }

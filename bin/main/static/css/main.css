@@ -126,7 +126,7 @@ div.background .right-side a{
 
 /* 본문 */
 .content {
-	padding: 0 123px 60px;
+	padding: 0 128px 60px;
     height: auto;
     flex: 1;
     min-height: calc(100% - 60px);

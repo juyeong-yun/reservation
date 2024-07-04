@@ -74,30 +74,20 @@ public class GuestController {
 	 * @return
 	 */
     @GetMapping("/board")
-    public String board(Model model,@Qualifier("q_pageable")@PageableDefault(page = 1) Pageable q_pageable,
-    @Qualifier("n_pageable")@PageableDefault(page = 1) Pageable n_pageable ) {
+    public String board(Model model, @PageableDefault(page = 1) Pageable pageable) {
         
-        Page<NoticeDTO> noticeList = noticeService.selectAll(n_pageable);
-        Page<QnaDTO> qnaList = qnaService.selectAll(q_pageable);
-        // List<NoticeDTO> noticeList = noticeService.selectAll();
-        // List<QnaDTO> qnaList = qnaService.selectAll();
+        Page<NoticeDTO> noticeList = noticeService.selectAll(pageable);
 
-        int n_totalPages = (int) noticeList.getTotalPages();
-		int n_page = n_pageable.getPageNumber();
-        PageNevigator n_nevi = new PageNevigator(pageLimit, n_page, n_totalPages);
+        int totalPages = (int) noticeList.getTotalPages();
+		int page = pageable.getPageNumber();
+        PageNevigator nevi = new PageNevigator(pageLimit, page, totalPages);
 
-        int q_totalPages = (int) qnaList.getTotalPages();
-		int q_page = q_pageable.getPageNumber();
-        PageNevigator q_nevi = new PageNevigator(pageLimit, q_page, q_totalPages);
 
         model.addAttribute("noticeList", noticeList);
-        model.addAttribute("nnevi", n_nevi);
-        model.addAttribute("qnaList", qnaList);
-        model.addAttribute("qnevi", q_nevi);
-        
+        model.addAttribute("nevi", nevi);
+
         return "guest/board";
     }
-
     
     /**
      * 전시소개 페이지 
@@ -192,77 +182,25 @@ public class GuestController {
      * @return
      */
     @GetMapping("/write")
-    public String write(
-        @RequestParam(value="from", required = false) String from, Model model ) {
-            
-            if ("qna".equals(from)) {  
-                log.info("qna 글쓰기");
-            } else if ("review".equals(from)) { 
-                log.info("review 글쓰기"); 
-            }
-            
-            model.addAttribute("from", from);
-            
-        return "/guest/write";
+    public String write( Model model ) {
+
+        return "guest/write";
     }
-
-
     
-    /**
-     * 리뷰 / 질문글 작성
-     * @param from
-     * @param qnaDTO
-     * @param reviewDTO
-     * @param attr
-     * @return
-     */
     @PostMapping("/writeInsert")
-    public String writeInsert(@RequestParam(value = "from", required = false) String from, 
-        @RequestParam(value = "detail", required = false) String detail,
-        @ModelAttribute QnaDTO qnaDTO, 
-        @ModelAttribute ReviewDTO reviewDTO,
-        RedirectAttributes attr) {
-
-            if ("qna".equals(from)) {
-                
-                // 비밀글 여부 처리
-                if (qnaDTO.getQnaPwd() == null || qnaDTO.getQnaPwd() .isEmpty()) {
-                    qnaDTO.setLock(false);
-                } else {
-                    qnaDTO.setLock(true);
-                }
-                
-                qnaDTO.setDetail(detail);
-                
-                try {    
-                    qnaService.writeQna(qnaDTO);
-                    attr.addFlashAttribute("message", "Q&A 작성이 완료되었습니다."); 
-                    return "redirect:/guest/board";
-                
-                } catch (Exception e) {
-                    attr.addFlashAttribute("error", "Q&A 작성 중 오류가 발생했습니다.");
-                    log.error("Q&A 작성 중 오류 발생", e);
-                    return "redirect:/guest/board"; // 오류 발생 시에도 동일한 경로로 리다이렉트
-                }
-            } else if ("review".equals(from)) {
-                
-                try {
-                    log.info("review:" + detail);
-                    reviewDTO.setDetail(detail);
-                    reviewService.writeReview(reviewDTO);
-                    attr.addFlashAttribute("message", "리뷰 작성이 완료되었습니다."); 
-                    return "redirect:/guest/reviews";
-
-                } catch (Exception e) {
-                    attr.addFlashAttribute("error", "리뷰 작성 중 오류가 발생했습니다.");
-                    log.error("리뷰 작성 중 오류 발생", e);
-                    return "redirect:/guest/reviews"; // 오류 발생 시에도 동일한 경로로 리다이렉트
-                }
-            } else {
-                attr.addFlashAttribute("error", "잘못된 요청입니다.");
-                log.warn("잘못된 요청: {}", from);
-                return "redirect:/"; // 잘못된 요청의 경우 에러 페이지로 리다이렉트
-            }
+    public String writeInsert( @RequestParam(value = "detail", required = false) String detail,
+    @ModelAttribute ReviewDTO reviewDTO, RedirectAttributes attr) {
+        try {
+            reviewDTO.setDetail(detail);
+            reviewService.writeReview(reviewDTO);
+            attr.addFlashAttribute("message", "리뷰 작성이 완료되었습니다."); 
+            return "redirect:/guest/reviews";
+        
+        } catch (Exception e) {
+            attr.addFlashAttribute("error", "리뷰 작성 중 오류가 발생했습니다.");
+            log.error("리뷰 작성 중 오류 발생", e);
+            return "redirect:/guest/reviews"; // 오류 발생 시에도 동일한 경로로 리다이렉트
+        }
     }
     
     
