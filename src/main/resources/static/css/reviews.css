@@ -1,19 +1,19 @@
 @import "main.css";
 
-@media (max-width:768px){
+@media screen and (max-width:768px){
     .content .gallery li, 
     .content .event-info,
     .content .write{width:33.33333%;}
 }
-@media (max-width:560px){
+@media screen and (max-width:560px){
     .content .gallery li,
     .content .event-info,
     .content .write{width:50%;}
 }
-@media (max-width:480px){
-    .content .gallery li,
+@media screen and (max-width:480px){
+    .content .gallery li {width:50%;}
     .content .event-info,
-    .content .write{width:100%;}
+    .content .write {width:100%;}
 }
 
 .review-event{ margin: 50px 0; padding: 7px;}

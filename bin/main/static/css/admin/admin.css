@@ -1,6 +1,55 @@
 @import "../main.css";
 @import "../board.css";
 
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width:767px) { 
+    
+    .top-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .top-bar .logo {
+        flex: 1; /* 모바일 화면에서 로고 영역을 1/3으로 설정 */
+    }
+
+    .top-bar .right-side {
+        flex: 1; /* 모바일 화면에서 메뉴 영역을 1/3으로 설정 */
+        margin-top: 10px; /* 예시로 상단 여백을 추가로 조정 */
+    }
+
+    .right-side ul {
+        justify-content: flex-start; /* 모바일 화면에서 왼쪽 정렬로 변경 */
+    }
+
+    .right-side a {
+        padding-right: 0; /* 패딩을 초기화하거나 필요에 따라 0으로 설정 */
+    }
+    
+    div.addEvent {
+        float: none;
+        width: 100%;
+        height: 50%;
+    }
+
+    div.eventGraph {
+        float: none;
+        width: 100%;
+        height: 50%;
+    }
+
+    div.reserveCheck{
+
+    }
+
+    .popup {
+        max-width: 100%; /* 모바일 화면에 맞게 최대 너비를 조정합니다 */
+    }
+
+
+}
+
 
 /*********
 adminMain 화면
@@ -40,6 +89,17 @@ div.eventGraph{
     color: #111;
 }
 
+/****************
+reserveCheck
+***************/
+
+table.reserveCheck {
+	width: 100%;
+    max-width: 400px;
+    margin-top: 45px;
+    text-align: center;
+}
+
 
 /*********
 adminManage 화면
@@ -47,7 +107,6 @@ adminManage 화면
 textarea{
 	resize: none;
 	width: 100%;
-    display: ;
     height: 6em;
     padding: 5px;
 }

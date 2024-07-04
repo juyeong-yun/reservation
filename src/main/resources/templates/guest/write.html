@@ -47,10 +47,10 @@
             <!-- <h4>본인 확인을 위해 개인 정보를 입력해주세요.</h4> -->
             <table  th:if="${from == 'qna'}">
 				<tr>
-					<td>이름<span>*</span></td>
+					<td id="qnaName">이름<span>*</span></td>
 					<td><input type="text" name="qnaName" id="qnaName" placeholder="홍길동" required></td>
                     <!-- qna에서 페이지가 넘어올때는 핸드폰 번호가 아니라 비밀번호 설정이 보이게 하려면 if문을 걸면 된다. -->
-                    <td><input type="checkbox" id="isLock" name="isLock">비밀글 설정</td>
+                    <td id="isLock"><input type="checkbox" id="isLock" name="isLock">비밀글 설정</td>
                     <td><input type="text" name="qnaPwd" id="qnaPwd" placeholder="비밀번호를 설정해주세요."></td>
 				</tr>
                 <tr>
@@ -70,10 +70,10 @@
             <form th:action="@{/guest/writeInsert(from=${from})}" id="reviewSubmitForm" method="post" enctype="multipart/form-data" >
             <table th:if="${from=='review'}">
                 <tr>
-                    <td>이름<span>*</span></td>
-					<td><input type="text" name="reviewer" id="reviewer" placeholder="홍길동" required></td>
-                    <td>핸드폰 번호<span>*</span></td>
-                    <td><input type="text" name="phone" id="phone" placeholder="01012345678" required></td> 
+                    <td id="reviewName">이름<span>*</span></td>
+					<td id="reviewName"><input type="text" name="reviewer" id="reviewer" placeholder="홍길동" required></td>
+                    <td id="phone">핸드폰 번호<span>*</span></td>
+                    <td id="phone"><input type="text" name="phone" id="phone" placeholder="01012345678" required></td> 
                 </tr>
                 <!-- 둘 사이 띄우기 -->
                 <tr>

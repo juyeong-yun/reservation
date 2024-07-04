@@ -66,14 +66,23 @@ div.reserve-info {
 
 .reserve-info button,
 .keyring button {
-	width: 35px;
-    height: 32px;
+	width: 29px;
+    height: 26px;
     border: none;
 }
 
 .request input { width: 40.5em;}
 .people-count { display: flex; align-items: center; padding: 0 !important;}
-#people-count {margin-left: 7px 0; padding: 0;}
+#people-count { padding: 0 !important; }
+
+#numberOfReserve, #keyring {
+    text-align: center;
+	border: 1px solid;
+    border-radius: 0px;
+    width: 8em;
+    height: 2em;
+	margin: 0;
+}
 
 /* 결제 금액 관련 div */
 div.total-amount {
@@ -93,7 +102,7 @@ div.total-amount {
 
 div.amount ,
 div.keyring-amount{
-	padding: 0;
+	padding: 0 !important;
     margin: 0px;
 	display: inline-flex;
 	align-items: center;
@@ -103,7 +112,7 @@ div.keyring-amount{
 div.keyring-amount { border-bottom: 1px solid; }
 
 div.total {
-	padding: 0;
+	padding: 0 !important;
 	margin: 10px 0;
 }
 
@@ -120,7 +129,7 @@ div.agree{
 .agree .all {
 	display: flex;
     align-items: center;
-	padding: 0;
+	padding: 0 !important;
     margin: 9px 0px;
 }
 
@@ -188,7 +197,7 @@ div.agree{
     float: right;
     width: 48%;
     height: 30%;
-	margin: -37px 7px 0 0 !important;
+	margin: -24px 7px 0 0 !important;
     padding: 0 !important;
 }
 

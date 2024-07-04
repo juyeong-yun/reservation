@@ -1,0 +1,147 @@
+/* 모바일에 최적화된 CSS 코드 */
+@media screen and (max-width:480px) {
+    .background { background-size: 480px auto;}
+    .background .header {padding:0 48px 0;}
+    
+    
+    .header .right-side li { margin: 8px 18px; font-size: 15px !important; }
+        
+    div.content { padding: 0 27px !important;}
+    div.content h2 {font-size: x-large;}
+    .content .header {padding:0 48px 0;}
+        
+    div.notice .pageNavigation, div.qna .pageNavigation { font-size: 9px; padding: 15px;}
+
+    /* board */
+    th.category, td.title, td.date,
+    th.name , td.question, 
+    td.detail p, td.haveAnswer p {font-size: 6pt;}
+
+    div.notice .category, div.qna .name {height: 20px !important;}
+    div.notice .title, div.qna .question {width: 80px !important; height: 20px; padding: 9px 0;}
+
+    /* reserve */
+    div.reserve-notice li {font-size: 13px;}
+
+    #calendar th[class*="unavailable"], 
+    #calendar td[class*="unavailable"]{ display: none;}
+
+    #calendar td[class*="available"] {
+        letter-spacing: 2px !important;
+        font-size: 12px;
+        height: fit-content;
+    }
+    #calendar td[class*="available"] li {
+        padding: 7px 0;
+    }
+
+    /* booking */
+    div.reserveForm div { padding: 10px;}
+    .reserveForm div.ticket, .reserveForm div.reserve-info,
+    .reserveForm div.keyring, .reserveForm div.about-cancle { width: 46%;}
+
+    .reserveForm div.total-amount, .reserveForm div.agree,
+    .reserveForm div.deposit-info, .reserveForm div.submit { width: 46%;}
+
+    div.reserveForm h3 {font-size: 11pt;}
+    div .ticket span, div.reserve-info span {font-size: 8pt;}
+
+    div.ticket .event span, div.ticket .event p { margin-right: 5px; font-size: 7pt;}
+
+    div.amount, div.keyring-amount, div.total p {font-size: 7pt;}
+    input#amount, input#keyring-amount { width: 7em; margin: 0px 8px; height: 2.6em;}
+
+
+    div.reserve-info input {width: 5.3em;}
+    input#request{ width: 11em;}
+    div.people-count {flex-direction: column;}
+    input#numberOfReserve, input#keyring {width: 2.4em;} 
+    
+    div.keyring p, div.about-cancle p { font-size: 9pt;}
+
+    div.deposit-info input {width: 11.5em;}
+    div.deposit-info p {font-size: 5pt;}
+
+    div.agree span {font-size:7pt;}
+    div.agree ul { margin-left: 12px;}
+
+    div.submit { margin: -70px 7px 0 0 !important;}
+    div.submit button { font-size: 13px;}
+    /* 조회 부분은 이후 넣는거 확정되면 진행 */
+
+    /* review  review.css 에 */
+
+    /* location */
+    #directions {flex-direction: column;}
+
+    #directions .map { width: 100%;}
+    div.map img {margin-left:15%;}
+    
+    #directions .explain {width: fit-content; font-size: 12px;}
+    /* .explain span {justify-content: center;} */
+    .explain p {font-size: 13px;}
+    
+    footer {padding: 15px !important; }
+    footer .sns {position: relative; left: 41%;}
+    footer .footer-info {flex-direction: column;}
+    footer .footer-info img {width:52px; max-width: 72px;}
+
+    /* write */
+    td#reviewName, td#phone{font-size: 9pt;}
+    td#reviewName, td#phone { display: flex;}
+
+    td#qnaName { font-size: 9pt;}
+    div.ck.ck-editor{width:23em ;}
+
+}
+
+/* booking이 너무 깨져서 얘만 처리 */
+@media screen and (max-width:768px) { 
+    .background { background-size: 768px auto;}
+    .background .header {padding:0 48px 0;}
+    
+    .top-bar {flex-direction: column;}
+    .logo {text-align: center;}
+    
+    .header .right-side li { margin: 8px 18px; font-size: 17px; }
+
+    div.content { padding: 0 50px;}
+    /* board */
+
+    div.notice .category, div.qna .name {height: 30px;}
+    div.notice .title, div.qna .question {width: 160px; height: 30px;}
+
+    /* booking */
+    div.reserveForm div { padding: 10px;}
+    .reserveForm div.ticket, .reserveForm div.reserve-info,
+    .reserveForm div.keyring, .reserveForm div.about-cancle { width: 46%;}
+
+    .reserveForm div.total-amount, .reserveForm div.agree,
+    .reserveForm div.deposit-info, .reserveForm div.submit { width: 46%;}
+
+    div.reserveForm h3 {font-size: 11pt;}
+    div .ticket span, div.reserve-info span {font-size: 8pt;}
+
+    div.ticket .event span, div.ticket .event p { margin-right: 5px; font-size: 7pt;}
+
+    div.amount, div.keyring-amount, div.total p {font-size: 7pt;}
+    input#amount, input#keyring-amount { width: 7em; margin: 0px 8px; height: 2.6em;}
+
+
+    div.reserve-info input {width: 5.3em;}
+    input#request{ width: 11em;}
+    div.people-count {flex-direction: column;}
+    input#numberOfReserve, input#keyring {width: 2.4em;} 
+    
+    div.keyring p, div.about-cancle p { font-size: 9pt;}
+
+    div.deposit-info input {width: 11.5em;}
+    div.deposit-info p {font-size: 5pt;}
+
+    div.agree span {font-size:7pt;}
+    div.agree ul { margin-left: 12px;}
+
+    div.submit { margin: -70px 7px 0 0 !important;}
+    div.submit button { font-size: 13px;}
+
+}

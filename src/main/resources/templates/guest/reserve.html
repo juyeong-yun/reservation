@@ -59,20 +59,20 @@
                 
                 <table>
                     <tr>
-						<th>8월 12일</th>
-						<th>8월 13일</th>
-						<th>8월 14일</th>
-						<th>8월 15일</th>
+						<th class="unavailable">8월 12일</th>
+						<th class="unavailable">8월 13일</th>
+						<th class="unavailable">8월 14일</th>
+						<th class="unavailable">8월 15일</th>
                         <!-- 이벤트 날짜 받아와서 그 날짜 요일은 계산해서 넣는 방법 있으면 넣기 -->
                         <th class="available">8월 16일(금)</th>
                         <th class="available">8월 17일(토)</th>
                         <th class="available">8월 18일(일)</th>
                     </tr>
                     <tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="unavailable"></td>
+						<td class="unavailable"></td>
+						<td class="unavailable"></td>
+						<td class="unavailable"></td>
                         <td class="available-fri">
 							<!-- 모달창 뜨게 해놓았고 추후 확인을 누르면 해당 정보를 가지고 예약페이지에 가서 정보 보여주면 됨 --> 
                             <ul th:each="event : ${eventList}" th:if="${#temporals.format(event.eventDate, 'yy/MM/dd') == '24/08/16'}">
