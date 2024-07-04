@@ -49,8 +49,7 @@ public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
      * @param phone
      * @return
      */
-    @Query("SELECT r FROM ReserveEntity r " +
-    "WHERE r.reserver = :reserver AND r.phone = :phone")
-    List<ReserveEntity> findAllSearchReserver(String reserver, String phone);
+    @Query("SELECT r FROM ReserveEntity r INNER JOIN r.eventEntity WHERE r.reserver = :reserver AND r.phone = :phone")
+    List<ReserveEntity> findSearchReserver(@Param("reserver")String reserver, @Param("phone") String phone);
     
 }

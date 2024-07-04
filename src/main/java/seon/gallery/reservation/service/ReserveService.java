@@ -24,6 +24,7 @@ import seon.gallery.reservation.dto.ReviewDTO;
 import seon.gallery.reservation.dto.check.YesorNo;
 import seon.gallery.reservation.dto.check.reserveState;
 import seon.gallery.reservation.entity.EventEntity;
+import seon.gallery.reservation.entity.NoticeEntity;
 import seon.gallery.reservation.entity.ReserveEntity;
 import seon.gallery.reservation.entity.ReviewEntity;
 import seon.gallery.reservation.repository.EventRepository;
@@ -157,14 +158,21 @@ public class ReserveService {
         log.info("입금 수정 완료");
     }
 
-    public ReserveDTO searchReserver(String reserver, String phone) {
-        // List<ReserveEntity> entity = reserveRepository.findAllSearchReserver(reserver, phone);
+    public List<ReserveDTO> searchReserver(String reserver, String phone) {
+        List<ReserveEntity> entityList = reserveRepository.findSearchReserver(reserver, phone);
+        List<ReserveDTO> dtoList = new ArrayList<>();
 
-        // if (!entity.isEmpty()) {
-        //     ReserveDTO reserveDTO = new ReserveDTO();
-        //     reserveDTO.setReserver(entity.getReserver());
-        // }
-        return null;
+        if (entityList.isEmpty()) {
+            return null;
+        }
+        
+        for (ReserveEntity reserve : entityList){
+            ReserveDTO dto = ReserveDTO.toDTO(reserve, reserve.getEventEntity().getEventId(), 
+            reserve.getEventEntity().getEventDate(), reserve.getEventEntity().getEventTime());
+            dtoList.add(dto);
+            }
+            
+        return dtoList;
     }
 
     

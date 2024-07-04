@@ -158,17 +158,20 @@ public class GuestController {
         }
     }
 
-    @PostMapping("/reserveCheck")
-    public String reserveCheck(@RequestParam(value = "reserver") String reserver,
+    @PostMapping("/searchReserve")
+    public String searchReserve(@RequestParam(value = "reserver") String reserver,
     @RequestParam(value = "phone") String phone, Model model){
 
-        ReserveDTO dto = reserveService.searchReserver(reserver, phone);
+        List<ReserveDTO> dto = reserveService.searchReserver(reserver, phone);
 
         if (dto != null) {
             model.addAttribute("dto", dto);
         } else {
             log.info("검색되지 않음");
         }
+
+        model.addAttribute("searchList", dto);
+
         return "guest/reserve";
     }
     

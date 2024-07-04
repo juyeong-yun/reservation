@@ -108,7 +108,7 @@ td li {
 }
 
 #search-result h4 {display: flex; align-items: center;}
-#search-result div {display: block;}
+#search-result #result {display: block; margin: 3px 5px;}
 /* modal css */
 
 .popup-wrap {

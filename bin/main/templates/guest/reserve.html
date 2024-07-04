@@ -136,9 +136,13 @@
                 </div>
             </form>
             <div id="search-result">
-                <h4><p >뫄뫄뫄</p>님의 예약 리스트</h4>
-                <div>
-                    <span>24/08/16</span> <span>13:00</span>
+                <h4 th:each="result,status:${searchList}">
+                    <p th:if="${status.index == 0} or ${status.index > 0} and ${result.reserver != searchList[status.index-1].reserver}" 
+                        th:text="${result.reserver}+'님의 예약 목록'">뫄뫄뫄</p></h4>
+                <div th:each="result:${searchList}">
+                    <div id="result">
+                        <span th:text="${result.eventDate}">24/08/16</span> <span th:text="${result.eventTime}+시">13:00</span>
+                    </div>
                 </div>
             </div>
         </div>
