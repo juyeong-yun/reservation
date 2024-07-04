@@ -55,12 +55,12 @@
                         <tr>
                             <td class="category" th:text="${notice.category}">공지</td>
                             <td class="title">
-                                <a th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" id="title" th:text="${notice.title}">냠냠</a>
+                                <a th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" id="dropdown-notice" th:text="${notice.title}">냠냠</a>
                             </td>
                             <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
                         </tr>
                         <tr>
-                            <td colspan="3" class="detail" th:utext="${notice.detail}"></td>
+                            <td colspan="3" class="detail" id="dropdown-detail" th:utext="${notice.detail}"></td>
                         </tr>
                     </tbody>
                 </table>

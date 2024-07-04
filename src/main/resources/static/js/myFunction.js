@@ -118,13 +118,16 @@ function checkDate() {
 /*****************
  * 4. board 페이지에서 공지 제목을 누르면 아래 내용이 나오게
  ******************/
-document.addEventListener('DOMContentLoaded', function(){
+$(function () {
     var noticeTitle = document.getElementById('dropdown-notice');
     var noticeDetail = document.getElementById('dropdown-detail');
     
-    // 페이지 로드 시 초기 상태에 따라 처리
-    noticeDetail.style.display = 'none';
-
+    // document.addEventListener('DOMContentLoaded', function(){
+        // 페이지 로드 시 초기 상태에 따라 처리
+    if(noticeDetail){
+        noticeDetail.style.display = 'none';
+    }
+    
     if (noticeTitle) { // 요소가 존재하는지 확인
         noticeTitle.addEventListener('click', function(){
             if (noticeDetail.style.display === 'none' || noticeDetail.style.display === '') {
@@ -133,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 noticeDetail.style.display = 'none';
             }
         });
-        
+            
     }
 });
 

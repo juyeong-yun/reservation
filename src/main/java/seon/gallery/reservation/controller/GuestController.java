@@ -158,7 +158,7 @@ public class GuestController {
         }
     }
 
-    @GetMapping("/reserveCheck")
+    @PostMapping("/reserveCheck")
     public String reserveCheck(@RequestParam(value = "reserver") String reserver,
     @RequestParam(value = "phone") String phone, Model model){
 

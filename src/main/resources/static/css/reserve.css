@@ -4,6 +4,14 @@
     font-family: 'Noto Sans KR';
 }
 
+.makeLine_star {
+    width: 6%;
+    position: absolute;
+    left: 73%;
+    top: 80%;
+}
+
+
 #calendar h3,
 .reserve-notice h3{
     padding: 7px;
@@ -36,13 +44,16 @@
 }
 
 
-#calendar th, td {
-    width: 165px;
+#calendar td.unavailable {
+    width: 155px;
     border: 1px solid #ffffff;
    	background: #f3f3f3;
 } 
 
-#calendar td[class*="available"] {
+#calendar .available-fri, 
+#calendar .available-sat,
+#calendar .available-sun {
+    width: 165px;
     text-align: center;
     letter-spacing: 5px;
 	color: #000000;
@@ -52,7 +63,6 @@
 
 #calendar th {
     text-align: center;
-
     color: #fff;
     background: #000;
     height: 32px;
@@ -72,6 +82,33 @@ td li {
     padding: 4px 0;  
 }
 
+#full {
+    color:#f3f3f3;
+}
+
+.reservationCheck {
+    margin-top: 10%;
+}
+
+#reservationCheck, 
+#search-result { display: flex; align-items: center; padding: 10px 20px;}
+
+#reservationCheck td {padding: 0 15px 0 0; font-size: 17px;}
+#reservationCheck input { padding: 4px; font-size: 14px;}
+.button #search {
+    padding: 3px 5px;
+    background: #FFEC8E;
+    border: none;
+}
+
+.button #cancel {
+    padding: 3px 5px;
+    background: #ff8e8e;
+    border: none;
+}
+
+#search-result h4 {display: flex; align-items: center;}
+#search-result div {display: block;}
 /* modal css */
 
 .popup-wrap {

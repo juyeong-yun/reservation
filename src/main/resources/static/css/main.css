@@ -141,6 +141,13 @@ div.background .right-side a{
     margin: 35px 0px;
 }
 
+/* 가운데 선 만드는 */
+
+.makeLine {
+    margin: 131px 0;
+    border: 0.72px solid;
+}
+
 /* 페이징 */
 nav.pageNavigation {
     display: flex;

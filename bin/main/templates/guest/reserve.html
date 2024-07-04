@@ -53,10 +53,14 @@
                 </ul>
                 <!-- <span>입금 계좌번호 : 우리은행 1002-650-981905 윤선애</span> -->
             </div>
+
+            <!-- 구분선 위한 -->
+            <img class="makeLine_star" th:src="@{../images/makeLine_star.png}" alt="">
+            <div class="makeLine">
+            </div>
             
             <div id="calendar">
 				<h3>예약 가능 시간대</h3>
-                
                 <table>
                     <tr>
 						<th class="unavailable">8월 12일</th>
@@ -80,7 +84,7 @@
                                     <a th:if="${event.reserveCount<20}" th:data-href="@{/guest/booking(eventId=${event.eventId})}" id="modal-open">
                                         <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
                                     </a>
-                                    <span th:if="${event.reserveCount>=20}">
+                                    <span id="full" th:if="${event.reserveCount>=20}">
                                         <span class="time" th:text="${event.eventTime}">12:30</span>(<span class="fill" th:text="${event.reserveCount}">0</span><span>/20)</span>
                                     </span>
                                 </li>
@@ -114,16 +118,28 @@
                 </table>
             </div>
         </form>
-        <!-- 여기쯤에 예약 확인 있으면 괜찮을 듯 모달로 빼면 딱 무난할 거 같은데 -->
+        <!-- 여기쯤에 예약 확인 있으면 괜찮을듯 ==> 구현할 부분 post로 변경-->
         <div class="reservationCheck">
-            <form th:action="@{/guest/searchReserve}">
-                <input type="text" name="reserver" id="reserver-check">
-                <input type="text" name="phone" id="reserver-phone-check">
-                <button type="submit" id="search">검색</button>
-                <button type="reset">취소</button>
+            <h3>예약 조회</h3>
+            <form th:action="@{/guest/searchReserve}" method="post">
+                <div id="reservationCheck">
+                    <table>
+                        <td>예약한 이름</td>
+                        <td><input type="text" name="reserver" id="reserver-check"></td>
+                        <td>예약한 연락처</td>
+                        <td><input type="text" name="phone" id="reserver-phone-check"></td>
+                    </table>
+                    <div class="button">
+                        <button type="submit" id="search">검색</button>
+                        <button type="reset" id="cancel">취소</button>
+                    </div>
+                </div>
             </form>
-            <div class="reserve-result">
-                
+            <div id="search-result">
+                <h4><p >뫄뫄뫄</p>님의 예약 리스트</h4>
+                <div>
+                    <span>24/08/16</span> <span>13:00</span>
+                </div>
             </div>
         </div>
     </div>
