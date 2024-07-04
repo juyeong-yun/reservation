@@ -3,12 +3,12 @@
     .background { background-size: 480px auto;}
     .background .header {padding:0 48px 0;}
     
-    
+    div.header .logo img {width: 63%;} 
     .header .right-side li { margin: 8px 18px; font-size: 15px !important; }
         
-    div.content { padding: 0 27px !important;}
+    div.content { padding: 0 24px !important;}
     div.content h2 {font-size: x-large;}
-    .content .header {padding:0 48px 0;}
+    div.content .header {padding:0 44px 0;}
         
     div.notice .pageNavigation, div.qna .pageNavigation { font-size: 9px; padding: 15px;}
 
@@ -31,6 +31,7 @@
         font-size: 12px;
         height: fit-content;
     }
+    
     #calendar td[class*="available"] li {
         padding: 7px 0;
     }
@@ -87,8 +88,8 @@
     footer .footer-info img {width:52px; max-width: 72px;}
 
     /* write */
-    td#reviewName, td#phone{font-size: 9pt;}
-    td#reviewName, td#phone { display: flex;}
+    td#reviewName, td#phone, td#lock{font-size: 9pt; }
+    td#reviewName, td#phone { display: flex; align-items: center;}
 
     td#qnaName { font-size: 9pt;}
     div.ck.ck-editor{width:23em ;}
