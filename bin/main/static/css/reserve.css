@@ -91,7 +91,7 @@ td li {
 }
 
 #reservationCheck, 
-#search-result { display: flex; align-items: center; padding: 10px 20px;}
+.search-result { display: flex; align-items: center; padding: 10px 20px;}
 
 #reservationCheck td {padding: 0 15px 0 0; font-size: 17px;}
 #reservationCheck input { padding: 4px; font-size: 14px;}
@@ -107,8 +107,8 @@ td li {
     border: none;
 }
 
-#search-result h4 {display: flex; align-items: center;}
-#search-result #result {display: block; margin: 3px 5px;}
+.search-result h4 {display: flex; align-items: center;}
+.search-result #result {display: block; margin: 3px 5px;}
 /* modal css */
 
 .popup-wrap {

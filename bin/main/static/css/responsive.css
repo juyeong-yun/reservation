@@ -102,9 +102,9 @@
         padding: 7px 0;
     }
 
-    div#reservationCheck, div#search-result {flex-direction: column;}
+    div#reservationCheck, div.search-result {flex-direction: column;}
     div#reservationCheck td {font-size: 13px; display: block; padding: 5px; margin-bottom: 4px;}
-
+    div.search-result
 
     /* booking */
     div.reserveForm div { padding: 10px;}

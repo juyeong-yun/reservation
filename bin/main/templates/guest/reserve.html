@@ -131,13 +131,17 @@
                     </div>
                 </div>
             </form>
-            <div id="search-result">
+            <div class="search-result" th:if="${searchList == null} or ${#lists.isEmpty(searchList)}">
+                <div id="result"><span>검색 결과가 존재하지 않습니다.</span></div>
+            </div>
+            <div class="search-result" th:if="${searchList != null}">
                 <h4 th:each="result,status:${searchList}">
                     <p th:if="${status.index == 0} or ${status.index > 0} and ${result.reserver != searchList[status.index-1].reserver}" 
                         th:text="${result.reserver}+'님의 예약 목록'">뫄뫄뫄</p></h4>
                 <div th:each="result:${searchList}">
                     <div id="result">
-                        <span th:text="${result.eventDate}">24/08/16</span> <span th:text="${result.eventTime}+시">13:00</span>
+                        <span th:text="${result.eventDate}+' '">24/08/16</span>
+                        <span th:text="${result.eventTime}+'시 '">13:00</span>
                     </div>
                 </div>
             </div>
