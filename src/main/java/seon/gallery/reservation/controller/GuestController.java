@@ -162,14 +162,16 @@ public class GuestController {
     public String searchReserve(@RequestParam(value = "reserver") String reserver,
     @RequestParam(value = "phone") String phone, Model model){
 
+        List<EventDTO> eventList = eventService.selectAll();
         List<ReserveDTO> dto = reserveService.searchReserver(reserver, phone);
-
+        
         if (dto != null) {
             model.addAttribute("dto", dto);
         } else {
             log.info("검색되지 않음");
         }
-
+        
+        model.addAttribute("eventList", eventList);
         model.addAttribute("searchList", dto);
 
         return "guest/reserve";

@@ -18,22 +18,6 @@
     div.notice .category {height: 20px !important;}
     div.notice .title {width: 80px !important; height: 20px; padding: 9px 0;}
 
-    /* reserve */
-    div.reserve-notice li {font-size: 13px;}
-
-    #calendar th[class*="unavailable"], 
-    #calendar td[class*="unavailable"]{ display: none;}
-
-    #calendar td[class*="available"] {
-        letter-spacing: 2px !important;
-        font-size: 12px;
-        height: fit-content;
-    }
-    
-    #calendar td[class*="available"] li {
-        padding: 7px 0;
-    }
-
     /* booking */
     div.reserveForm div { padding: 10px;}
     .reserveForm div.ticket, .reserveForm div.reserve-info,
@@ -101,6 +85,26 @@
 
     div.notice .category, div.qna .name {height: 30px;}
     div.notice .title, div.qna .question {width: 160px; height: 30px;}
+
+    /* reserve */
+    div.reserve-notice li {font-size: 13px;}
+
+    #calendar th[class*="unavailable"], 
+    #calendar td[class*="unavailable"]{ display: none;}
+
+    #calendar td[class*="available"] {
+        letter-spacing: 2px !important;
+        font-size: 12px;
+        height: fit-content;
+    }
+    
+    #calendar td[class*="available"] li {
+        padding: 7px 0;
+    }
+
+    div#reservationCheck, div#search-result {flex-direction: column;}
+    div#reservationCheck td {font-size: 13px; display: block; padding: 5px; margin-bottom: 4px;}
+
 
     /* booking */
     div.reserveForm div { padding: 10px;}
