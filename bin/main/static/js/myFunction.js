@@ -117,26 +117,31 @@ function checkDate() {
 
 /*****************
  * 4. board 페이지에서 공지 제목을 누르면 아래 내용이 나오게
+ * 여기서는 id는 유일한 하나이ㄱ기 때뮨에 class를 사용하여 그룹을 만들고 for 문을 돌린다,,!
  ******************/
-$(function () {
-    var noticeTitle = document.getElementById('dropdown-notice');
-    var noticeDetail = document.getElementById('dropdown-detail');
+document.addEventListener('DOMContentLoaded', function() {
+    var noticeTitles = document.getElementsByClassName('dropdown-notice');
+    var noticeDetails = document.getElementsByClassName('dropdown-detail');
     
-    // document.addEventListener('DOMContentLoaded', function(){
-        // 페이지 로드 시 초기 상태에 따라 처리
-    if(noticeDetail){
-        noticeDetail.style.display = 'none';
+    // 모든 상세 내용을 숨깁니다.
+    for (var i = 0; i < noticeDetails.length; i++) {
+        noticeDetails[i].style.display = 'none';
     }
     
-    if (noticeTitle) { // 요소가 존재하는지 확인
-        noticeTitle.addEventListener('click', function(){
-            if (noticeDetail.style.display === 'none' || noticeDetail.style.display === '') {
-                noticeDetail.style.display = 'table-cell';
-            } else {
-                noticeDetail.style.display = 'none';
+    // 각 제목에 클릭 이벤트 리스너를 추가합니다.
+    for (var j = 0; j < noticeTitles.length; j++) {
+        noticeTitles[j].addEventListener('click', function() {
+            // 현재 클릭된 제목 바로 다음에 오는 요소를 찾습니다.
+            var relatedDetail = this.closest('tr').nextElementSibling.querySelector('.dropdown-detail');
+            if (relatedDetail) {
+                // 상세 내용을 토글합니다.
+                if (relatedDetail.style.display === 'none' || relatedDetail.style.display === '') {
+                    relatedDetail.style.display = 'table-cell';
+                } else {
+                    relatedDetail.style.display = 'none';
+                }
             }
         });
-            
     }
 });
 

@@ -57,12 +57,12 @@
                 <tbody>
                     <tr class="noticeTitle">
                         <td class="category" th:text="${notice.category}">공지</td>
-                        <td class="title"><a id="dropdown-notice" th:text="${notice.title}">냠냠</a></td>
+                        <td class="title"><a class="dropdown-notice" th:text="${notice.title}">냠냠</a></td>
                         <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
                     </tr>
                     <tr>
                         <!--구체적인 css 곧 잡기 -->
-                        <td colspan="3" class="detail" id="dropdown-detail" th:utext="${notice.detail}"></td>
+                        <td colspan="3" class="dropdown-detail" th:utext="${notice.detail}"></td>
                     </tr>
                 </tbody>
             </table>
