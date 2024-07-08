@@ -54,18 +54,20 @@
 
                 <div class="total-amount">
                     <h3>최종 결제 금액</h3>
-                    <div class="amount">
-                        <p>상품가격</p>
-                        <input type="text" id="amount" disabled placeholder="임시 형태">
-                    </div>
-                    <div class="keyring-amount">
-                        <p>보이스키링</p>
-                        <input type="text" id="keyring-amount" disabled placeholder="임시 형태">
-                    </div>
-                    <div class="total">
-                        <p>총 결제금액</p>
-                        <span></span>
-                    </div>
+                    <table>
+                        <tr>
+                            <th class="amount">상품가격</th>
+                            <td><input type="text" id="amount" disabled placeholder="임시 형태"></td>
+                        </tr>
+                        <tr>
+                            <th class="keyring-amount">보이스키링</th>
+                            <td><input type="text" id="keyring-amount" disabled placeholder="임시 형태"></td>
+                        </tr>
+                        <tr>
+                            <th class="total">총 결제금액</th>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="reserve-info">
@@ -88,10 +90,15 @@
                 
                 <div class="deposit-info">
                     <h3>입금정보</h3>
-                    <span class="account"><input type="text" placeholder="우리은행 1002-650-981905 윤선애" disabled></span>
-                    <span class="depositor">
-                        <input type="text" name="depositor" id="depositor" placeholder="입금자명(미입력시 주문자명)">
-                    </span>
+                    <table>
+                        <tr>
+                            <td class="account"><input type="text" placeholder="우리은행 1002-650-981905 윤선애" disabled></td>
+                        </tr>
+                        <tr>
+                            <td class="depositor"><input type="text" name="depositor" id="depositor" placeholder="입금자명(미입력시 주문자명)"></td>
+                        </tr>
+                    </table>
+                    <span ></span>
                     <p>신청 당일까지 미입금 시 자동취소 됩니다.</p>
                 </div>
 

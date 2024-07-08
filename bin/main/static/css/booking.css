@@ -91,6 +91,8 @@ div.total-amount {
 	height:50%
 }
 
+.total-amount th { font-size: 10pt; text-align: right; }
+
 #amount,
 #keyring-amount{
     width: 32em;

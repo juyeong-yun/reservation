@@ -168,7 +168,7 @@ public class GuestController {
         if (dto != null) {
             model.addAttribute("dto", dto);
         } else {
-            log.info("검색되지 않음");
+            model.addAttribute("errormessage", "검색 결과가 존재하지 않습니다.");
         }
         
         model.addAttribute("eventList", eventList);
