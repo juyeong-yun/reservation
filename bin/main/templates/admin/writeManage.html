@@ -55,18 +55,23 @@
                         <tr>
                             <td class="category" th:text="${notice.category}">공지</td>
                             <td class="title">
-                                <a th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" id="dropdown-notice" th:text="${notice.title}">냠냠</a>
+                                <a class="dropdown-notice" th:id="'noticeModal_' + ${notice.noticeId}" th:data-id="${notice.noticeId}" id="dropdown-notice" th:text="${notice.title}">냠냠</a>
                             </td>
                             <td class="date" th:text="${#temporals.format(notice.writeDate,'yyyy/MM/dd')}">날짜</td>
                         </tr>
                         <tr>
-                            <td colspan="3" class="detail" id="dropdown-detail" th:utext="${notice.detail}"></td>
+                            <!-- 모달 나오는 <td colspan="3" class="detail" id="dropdown-detail" th:utext="${notice.detail}"></td> -->
+                            <td colspan="2" class="dropdown-detail" th:utext="${notice.detail}"></td>
+                            <td class="button-group">
+                                <button class="update">수정</button>
+                                <button class="delete">삭제</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
-            <div class="popup-wrap" id="notice-popup">
+            <!-- <div class="popup-wrap" id="notice-popup">
                 <div class="popup">
                     <div class="contentbox">
                         <table>
@@ -81,7 +86,7 @@
                         <button class="delete">삭제</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
         </form>
     </div>

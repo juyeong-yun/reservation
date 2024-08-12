@@ -64,7 +64,7 @@
                             <img th:src="@{${review.originalFileName}}" alt="Review Image">
                         </div>
                         <div th:unless="${review.originalFileName}!=null">
-                            <img src="https://via.placeholder.com/550x750" alt="#">
+                            <img src="https://via.placeholder.com/450x500" alt="#">
                         </div>
                         <div class="info">
                             <span class="writeDate" th:text="${#temporals.format(review.writeDate,'yyyy/MM/dd')}">윤선애</span>

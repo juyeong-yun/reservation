@@ -68,11 +68,12 @@
     height:auto;
 }
 
-.gallery .info { margin-bottom: 0;}
+.gallery .info { margin-bottom: 0; border: 0.72px solid;}
 
 .gallery span {
+
     display: block;
-    padding: 8px 0;
+    padding: 8px 0 8px 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: pre;  /* 한 줄로 표현하고 싶다면 nowrap을 사용하면 된다 */
