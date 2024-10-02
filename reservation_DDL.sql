@@ -17,6 +17,11 @@ create table notice(
 
 select * from notice;
 
+delete from notice
+where notice_id = 21;
+
+
+
 --2)qna 게시판
 drop table qna;
 drop sequence qna_seq;
@@ -54,8 +59,6 @@ CREATE TABLE event (
 
 select * from event;
 
--- 관리자가 필요한 걸까 전시 정보에 대해 필요할까 
--- 전시 정보에 대한게 필요하겠네...
 
 -- 3) 예약자 게시판
 drop table reserve;
