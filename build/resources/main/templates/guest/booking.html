@@ -1,53 +1,137 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>온실(溫室) | 예약 진행</title>
-    <link rel="icon" href="../static/images/icon.jpeg" type="image/png">
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
 
-    <link rel="stylesheet" href="../static/css/reservation.css">
+    <link rel="stylesheet" th:href="@{/css/booking.css}">
+    
     <!-- 폰트어썸 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- js -->
-    <script src="../static/script/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <!-- 개인용 -->
-    <script src="../static/js/myFunction.js"></script>
+    <script th:src="@{/js/myFunction.js}"></script>
 </head>
 <body>
     <div class="header">
         <div class="top-bar">
             <div class="logo">
-                <a href="main.html"><img src="../static/images/logo_white.png" alt="logo"></a>
+                <a th:href="@{/}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
             </div>
                 
             <div class="right-side">
                 <ul id="menu">
-                    <li>
-                        <a id="" href="about.html">About</a>
-                        <ul>
-                            <li><a href="about.html#introduce">온실 溫室</a></li>
-                            <li><a href="about.html#directions">Directions</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="board.html">Board</a>
-                        <ul>
-                            <li><a href="board.html#notice">Notice</a></li>
-                            <li><a href="board.html#qna">QnA</a></li>
-                        </ul>
-                    </li>
-                    <li><a id="" href="reservation.html">Reserve</a></li>
-                    <li><a id="" href="reviews.html">Review</a></li>
+                    <li><a th:href="@{/guest/about}">About</a></li>
+                    <li><a th:href="@{/guest/board}">Board</a></li>
+                    <li><a th:href="@{/guest/reserve}">Reserve</a></li>
+                    <li><a th:href="@{/guest/reviews}">Review</a></li>
+                    <li><a th:href="@{/guest/location}">Location</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="content">
-        <form action="">
+		<!-- 템플릿 배껴와서 마무리 하기 -->
+        <!-- 세부적인 css 는 다시 잡기 -->
+        <form th:action="@{/guest/reserveInsert}" method="post" id="reserveSubmitForm">
+            <div class="reserveForm">			
+                <div class="ticket">
+                    <h3>예약 상품 정보</h3>
+                    <span>leeseungyoon birthday exhibition [ 溫室 ]</span>
+                    <div class="event" th:if="${event}">
+                        <span>일시</span>
+                        <p th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd')}">날짜</p>
+                        <p th:text="${event.eventTime}">시간</p>
+                        <input type="hidden" name="eventId" th:value="${event.eventId}">
+                        <input type="hidden" name="eventTime" th:value="${event.eventTime}">
+                    </div>
+                </div>
 
+                <div class="total-amount">
+                    <h3>최종 결제 금액</h3>
+                    <table>
+                        <tr>
+                            <th class="amount">상품가격</th>
+                            <td><input type="text" id="amount" disabled placeholder="임시 형태"></td>
+                        </tr>
+                        <tr>
+                            <th class="keyring-amount">보이스키링</th>
+                            <td><input type="text" id="keyring-amount" disabled placeholder="임시 형태"></td>
+                        </tr>
+                        <tr>
+                            <th class="total">총 결제금액</th>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reserve-info">
+                    <h3>예약자 정보</h3>
+                    <table>
+                        <tr>
+                            <td class="reserver"><input type="text" id="reserver" name="reserver" placeholder="이름" required></td>
+                            <td class="phone"><input type="text" id="phone" name="phone" placeholder="연락처" required></td>
+                        </tr>
+                        <tr><td class="request" colspan="2"><input type="text" id="request" name="request" placeholder="요청사항"></td></tr>
+                    </table>
+                    <div class="people-count">
+                        <h3>예약인원</h3>
+                        <!-- + -  할 수 있는 버튼 넣고 다시 만들기  -->
+                        <div id="people-count">
+                            <button type="button">+</button> <input type="number" name="numberOfReserve" id="numberOfReserve" value="1"> <button type="button">-</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deposit-info">
+                    <h3>입금정보</h3>
+                    <table>
+                        <tr>
+                            <td class="account"><input type="text" placeholder="@@은행 윤##" disabled></td>
+                        </tr>
+                        <tr>
+                            <td class="depositor"><input type="text" name="depositor" id="depositor" placeholder="입금자명(미입력시 주문자명)"></td>
+                        </tr>
+                    </table>
+                    <span ></span>
+                    <p>신청 당일까지 미입금 시 자동취소 됩니다.</p>
+                </div>
+
+                <div class="keyring">
+                    <h3>보이스 키링</h3>
+                    <p>보이스키링은 예약인원 만큼만 구매 가능합니다.</p>
+                    <p>한정수량으로 소진시 매진될 수 있는 점 양해 부탁드립니다.</p>
+                    <div class="keyring-count">
+                        <button type="button">+</button> <input type="number" name="keyring" id="keyring" value="0"> <button type="button">-</button>
+                    </div>
+                </div>
+                
+                <div class="agree">
+                    <div class="all"><input type="checkbox" id=""><span>전체 동의</span></div>
+                    <ul>
+                        <li class="personal-1"><input type="checkbox" id=""><span>개인정보 수집 및 동의</span></li>
+                        <li class="personal-2"><input type="checkbox" id=""> <span>구매조건 확인 및 결제 진행 동의</span></li>
+                    </ul>
+                </div>
+
+                <div class="about-cancle">
+                    <h3>취소/환불 규정에 대한 동의</h3>
+                    <p>까지 예약 변결/취소 가능합니다.</p>
+                    <p>원하시는 경우 디엠으로 연락주시면 됩니다.</p>
+                    <p>취소 가능 기한 이후 취소나 환불은 불가합니다.</p>
+                    <div class="personal-3">
+                        <input type="checkbox" name="" id=""><span>동의합니다.</span>
+                    </div>
+                </div>
+                <div class="submit">
+                    <button id="reserve" type="submit">결제하기</button>
+                </div>
+            </div>
         </form>
     </div>
     
@@ -56,6 +140,16 @@
             <a href="https://www.instagram.com/du_bi_dubap?igsh=aHo1a3JnenZrajJh&utm_source=qr"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://x.com/Du_Bidubap"><i class="fa-brands fa-twitter"></i></a>
         </div>
+        <div class="footer-info">
+            <div>
+				<span>Lee Seungyoon Birthday Exhibition</span>
+				<span>Aug.16-18.2024 Gallary Non-Scaled</span>
+			</div>
+			<div class="footer-img">
+				<img th:src="@{/images/icon_white.png}">
+				<img th:src="@{/images/logo_white.png}">	
+			</div>			
+		</div>
     </footer>
         
 </body>

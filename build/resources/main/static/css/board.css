@@ -1,65 +1,33 @@
 @import "main.css";
 
-* {
-    font-family: 'Noto Sans KR';
-}
-
 .content h3 {
     font-family: "Playfair Display";
     font-size: 20px;
     padding: 22px 0;
-
+    border-bottom: 1px solid;
 }
 
-table {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: auto;
-    border-top: 2px solid;
-    align-items: center;
-}
+table {width: 100%; border-bottom: 1px solid #ccc;}
 
 table tr {
     margin: 5px 0;
     font-size: 17px;
 }
 
+.noticeTitle { height: 47px;}
+.category, .date { text-align: center; width: 115px;}
 
-table th.title, th.name {
-    width: 165px;
-    text-align: center;
-    padding: 5px 0;
-}
+.title { text-align: start;}
 
-table td.detail, td.question {
-    width: 800px;
-    text-align: start;
-    padding: 5px 0;
-}
+.dropdown-detail { display: none; padding: 0 10%; }
 
-table td.detail:hover, td.question a:hover{
-    color: rgb(116, 116, 116);;
-
-}
-
-table td.date {
-    width: 200px;
-    text-align: center;
-    padding: 5px 0;
-}
-
-.notice table tr:last-child,
-.qna table tr:last-child {
-    border-bottom: 1px solid #ccc; /* 선 스타일 지정 */
+.dropdown-detail p {
+    background: #f3f3f3;
+    padding: 6px 10px 3px 20px;
+    font-size: 16px;
 }
 
 
-.notice {
-    margin-bottom: 32%;
-}
+/* 관리자 */
+.notice .write { float: right; padding: 0 14px 10px; }
 
-.qna .write {
-    float: right;
-    padding: 0 14px 10px;
-}

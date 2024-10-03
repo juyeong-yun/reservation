@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "responsive.css";
 
 /* 초기화 */
 * {
-
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -28,36 +28,23 @@ img {
     vertical-align: top; /* 수직정렬 */
 }
 
-/***************************
-해당 화면 크기에 대한 @media 규칙 내부에서 스타일을 지정하시면 됩니다. 
- ***************************/
-
-/* 모바일에 최적화된 CSS 코드 */
-@media (max-width: 768px) {
-    /* 모바일 화면에서의 스타일 지정 */
-}
-
-/* 데스크탑에 최적화된 CSS 코드 */
-@media (min-width: 769px) {
-    /* 데스크탑 화면에서의 스타일 지정 */
-}
-
-/* 특정 너비에 대한 반응형 CSS 코드 */
-@media (max-width: 992px) {
-    /* 특정 너비 범위에서의 스타일 지정 */
-}
-/* @media all and (max-width:1080px) {} 최대 너비가 1080px 이하인 경우에 스타일이 적용 */
 
 html, 
 body {
-    height: 100%;
+    /* 처음부터 높이를 높게 설정 */
+    height: 110%;
+}
+
+
+a:hover {
+    color: rgb(116, 116, 116);
 }
 
 div.background {
-    background-image: url('../images/poster.jpg');
-    position: fixed;
+    background-image: url('../images/mainpage_imsi.jpeg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100vh;
 }
@@ -69,27 +56,28 @@ div.background .right-side a{
 }
 
 /* 상단 바 스타일링 */
+.header {
+    padding: 0 104px 0;
+    border-bottom: 1px solid;
+}
 .top-bar {
     display: flex;
-    padding: 10px 20px;
+    /* padding: 3px 20px; */
     align-items: center;
 }
 
 .logo img{
-    width: 10%;
+    width: 23%;
 }
 
-.right-side {
-    position: relative;
-    right: 18%;
-}
 
 .right-side ul{
     display: flex;
+    align-items: center;
 }
 
 .right-side li {
-    min-width: 52%;
+    margin: 0 12px 0 41px;
     font-size: 19px;
 }
 
@@ -100,7 +88,7 @@ div.background .right-side a{
 
 .right-side a:hover {
     color: rgb(116, 116, 116);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     text-underline-offset: 6px;
     /* font-size: 21px; */
 }
@@ -138,28 +126,87 @@ div.background .right-side a{
 
 /* 본문 */
 .content {
-    padding: 0 125px 60px;
+	padding: 0 128px 60px;
     height: auto;
     flex: 1;
     min-height: calc(100% - 60px);
 }
 
+.content h2 {
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    font-weight: 300;
+    font-size: xx-large;
+    margin: 35px 0px;
+}
+
+/* 가운데 선 만드는 */
+
+.makeLine {
+    margin: 131px 0;
+    border: 0.72px solid;
+}
+
+/* 페이징 */
+nav.pageNavigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    padding: 27px;
+}
+
+.page-no {
+    margin-right: 11px;
+    font-family: "WorkSans";
+}
+
+b.page-no{
+    font-family: "WorkSans";
+    font-weight: 600;
+}
+
 footer {
     position: relative;
-    padding: 10px 0;
+    /*padding: 10px 0;*/
+    padding: 10px 125px 31px;
     width: 100%;
-    height: 60px;
+    height: auto;
     bottom: 0;
-    text-align: center;
+    /*text-align: center;*/
     transform: translatY(-100%);
     border-top: 1px solid ;
 }
+
+
 
 .sns {
     display: inline-flex;
     align-items: center;
 }
+
 .sns a{
     margin: 10px;
 }
+
+.footer-info {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-info span {
+	display: block;
+}
+
+.footer-img img{
+	display: inline-flex;
+    height: auto;
+    width: 72px;
+    align-items: center;
+    margin: 5px;
+}
+
+
 

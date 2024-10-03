@@ -1,27 +1,43 @@
 @import "main.css";
 
-@media (max-width:768px){
+@media screen and (max-width:768px){
     .content .gallery li, 
     .content .event-info,
     .content .write{width:33.33333%;}
 }
-@media (max-width:560px){
+@media screen and (max-width:560px){
     .content .gallery li,
     .content .event-info,
     .content .write{width:50%;}
 }
-@media (max-width:480px){
-    .content .gallery li,
+@media screen and (max-width:480px){
+    .content .gallery li {width:50%;}
     .content .event-info,
-    .content .write{width:100%;}
+    .content .write {width:100%;}
 }
 
-.event-info{
-    margin: 30px 0; 
+.review-event{ margin: 50px 0; padding: 7px;}
+
+.review-event h3{
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
-.write {
-    /* border: 0.72px solid; */
+.review-event .explain {
+    margin: 25px 0;
+}
+.event-info span {
+    display: block;
+    margin: 5px 0;
+}
+
+.private {
+    display: flex;
+    align-items: center;
+}
+
+.private .name {
+    margin: 0 8px 0 0;
 }
 
 .gallery {
@@ -37,7 +53,8 @@
 }
 
 .gallery li {
-    width:20%;
+    /* width:20%; */
+    width: 25%;
     float:left;
     box-sizing:border-box;
     padding:0 20px;
@@ -51,13 +68,12 @@
     height:auto;
 }
 
-.gallery .info {
-    margin-bottom: 0;
-}
+.gallery .info { margin-bottom: 0; border: 0.72px solid;}
 
 .gallery span {
+
     display: block;
-    padding: 8px 0;
+    padding: 8px 0 8px 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: pre;  /* 한 줄로 표현하고 싶다면 nowrap을 사용하면 된다 */

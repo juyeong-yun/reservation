@@ -1,6 +1,73 @@
 @import "main.css";
 
+#directions{
+    display: flex;
+}
+
 #directions .explain,
-#directions img {
+#directions .map {
     margin: 20px;
 }
+
+div.map{
+	float:left;
+	width:50%;
+	height:50%
+}
+
+.map img {
+    margin-left: 100px;
+    width: 56%;
+}
+
+div.explain{
+	float:right;
+	width:50%;
+	height:50%
+}
+
+.explain h3{
+    padding: 10px 0;
+}
+
+.explain span {
+	display: flex;
+    padding: 5px;
+    align-items: center;
+}
+
+.explain span img {
+	height: auto;
+    width: 15px;
+    margin: 6px;
+}
+
+.explain p {
+	margin: 40px 0 15px 0;
+    font-size: 18px;
+}	
+	
+
+.explain .parking {
+	counter-reset: list-counter;
+    float:left;
+}
+
+.parking li {
+    margin: 10px 0;
+    line-height: 1em;
+}
+
+.parking a {
+    display: block;
+    padding: 8px;
+}
+
+/* .parking li:before{
+    content: counter(list-counter);
+    counter-increment: list-counter;
+    color: #666;
+    font: inherit;
+    font-size: 1.3em;
+    margin: 0.7em;
+} */

@@ -1,12 +1,7 @@
 package seon.gallery.reservation.controller;
 
-import java.io.FileInputStream;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.dto.NoticeDTO;
-import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.dto.ReserveDTO;
 import seon.gallery.reservation.dto.ReviewDTO;
-import seon.gallery.reservation.dto.check.YesorNo;
 import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
@@ -35,14 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Slf4j
@@ -95,7 +84,8 @@ public class GuestController {
      */
     @GetMapping("/about")
     public String about() {
-        return "/guest/about";
+
+        return "guest/about";
     }
 
     /**
@@ -105,7 +95,7 @@ public class GuestController {
     @GetMapping("/location")
     public String location() {
 
-        return "/guest/location";
+        return "guest/location";
     }
     
     /**
