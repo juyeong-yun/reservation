@@ -60,6 +60,15 @@ adminMain 화면
 .right-side ul {justify-content: flex-end;}
 .right-side a { padding-right: 0%;}
 
+/*
+행사 등록
+*/
+
+.addEvent ul { display: flex; align-items: center; margin-bottom: 20px;}
+.addEvent ul li { padding: 15px 0 10px;}
+
+/*
+페이지 구분 - 보류
 div.addEvent {
     float: left;
     width: 30%;
@@ -71,11 +80,13 @@ div.eventGraph{
     width: 65%;
     height: 50%;
 }
+*/
 
+/* 예약 인원 체크 */
 .progress-bar {
     width: 100%;
     height: 30px;
-    background-color: #dedede;
+    background-color: #fffbfb;
     font-weight: 600;
     font-size: .8rem;
 }
@@ -85,7 +96,7 @@ div.eventGraph{
     height: 30px;
     padding: 0;
     text-align: center;
-    background-color: #4F98FF;
+    background-color:#268e26;
     color: #111;
 }
 

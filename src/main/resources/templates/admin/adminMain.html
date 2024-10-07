@@ -13,6 +13,7 @@
     
     <!-- js -->
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/myFunction.js}"></script>
     
 </head>
 <body>
@@ -39,45 +40,23 @@
                     <li>이벤트 날짜<input name="eventDate" type="date"></li>
                     <li>시작 시간<input name="startTime" type="time"></li>
                     <li>종료 시간<input name="endTime" type="time"></li>
+                    <button class="submit" type="submit">등록</button>
                 </ul>
-                <button class="submit" type="submit">등록</button>
             </form>
             <table th:each="event:${eventList}">
                 <tr>
-                    <th th:text="${event.eventDate}">8/16</th>
-                </tr>
-                <tr>
+                    <td th:text="${event.eventDate}">8/16</td>
                     <td th:text="${event.eventTime}">12:00</td>
                 </tr>
-            </table>
-        </div>
-        
-        <!-- 예약 날짜와 시간에 맞게 막대 그래프 그리기 -->
-        <div class="eventGraph">
-            <table>
+                <!-- 예약 날짜와 시간 예약 인수 막대 그래프 -->
                 <tr>
-                    <th>날짜</th>
-                    <td>
-                        전시시간
-                        <div class="progress-bar">           
-                            <div class="progress"> </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th>날짜</th>
-                    <td>
-                        전시시간
-                    </td>
-                </tr>
-                <tr>
-                    <th>날짜</th>
-                    <td>
-                        전시시간
+                    <td class="progress-bar">           
+                        <div class="progress"></div>
                     </td>
                 </tr>
             </table>
         </div>
+
     </div>
 </body>
 </html>

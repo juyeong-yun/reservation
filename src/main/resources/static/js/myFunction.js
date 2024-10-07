@@ -10,7 +10,7 @@
 
 
 /*****************
- * 1.reserve 예약시간을 누르면 모달이 나오게
+ * 1.jquery / reserve 예약시간을 누르면 모달이 나오게
  ******************/
 $(function() {
     let targetHref;
@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 
 /*****************
- * 2. notice 보기 
+ * 2. jquery / notice 보기 
  ******************/
 $(function(){
 
@@ -116,8 +116,8 @@ function checkDate() {
 
 
 /*****************
- * 4. board 페이지에서 공지 제목을 누르면 아래 내용이 나오게
- * 여기서는 id는 유일한 하나이ㄱ기 때뮨에 class를 사용하여 그룹을 만들고 for 문을 돌린다,,!
+ * 4. javascript / board 페이지에서 공지 제목을 누르면 아래 내용이 나오게
+ * 여기서는 id는 유일한 하나이기 때뮨에 class를 사용하여 그룹을 만들고 for 문을 돌린다,,!
  ******************/
 document.addEventListener('DOMContentLoaded', function() {
     var noticeTitles = document.getElementsByClassName('dropdown-notice');
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /*****************
- * 5. notice, review, qna ckeditor 불러오는 api , 유효값 
+ * 5. javascript / notice, review, qna ckeditor 불러오는 api , 유효값 
  ******************/
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 /***************
- * 6. 예약 페이지에서 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정
+ * 6. jquery/ 예약 페이지에서 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정 
  **************/
 
 $(function(){
