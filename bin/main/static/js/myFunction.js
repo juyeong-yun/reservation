@@ -2,10 +2,11 @@
  * 목차 설정
  * 1. reserve 예약시간을 누르면 모달이 나오게
  * 1-1. booking 에서 eventId, EventTime 같이 보내기
- * 2. 관리자 페이지에서 qna, notice detail 볼 수 있는 모달
- * 3. 리뷰페이지 글쓰기 버튼 기간 설정
- * 4. board 페이지에서 isLock 에 체크하면 input 박스 보이도록
+ * 2. 관리자 페이지 - qna, notice detail 볼 수 있는 모달
+ * 3. 리뷰페이지 - 글쓰기 버튼 기간 설정
+ * 4. board 페이지- isLock 에 체크하면 input 박스 보이도록
  * 5. notice, review, qna ckeditor 불러오는 api
+ * 6. 예약 페이지- 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정 
  */
 
 
@@ -304,3 +305,4 @@ $(function(){
         })
     }); 
 });
+

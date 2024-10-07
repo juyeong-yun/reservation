@@ -66,6 +66,7 @@ public class AdminController {
 	public String adminMain(Model model) {
 
 		List<EventDTO> eventList = eventService.selectAll();
+		
 		model.addAttribute("eventList", eventList);
 		
 		return "admin/adminMain";

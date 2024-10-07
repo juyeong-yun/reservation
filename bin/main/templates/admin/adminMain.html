@@ -12,9 +12,75 @@
     <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     
     <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/myFunction.js}"></script>
     
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const ctx = document.getElementById('reservationChart');
+
+            const table = document.getElementById('eventTable');
+
+            if(!table) {
+                console.error("Table with id 'eventTable' not found");
+                return;
+            }
+            
+            const rows = table.querySelectorAll('tr');
+            const data = Array.from(rows).map(row => {
+                
+                const cells = row.querySelectorAll('td');
+
+                if (cells.length < 1) {
+                    return {
+                        time: cells[0].textContent,
+                        reservations: 0
+                    };
+                }
+                
+                return {
+                    time: cells[0].textContent,
+                    reservations: cells.length > 1 ? parseInt(cells[1].textContent, 10) : 0
+                };
+            }).filter(item => item !== null);
+
+            console.log(data);
+             
+            const time = data.map(item => item.time);
+            const reservations = data.map(item => item.reservations);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: time,
+                datasets: [{
+                    label: '예약 인원',
+                    data: reservations,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '예약 인원'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '시간'
+                    }
+                }
+            }
+        }
+        });
+    });
+    </script>
 </head>
 <body>
     <div class="header">
@@ -43,20 +109,22 @@
                     <button class="submit" type="submit">등록</button>
                 </ul>
             </form>
-            <table th:each="event:${eventList}">
-                <tr>
-                    <td th:text="${event.eventDate}">8/16</td>
-                    <td th:text="${event.eventTime}">12:00</td>
-                </tr>
-                <!-- 예약 날짜와 시간 예약 인수 막대 그래프 -->
-                <tr>
-                    <td class="progress-bar">           
-                        <div class="progress"></div>
-                    </td>
-                </tr>
-            </table>
-        </div>
 
+            <div id="eventTable" >
+                <div th:each="date : ${#lists.distinct(eventList.![eventDate])}">
+                    <h4 th:text="${date}">날짜</h4>
+                    <table th:each="event:${eventList}" >
+                        <tr>
+                            <td th:text="${event.eventDate}" th:if="${event.eventDate} == date">8/16</td>
+                            <td th:text="${event.eventTime}">12:00</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- chart.js -->
+            <canvas id="reservationChart"></canvas>
+        </div>
     </div>
 </body>
 </html>
