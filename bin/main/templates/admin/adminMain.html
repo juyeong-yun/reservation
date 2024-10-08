@@ -18,45 +18,34 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function(){
-            const ctx = document.getElementById('reservationChart');
-
+            const ctx = document.getElementById('reservationChart').getContext('2d');
             const table = document.getElementById('eventTable');
 
             if(!table) {
                 console.error("Table with id 'eventTable' not found");
                 return;
             }
-            
-            const rows = table.querySelectorAll('tr');
-            const data = Array.from(rows).map(row => {
-                
-                const cells = row.querySelectorAll('td');
 
-                if (cells.length < 1) {
-                    return {
-                        time: cells[0].textContent,
-                        reservations: 0
-                    };
-                }
-                
-                return {
-                    time: cells[0].textContent,
-                    reservations: cells.length > 1 ? parseInt(cells[1].textContent, 10) : 0
-                };
-            }).filter(item => item !== null);
+            const eventGroups = table.querySelectorAll('div');
+            const labels = [];
+            const data = [];
 
-            console.log(data);
-             
-            const time = data.map(item => item.time);
-            const reservations = data.map(item => item.reservations);
+            eventGroups.forEach(group => {
+                const date = group.querySelector('h4').textContent;
+                const events = group.querySelector('tr');
+                const count = events.length;
+
+                labels.push(date);
+                data.push(count);
+            })
 
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                labels: time,
+                labels: labels,
                 datasets: [{
-                    label: '예약 인원',
-                    data: reservations,
+                    label: 'Events per Date',
+                    data: data,
                     borderWidth: 1
                 }]
             },
@@ -65,16 +54,7 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: '예약 인원'
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: '시간'
-                    }
+                    max: 20
                 }
             }
         }
@@ -109,13 +89,12 @@
                     <button class="submit" type="submit">등록</button>
                 </ul>
             </form>
-
-            <div id="eventTable" >
-                <div th:each="date : ${#lists.distinct(eventList.![eventDate])}">
-                    <h4 th:text="${date}">날짜</h4>
-                    <table th:each="event:${eventList}" >
-                        <tr>
-                            <td th:text="${event.eventDate}" th:if="${event.eventDate} == date">8/16</td>
+            
+            <div id="eventTable" style="display: none;" >
+                <div th:each="entry : ${eventsByDate}">
+                    <h4 th:text="${entry.key}">날짜</h4>
+                    <table>
+                        <tr th:each="event : ${entry.value}">
                             <td th:text="${event.eventTime}">12:00</td>
                         </tr>
                     </table>

@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,11 +66,15 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/adminMain")
-	public String adminMain(Model model) {
+	public String adminMain(Model model, @ModelAttribute EventDTO eventDTO) {
 
 		List<EventDTO> eventList = eventService.selectAll();
 		
+		Map<LocalDate, List<EventDTO>> eventsByDate = eventList.stream().collect(Collectors.groupingBy(EventDTO::getEventDate));
+
+
 		model.addAttribute("eventList", eventList);
+		model.addAttribute("eventsByDate", eventsByDate);
 		
 		return "admin/adminMain";
 	}
