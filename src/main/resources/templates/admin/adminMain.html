@@ -16,51 +16,6 @@
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/myFunction.js}"></script>
     
-    <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const ctx = document.getElementById('reservationChart').getContext('2d');
-            const table = document.getElementById('eventTable');
-
-            if(!table) {
-                console.error("Table with id 'eventTable' not found");
-                return;
-            }
-
-            const eventGroups = table.querySelectorAll('div');
-            const labels = [];
-            const data = [];
-
-            eventGroups.forEach(group => {
-                const date = group.querySelector('h4').textContent;
-                const events = group.querySelector('tr');
-                const count = events.length;
-
-                labels.push(date);
-                data.push(count);
-            })
-
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Events per Date',
-                    data: data,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 20
-                }
-            }
-        }
-        });
-    });
-    </script>
 </head>
 <body>
     <div class="header">
@@ -90,7 +45,7 @@
                 </ul>
             </form>
             
-            <div id="eventTable" style="display: none;" >
+            <div id="eventTable" style="display: none;"  > <!-- -->
                 <div th:each="entry : ${eventsByDate}">
                     <h4 th:text="${entry.key}">날짜</h4>
                     <table>
@@ -102,7 +57,98 @@
             </div>
 
             <!-- chart.js -->
-            <canvas id="reservationChart"></canvas>
+            <canvas id="reservationChart1"></canvas>
+            <canvas id="reservationChart2"></canvas>
+            <canvas id="reservationChart3"></canvas>
+            
+            
+            <script th:inline = "javascript">
+				const chartDataJson = /*[[${chartDataJson}]]*/ '[]';
+			</script>
+			
+            <script>
+				document.addEventListener("DOMContentLoaded", function() { 
+			
+				    const ctx1 = document.getElementById('reservationChart1').getContext('2d');
+				    const ctx2 = document.getElementById('reservationChart2').getContext('2d');
+				    const ctx3 = document.getElementById('reservationChart3').getContext('2d');
+				     
+				
+				    // 테이블에서 데이터 추출
+				    const chartData = JSON.parse(chartDataJson);
+				    
+				    const groupData = chartData.reduce((acc, item) => {
+						if (!acc[item.date]) { 
+							acc[item.date] = [];
+					    } 
+					    acc[item.date].push(item);
+					    
+					    return acc;
+					    
+					}, {});
+				    
+				    // 날짜목록 가져오기
+				    const dates = Object.keys(groupData).slice(0,3);
+				    
+				    dates.forEach((date, index) => {
+						
+						//JSON 형식으로 데이터 받음
+						const dateData = groupData[date];
+						
+						// 시간대별로 데이터 정리
+						const timeData = dateData.reduce((acc,item) => {
+							acc[item.time] = item.count;
+							
+							return acc;
+						}, {});
+					    
+					    const labels = Object.keys(timeData).sort();
+				    	const data = labels.map(time => timeData[time]);
+				    	
+				    	const ctx = index === 0 ? ctx1 : (index === 1 ? ctx2 : ctx3);
+				    	
+				    	// 차트
+					    new Chart(ctx, {
+					        type: 'bar',
+					        data: {
+					            labels: labels,
+					            datasets: [{
+					                label: `시간대별 총 예약 인원 : ${date}`,
+					                data: data,
+					                borderWidth: 1
+					            }]
+					        },
+					        options: { 
+					            responsive: true,
+					            scales: {
+					                y: { 
+					                    beginAtZero: true,
+					                    max: 20,
+					                    title: {
+					                        display: true,
+					                        text: '예약 인원'
+					                    }
+					                }, 
+					                x: { 
+					                    title: {
+					                        display: true,
+					                        text: '예약 시간'
+					                    }
+					                } 
+					            }, 
+					            plugins: { 
+					                title: {
+					                    display: true,
+					                    text: `시간대별 총 예약 현황 - ${date}`
+					                }
+					            } 
+					        } 
+					    });
+					});
+				
+				});
+		
+		    </script>
         </div>
     </div>
 </body>

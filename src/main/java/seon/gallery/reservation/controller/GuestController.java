@@ -7,10 +7,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.dto.NoticeDTO;
@@ -22,16 +27,6 @@ import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
 import seon.gallery.reservation.service.ReviewService;
 import seon.gallery.reservation.util.PageNevigator;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Slf4j
@@ -54,6 +49,9 @@ public class GuestController {
         this.eventService = eventService;
     }
 
+    /**
+     * 페이지 제한
+     */
     @Value("${user.board.pageLimit}")
 	int pageLimit = 5;
 
@@ -148,6 +146,13 @@ public class GuestController {
         }
     }
 
+    /**
+     * 예약자 조회
+     * @param reserver
+     * @param phone
+     * @param model
+     * @return
+     */
     @PostMapping("/searchReserve")
     public String searchReserve(@RequestParam(value = "reserver") String reserver,
     @RequestParam(value = "phone") String phone, Model model){
@@ -166,7 +171,6 @@ public class GuestController {
 
         return "guest/reserve";
     }
-    
 
 
     

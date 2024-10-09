@@ -1,12 +1,14 @@
 package seon.gallery.reservation.controller;
 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,29 +16,29 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.springframework.ui.Model;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.EventDTO;
 import seon.gallery.reservation.dto.EventFormDTO;
 import seon.gallery.reservation.dto.NoticeDTO;
 import seon.gallery.reservation.dto.QnaDTO;
 import seon.gallery.reservation.dto.ReserveDTO;
-import seon.gallery.reservation.entity.QnaEntity;
 import seon.gallery.reservation.service.EventService;
 import seon.gallery.reservation.service.NoticeService;
 import seon.gallery.reservation.service.QnaService;
 import seon.gallery.reservation.service.ReserveService;
 import seon.gallery.reservation.util.PageNevigator;
-
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -49,13 +51,16 @@ public class AdminController {
 	private EventService eventService;
 	private QnaService qnaService;
 	private ReserveService reserveService;
+	//json 형식의 데이터 변환을 위한
+	private ObjectMapper objectMapper;
 
 	public AdminController(NoticeService noticeService, EventService eventService,
-	QnaService qnaService, ReserveService reserveService){
+	QnaService qnaService, ReserveService reserveService, ObjectMapper objectMapper){
 		this.noticeService = noticeService;
 		this.eventService = eventService;
 		this.qnaService = qnaService;
 		this.reserveService = reserveService;
+		this.objectMapper = objectMapper;
 	}
 
 	@Value("${user.board.pageLimit}")
@@ -70,14 +75,62 @@ public class AdminController {
 
 		List<EventDTO> eventList = eventService.selectAll();
 		
-		Map<LocalDate, List<EventDTO>> eventsByDate = eventList.stream().collect(Collectors.groupingBy(EventDTO::getEventDate));
+		// 날짜, 이벤트 시간		
+		Map<LocalDate, List<EventDTO>> eventsByDate = eventList.stream()
+				.collect(Collectors.groupingBy(EventDTO::getEventDate));
+		
 
+		//ChartjJS 데이터
+		List<Map<String ,Object>> chartData = new ArrayList<>();
+		
+		//날짜별 순회
+		for (Map.Entry<LocalDate, List<EventDTO>> entry : eventsByDate.entrySet()) {
+			
+			Map<String, Integer> count = new HashMap<>();
+			
+			// 이벤트 시간별로 집계
+			for (EventDTO event : entry.getValue()) {
+				String time = event.getEventTime();
+				int reservationCount = event.getReserveCount();
+				
+				// 시간 정보가 null이 아닌지 확인
+	            if (time != null) {
+	                count.put(time, count.getOrDefault(time, 0) + reservationCount );
+	            }
+			}
+			
+			// 각 시간대의 예약 수를 chartData에 추가
+		    for (Map.Entry<String, Integer> timeEntry : count.entrySet()) {
+		        Map<String, Object> dataPoint = new HashMap<>();
+		        
+		        dataPoint.put("date", entry.getKey().toString()); // 날짜
+		        dataPoint.put("time", timeEntry.getKey()); // 시간
+		        dataPoint.put("count", timeEntry.getValue()); // 예약 수
+
+		        chartData.add(dataPoint);
+		    }
+			
+		}
+		
+		
+		// JSON 변환
+		String chartDataJson = null;
+		
+		try {
+			chartDataJson = objectMapper.writeValueAsString(chartData);
+			
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
 
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("eventsByDate", eventsByDate);
+		model.addAttribute("chartDataJson", chartDataJson);
 		
 		return "admin/adminMain";
 	}
+	
 
 	/**
 	 * event 추가 하는 

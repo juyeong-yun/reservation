@@ -188,3 +188,230 @@ Binding(COMMAND+SHIFT+T,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2024-10-08 13:53:39.976 -----------------------------------------------
+eclipse.buildId=4.21.0.202312011804
+java.version=17.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=en_KR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/juyeong/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/juyeong/.eclipse_keyring
+
+!ENTRY org.eclipse.emf.ecore 2 0 2024-10-08 13:53:40.531
+!MESSAGE Both 'org.eclipse.jst.j2ee.core' and 'org.eclipse.jst.j2ee.core' register a package for 'application.xmi'
+
+!ENTRY org.eclipse.jface 2 0 2024-10-08 13:53:55.997
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-10-08 13:53:55.997
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolinworkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.buildship.core 8 0 2024-10-08 13:56:36.082
+!MESSAGE Project synchronization was cancelled.
+!STACK 0
+org.gradle.tooling.BuildCancelledException: Build cancelled
+	at org.gradle.tooling.internal.consumer.connection.CancellableConsumerActionExecutor.run(CancellableConsumerActionExecutor.java:43)
+	at org.gradle.tooling.internal.consumer.connection.ProgressLoggingConsumerActionExecutor.run(ProgressLoggingConsumerActionExecutor.java:61)
+	at org.gradle.tooling.internal.consumer.connection.RethrowingErrorsConsumerActionExecutor.run(RethrowingErrorsConsumerActionExecutor.java:38)
+	at org.gradle.tooling.internal.consumer.async.DefaultAsyncConsumerActionExecutor$1$1.run(DefaultAsyncConsumerActionExecutor.java:67)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+	at org.gradle.tooling.internal.consumer.BlockingResultHandler.getResult(BlockingResultHandler.java:46)
+	at org.gradle.tooling.internal.consumer.DefaultModelBuilder.get(DefaultModelBuilder.java:51)
+	at org.eclipse.buildship.core.internal.util.gradle.CompatProjectConnection$CompatModelBuilder.get(CompatProjectConnection.java:272)
+	at org.eclipse.buildship.core.internal.util.gradle.IdeAttachedProjectConnection.getModel(IdeAttachedProjectConnection.java:86)
+	at org.eclipse.buildship.core.internal.CompatibilityChecker.lambda$validateToolingApiCompatibility$0(CompatibilityChecker.java:55)
+	at org.eclipse.buildship.core.internal.DefaultGradleBuild$GradleConnectionOperation.runInToolingApi(DefaultGradleBuild.java:337)
+	at org.eclipse.buildship.core.internal.operation.DefaultToolingApiOperationManager$WorkspaceRunnableAdapter.run(DefaultToolingApiOperationManager.java:58)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2453)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2478)
+	at org.eclipse.buildship.core.internal.operation.DefaultToolingApiOperationManager.run(DefaultToolingApiOperationManager.java:39)
+	at org.eclipse.buildship.core.internal.DefaultGradleBuild.withConnection(DefaultGradleBuild.java:127)
+	at org.eclipse.buildship.core.internal.DefaultGradleBuild.withConnection(DefaultGradleBuild.java:117)
+	at org.eclipse.buildship.core.internal.CompatibilityChecker.validateToolingApiCompatibility(CompatibilityChecker.java:55)
+	at org.eclipse.buildship.core.internal.DefaultGradleBuild.synchronize(DefaultGradleBuild.java:90)
+	at org.eclipse.buildship.ui.internal.wizard.project.ProjectImportWizardController$5.run(ProjectImportWizardController.java:213)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+
+!ENTRY org.springsource.ide.eclipse.commons.core 4 0 2024-10-08 14:00:29.401
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): src does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:549)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2576)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:2438)
+	at org.eclipse.jdt.internal.core.JavaProject.getResolvedClasspath(JavaProject.java:2536)
+	at org.springframework.tooling.boot.ls.BootProjectTester.isProjectWithDependency(BootProjectTester.java:71)
+	at org.springframework.tooling.boot.ls.BootProjectTester.test(BootProjectTester.java:58)
+	at org.eclipse.core.internal.expressions.Property.test(Property.java:65)
+	at org.eclipse.core.expressions.TestExpression.evaluate(TestExpression.java:107)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.expressions.AndExpression.evaluate(AndExpression.java:36)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.internal.expressions.AdaptExpression.evaluate(AdaptExpression.java:121)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.expressions.OrExpression.evaluate(OrExpression.java:26)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:163)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.expressions.AndExpression.evaluate(AndExpression.java:36)
+	at org.eclipse.e4.ui.internal.workbench.ContributionsAnalyzer.isCoreExpressionVisible(ContributionsAnalyzer.java:281)
+	at org.eclipse.e4.ui.internal.workbench.ContributionsAnalyzer.isVisible(ContributionsAnalyzer.java:255)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.computeVisibility(ContributionRecord.java:170)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:101)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:191)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:202)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:256)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:114)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4645)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1524)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1547)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1528)
+	at org.eclipse.swt.widgets.Menu.menuWillOpen(Menu.java:807)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:6424)
+	at org.eclipse.swt.internal.cocoa.OS.objc_msgSend(Native Method)
+	at org.eclipse.swt.internal.cocoa.NSMenu.popUpContextMenu(NSMenu.java:80)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:270)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4489)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3981)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:648)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:555)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:651)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2024-10-08 14:00:29.402
+!MESSAGE src does not exist
+
+!ENTRY org.springsource.ide.eclipse.commons.core 4 0 2024-10-08 14:00:37.866
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): src does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:549)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2576)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:2438)
+	at org.eclipse.jdt.internal.core.JavaProject.getResolvedClasspath(JavaProject.java:2536)
+	at org.springframework.tooling.boot.ls.BootProjectTester.isProjectWithDependency(BootProjectTester.java:71)
+	at org.springframework.tooling.boot.ls.BootProjectTester.test(BootProjectTester.java:58)
+	at org.eclipse.core.internal.expressions.Property.test(Property.java:65)
+	at org.eclipse.core.expressions.TestExpression.evaluate(TestExpression.java:107)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.expressions.AndExpression.evaluate(AndExpression.java:36)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.internal.expressions.AdaptExpression.evaluate(AdaptExpression.java:121)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.expressions.OrExpression.evaluate(OrExpression.java:26)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:163)
+	at org.eclipse.core.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:54)
+	at org.eclipse.core.expressions.AndExpression.evaluate(AndExpression.java:36)
+	at org.eclipse.e4.ui.internal.workbench.ContributionsAnalyzer.isCoreExpressionVisible(ContributionsAnalyzer.java:281)
+	at org.eclipse.e4.ui.internal.workbench.ContributionsAnalyzer.isVisible(ContributionsAnalyzer.java:255)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.computeVisibility(ContributionRecord.java:170)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributionRecord.updateVisibility(ContributionRecord.java:101)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:191)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRendererFilter.updateElementVisibility(MenuManagerRendererFilter.java:202)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.showMenu(MenuManagerShowProcessor.java:256)
+	at org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerShowProcessor.menuAboutToHide(MenuManagerShowProcessor.java:114)
+	at org.eclipse.jface.internal.MenuManagerEventHelper.showEventPostHelper(MenuManagerEventHelper.java:95)
+	at org.eclipse.jface.action.MenuManager.handleAboutToShow(MenuManager.java:469)
+	at org.eclipse.jface.action.MenuManager$2.menuShown(MenuManager.java:495)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:259)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4645)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1524)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1547)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1528)
+	at org.eclipse.swt.widgets.Menu.menuWillOpen(Menu.java:807)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:6424)
+	at org.eclipse.swt.internal.cocoa.OS.objc_msgSend(Native Method)
+	at org.eclipse.swt.internal.cocoa.NSMenu.popUpContextMenu(NSMenu.java:80)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:270)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4489)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3981)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:648)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:555)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:651)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2024-10-08 14:00:37.867
+!MESSAGE src does not exist
+
+!ENTRY org.eclipse.egit.ui 4 0 2024-10-08 14:01:41.126
+!MESSAGE Invalid project description.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description.
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:211)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:305)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:291)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2453)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2473)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+Contains: OK
+Contains: /Users/juyeong/workspace/reservation overlaps the workspace location: /Users/juyeong/workspace/reservation
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2024-10-08 14:01:41.127
+!MESSAGE Invalid project description.
+!SUBENTRY 2 unknown 0 0 2024-10-08 14:01:41.127
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2024-10-08 14:01:41.127
+!MESSAGE /Users/juyeong/workspace/reservation overlaps the workspace location: /Users/juyeong/workspace/reservation

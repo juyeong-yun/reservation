@@ -85,10 +85,23 @@ create table reserve(
 
 select * from reserve;
 
+
+
 select * 
 from reserve r
 inner join event e
 on r.event_id = e.event_id;
+
+
+-- 현재 예약자수를 구하는 query
+select e.event_date, e.event_time, count(r.reserve_id)as count
+from event e
+inner join reserve r
+on e.event_id = r.event_id
+where r.is_cancel = 'N'
+group by e.event_date, e.event_time;
+
+
 
 -- 4) 리뷰 게시판
 drop table review;

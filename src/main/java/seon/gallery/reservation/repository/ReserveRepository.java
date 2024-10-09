@@ -1,10 +1,10 @@
 package seon.gallery.reservation.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -41,15 +41,25 @@ public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
      */
     @Query("SELECT COUNT(r) FROM ReserveEntity r WHERE r.eventEntity.eventId =:eventId AND r.isCancel='N'")
     int countEventByReserveId(@Param("eventId") String eventId);
+    
+    /**
+     * (미완성)
+	 * 날짜와 시간별 예약 수 세기
+	 * @return
+	 */
+	@Query("SELECT e.eventDate, e.eventTime, COUNT(r) AS count FROM ReserveEntity r INNER JOIN r.eventEntity e WHERE r.isCancel='N' GROUP BY e.eventDate, e.eventTime")
+	List<ReserveEntity> countReservationByDateandTime();
 
+	
     /**
      * reserve 페이지에서 예약자의 이름과 번호로 찾아서 조회
-     * (아직 미완성)
      * @param reserver
      * @param phone
      * @return
      */
     @Query("SELECT r FROM ReserveEntity r INNER JOIN r.eventEntity WHERE r.reserver = :reserver AND r.phone = :phone")
     List<ReserveEntity> findSearchReserver(@Param("reserver")String reserver, @Param("phone") String phone);
+    
+    
     
 }

@@ -2,15 +2,16 @@
  * 목차 설정
  * 1. reserve 예약시간을 누르면 모달이 나오게
  * 1-1. booking 에서 eventId, EventTime 같이 보내기
- * 2. 관리자 페이지에서 qna, notice detail 볼 수 있는 모달
- * 3. 리뷰페이지 글쓰기 버튼 기간 설정
- * 4. board 페이지에서 isLock 에 체크하면 input 박스 보이도록
+ * 2. 관리자 페이지 - qna, notice detail 볼 수 있는 모달
+ * 3. 리뷰페이지 - 글쓰기 버튼 기간 설정
+ * 4. board 페이지- isLock 에 체크하면 input 박스 보이도록
  * 5. notice, review, qna ckeditor 불러오는 api
+ * 6. 예약 페이지- 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정 
  */
 
 
 /*****************
- * 1.reserve 예약시간을 누르면 모달이 나오게
+ * 1.jquery / reserve 예약시간을 누르면 모달이 나오게
  ******************/
 $(function() {
     let targetHref;
@@ -63,7 +64,7 @@ $(document).ready(function() {
 
 
 /*****************
- * 2. notice 보기 
+ * 2. jquery / notice 보기 
  ******************/
 $(function(){
 
@@ -116,8 +117,8 @@ function checkDate() {
 
 
 /*****************
- * 4. board 페이지에서 공지 제목을 누르면 아래 내용이 나오게
- * 여기서는 id는 유일한 하나이ㄱ기 때뮨에 class를 사용하여 그룹을 만들고 for 문을 돌린다,,!
+ * 4. javascript / board 페이지에서 공지 제목을 누르면 아래 내용이 나오게
+ * 여기서는 id는 유일한 하나이기 때뮨에 class를 사용하여 그룹을 만들고 for 문을 돌린다,,!
  ******************/
 document.addEventListener('DOMContentLoaded', function() {
     var noticeTitles = document.getElementsByClassName('dropdown-notice');
@@ -146,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /*****************
- * 5. notice, review, qna ckeditor 불러오는 api , 유효값 
+ * 5. javascript / notice, review, qna ckeditor 불러오는 api , 유효값 
  ******************/
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -277,7 +278,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 /***************
- * 6. 예약 페이지에서 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정
+ * 6. jquery/ 예약 페이지에서 이름과 전화번호를 검색하면 예약한 날짜와 시간이 나오도록 설정 
  **************/
 
 $(function(){
@@ -304,3 +305,4 @@ $(function(){
         })
     }); 
 });
+

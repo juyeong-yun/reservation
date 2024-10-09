@@ -51,6 +51,7 @@ public class EventEntity {
 	@Column(name="is_full")
 	private boolean isFull;
 	
+	// 예약이 속한 이벤트
 	@OneToMany(mappedBy = "eventEntity", fetch = FetchType.LAZY)
 	@OrderBy("event_id")
 	private List<ReserveEntity> reserveList;

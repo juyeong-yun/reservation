@@ -3,6 +3,7 @@ package seon.gallery.reservation.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.hibernate.event.spi.EventManager;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import lombok.RequiredArgsConstructor;
@@ -75,6 +77,7 @@ public class ReserveService {
         );
         return dtoList;
     }
+    
 
     /**
      * 예약폼 추가
@@ -108,7 +111,7 @@ public class ReserveService {
 
 
     /**
-     * 하나만 고르기
+     * ID 하나만 고르기
      * @param reserveId
      * @return
      */
@@ -124,6 +127,7 @@ public class ReserveService {
             return null;
         }
     }
+    
 
     /**
      * 해당하는 아이디를 입금완료로 상태변경
