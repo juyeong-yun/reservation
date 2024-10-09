@@ -41,14 +41,6 @@ public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
      */
     @Query("SELECT COUNT(r) FROM ReserveEntity r WHERE r.eventEntity.eventId =:eventId AND r.isCancel='N'")
     int countEventByReserveId(@Param("eventId") String eventId);
-    
-    /**
-     * (미완성)
-	 * 날짜와 시간별 예약 수 세기
-	 * @return
-	 */
-	@Query("SELECT e.eventDate, e.eventTime, COUNT(r) AS count FROM ReserveEntity r INNER JOIN r.eventEntity e WHERE r.isCancel='N' GROUP BY e.eventDate, e.eventTime")
-	List<ReserveEntity> countReservationByDateandTime();
 
 	
     /**
