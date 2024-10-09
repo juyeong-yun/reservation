@@ -192,14 +192,23 @@ public class AdminController {
 	}
 	
 	/**
-	 * 등록한 이벤트 삭제
+	 * 등록한 이벤트 날짜별 삭제
+	 * 시작 시간과 종료 시간을 받아서 30분씩 추가해서 이벤트를 설정했기 때문에
+	 * 처음이 이상했다면, 나머지도 이상할 거기 때문이다.
 	 * @param eventId
 	 * @return
 	 */
 	@GetMapping("/eventDelete")
-	public String eventDelete(@RequestParam(name="eventId") String eventId ) {
+	public String eventDelete(@RequestParam(name="eventId") String eventId,
+			RedirectAttributes attr ) {
 		
-		eventService.deleteOne(eventId);
+		try {
+			eventService.deleteOne(eventId);			
+			attr.addFlashAttribute("message", "삭제 완료");
+
+		}catch (Exception e){
+			attr.addFlashAttribute("error", "삭제 중 오류발생");
+		}
 		
 		return "redirect:/admin/timeCheck";
 	}

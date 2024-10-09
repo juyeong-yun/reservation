@@ -62,6 +62,7 @@
 				for (let dateElement of dateElements) {
 			        const date = dateElement.textContent;
 			        const rows = dateElement.nextElementSibling.getElementsByTagName('tr');
+			        
 			        const events = Array.from(rows).map(row => {
 			            const time = row.children[0].textContent;
 			            const reserveCount = parseInt(row.children[1].textContent);
