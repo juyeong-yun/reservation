@@ -45,12 +45,13 @@
                 </ul>
             </form>
             
-            <div id="eventTable" style="display: none;"  > <!-- -->
+            <div id="eventTable" style="display: none;"  > <!--  -->
                 <div th:each="entry : ${eventsByDate}">
                     <h4 th:text="${entry.key}">날짜</h4>
                     <table>
                         <tr th:each="event : ${entry.value}">
                             <td th:text="${event.eventTime}">12:00</td>
+                            <td th:text="${event.reserveCount}">12:00</td>
                         </tr>
                     </table>
                 </div>
@@ -60,92 +61,81 @@
             <canvas id="reservationChart1"></canvas>
             <canvas id="reservationChart2"></canvas>
             <canvas id="reservationChart3"></canvas>
-            
-            
-            <script th:inline = "javascript">
-				const chartDataJson = /*[[${chartDataJson}]]*/ '[]';
-			</script>
 			
             <script>
-				document.addEventListener("DOMContentLoaded", function() { 
+				function extractEventData(){
+					const eventTable = document.getElementById('eventTable');
+					const dateElements = eventTable.getElementsByTagName('h4');
+					const eventData = {};
+					
+					for (let dateElement of dateElements) {
+				        const date = dateElement.textContent;
+				        const rows = dateElement.nextElementSibling.getElementsByTagName('tr');
+				        const events = Array.from(rows).map(row => {
+				            const time = row.children[0].textContent;
+				            const reserveCount = parseInt(row.children[1].textContent);
+				            return { time, reserveCount };
+				        });
+				        eventData[date] = events;
+					  }
+					
+					  return eventData;
+				}
+				
+				// 차트 생성 함수
+				function createEventChart() {
+					
+				  const eventData = extractEventData();
+				  
+				  const dates = Object.keys(eventData);
+				  const eventCounts = dates.map(date => eventData[date].length);
+				
+			    // 날짜별로 차트를 만듭니다.
+			    dates.forEach((date, index) => {
+			        const eventTimes = eventData[date].map(event => event.time);
+			        const reserveCounts = eventData[date].map(event => event.reserveCount);
 			
-				    const ctx1 = document.getElementById('reservationChart1').getContext('2d');
-				    const ctx2 = document.getElementById('reservationChart2').getContext('2d');
-				    const ctx3 = document.getElementById('reservationChart3').getContext('2d');
-				     
+			        const ctx = document.getElementById(`reservationChart${index + 1}`).getContext('2d');
+			        
+			        new Chart(ctx, {
+			            type: 'bar',
+			            data: {
+			                labels: eventTimes,  // 시간대
+			                datasets: [{
+			                    label: `${date} 예약 인원수`,
+			                    data: reserveCounts,  // 예약 인원수
+			                    max:20,
+			                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+			                    borderColor: 'rgba(75, 192, 192, 1)',
+			                    borderWidth: 1
+			                }]
+			            },
+			            options: {
+			                responsive: true,
+			                scales: {
+			                    y: {
+			                        beginAtZero: true,
+			                        max: 20,
+			                        title: {
+			                            display: true,
+			                            text: '예약 인원 수'
+			                        }
+			                    },
+			                    x: {
+			                        title: {
+			                            display: true,
+			                            text: '시간대'
+			                        }
+			                    }
+			                }
+			            }
+			        });
+			       });
+				}
+
 				
-				    // 테이블에서 데이터 추출
-				    const chartData = JSON.parse(chartDataJson);
-				    
-				    const groupData = chartData.reduce((acc, item) => {
-						if (!acc[item.date]) { 
-							acc[item.date] = [];
-					    } 
-					    acc[item.date].push(item);
-					    
-					    return acc;
-					    
-					}, {});
-				    
-				    // 날짜목록 가져오기
-				    const dates = Object.keys(groupData).slice(0,3);
-				    
-				    dates.forEach((date, index) => {
-						
-						//JSON 형식으로 데이터 받음
-						const dateData = groupData[date];
-						
-						// 시간대별로 데이터 정리
-						const timeData = dateData.reduce((acc,item) => {
-							acc[item.time] = item.count;
-							
-							return acc;
-						}, {});
-					    
-					    const labels = Object.keys(timeData).sort();
-				    	const data = labels.map(time => timeData[time]);
-				    	
-				    	const ctx = index === 0 ? ctx1 : (index === 1 ? ctx2 : ctx3);
-				    	
-				    	// 차트
-					    new Chart(ctx, {
-					        type: 'bar',
-					        data: {
-					            labels: labels,
-					            datasets: [{
-					                label: `시간대별 총 예약 인원 : ${date}`,
-					                data: data,
-					                borderWidth: 1
-					            }]
-					        },
-					        options: { 
-					            responsive: true,
-					            scales: {
-					                y: { 
-					                    beginAtZero: true,
-					                    max: 20,
-					                    title: {
-					                        display: true,
-					                        text: '예약 인원'
-					                    }
-					                }, 
-					                x: { 
-					                    title: {
-					                        display: true,
-					                        text: '예약 시간'
-					                    }
-					                } 
-					            }, 
-					            plugins: { 
-					                title: {
-					                    display: true,
-					                    text: `시간대별 총 예약 현황 - ${date}`
-					                }
-					            } 
-					        } 
-					    });
-					});
-				
+				document.addEventListener("DOMContentLoaded", function() { 	
+					createEventChart();				
 				});
 		
 		    </script>
