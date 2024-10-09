@@ -170,6 +170,21 @@ public class AdminController {
 
 		}
 	}
+	
+	@GetMapping("/timeCheck")
+	public String timeCheck(Model model) {
+		List<EventDTO> eventList = eventService.selectAll();
+		
+		// 날짜, 이벤트 시간		
+		Map<LocalDate, List<EventDTO>> eventsByDate = eventList.stream()
+				.collect(Collectors.groupingBy(EventDTO::getEventDate));
+		
+		
+		model.addAttribute("eventList", eventList);
+		model.addAttribute("eventsByDate", eventsByDate);
+		
+		return "admin/timeCheck";
+	}
 
 	/**
 	 * 관리자 예약관리 화면

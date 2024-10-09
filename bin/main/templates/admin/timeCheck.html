@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온실(溫室) | 관리자</title>
+    <link rel="icon" th:href="@{/images/icon.jpeg}" type="image/png">
+    
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    
+    <!-- js -->
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/myFunction.js}"></script>
+    
+</head>
+<body>
+    <div class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}"><img th:src="@{/images/logo_white.png}" alt="logo"></a>
+            </div>
+            
+            <div class="right-side">
+                <ul id="menu">
+					<li><a th:href="@{/admin/adminMain}"><i class="fa-solid fa-house-user"></i></a></li>
+					<li><a th:href="@{/admin/timeCheck}">예약시간 관리</a></li>
+                    <li><a th:href="@{/admin/reserveCheck}">예약자 관리</a></li>
+                    <li><a th:href="@{/admin/writeManage}">글 작성</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="addEvent">
+            <form th:action="@{/admin/eventInsert}" method="post">
+                <ul>
+                    <li>이벤트 날짜<input name="eventDate" type="date"></li>
+                    <li>시작 시간<input name="startTime" type="time"></li>
+                    <li>종료 시간<input name="endTime" type="time"></li>
+                    <li><button class="submit" type="submit">등록</button></li>
+                </ul>
+            </form>
+            
+            <div id="eventTable">
+                <div th:each="entry : ${eventsByDate}">
+                    <h4 th:text="${entry.key}">날짜</h4>
+                    <table>
+                        <tr th:each="event : ${entry.value}">
+                            <td th:text="${event.eventTime}">12:00</td>
+                            <td><button class="delete" type="submit">삭제</button></td>
+                        </tr>
+                    </table>
+                 </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
