@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import seon.gallery.reservation.dto.EventDTO;
@@ -78,10 +79,27 @@ public class EventService {
 
         if (entity.isPresent()) {
             EventEntity eventEntity = entity.get();
+            
             return EventDTO.toDTO(eventEntity);
         } else {
             return null;
         }
     }
+
+    
+    /**
+     * db에서 해당하는 이벤트 삭제
+     * @param eventId
+     * @return 
+     */
+    @Transactional
+	public void deleteOne(String eventId) {
+		Optional<EventEntity> entity = eventRepository.findById(eventId);
+		
+		if(entity.isPresent()) {			
+			eventRepository.deleteById(eventId);
+		}
+		
+	}
     
 }

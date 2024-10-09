@@ -131,6 +131,26 @@ public class AdminController {
 		return "admin/adminMain";
 	}
 	
+	/**
+	 * 예약 시간 관리 페이지
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/timeCheck")
+	public String timeCheck(Model model) {
+		List<EventDTO> eventList = eventService.selectAll();
+		
+		// 날짜, 이벤트 시간		
+		Map<LocalDate, List<EventDTO>> eventsByDate = eventList.stream()
+				.collect(Collectors.groupingBy(EventDTO::getEventDate));
+		
+		
+		model.addAttribute("eventList", eventList);
+		model.addAttribute("eventsByDate", eventsByDate);
+		
+		return "admin/timeCheck";
+	}
+	
 
 	/**
 	 * event 추가 하는 
@@ -161,29 +181,27 @@ public class AdminController {
 				startTime = startTime.plusMinutes(30);
 			}
 			attr.addFlashAttribute("message","event 등록 성공");
-			return "redirect:/admin/adminMain";
+			return "redirect:/admin/timeCheck";
 
 		} catch (Exception e) {
 			attr.addFlashAttribute("error", "event 등록 중 오류가 발생했습니다.");
 			log.error("event 등록 중 오류 발생", e);
-			return "redirect:/admin/adminMain"; // 오류 발생 시에도 동일한 경로로 리다이렉트
+			return "redirect:/admin/timeCheck"; // 오류 발생 시에도 동일한 경로로 리다이렉트
 
 		}
 	}
 	
-	@GetMapping("/timeCheck")
-	public String timeCheck(Model model) {
-		List<EventDTO> eventList = eventService.selectAll();
+	/**
+	 * 등록한 이벤트 삭제
+	 * @param eventId
+	 * @return
+	 */
+	@GetMapping("/eventDelete")
+	public String eventDelete(@RequestParam(name="eventId") String eventId ) {
 		
-		// 날짜, 이벤트 시간		
-		Map<LocalDate, List<EventDTO>> eventsByDate = eventList.stream()
-				.collect(Collectors.groupingBy(EventDTO::getEventDate));
+		eventService.deleteOne(eventId);
 		
-		
-		model.addAttribute("eventList", eventList);
-		model.addAttribute("eventsByDate", eventsByDate);
-		
-		return "admin/timeCheck";
+		return "redirect:/admin/timeCheck";
 	}
 
 	/**
