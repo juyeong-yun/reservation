@@ -120,6 +120,7 @@ function checkDate() {
  * 4. javascript / board 페이지에서 공지 제목을 누르면 아래 내용이 나오게
  * 여기서는 id는 유일한 하나이기 때뮨에 class를 사용하여 그룹을 만들고 for 문을 돌린다,,!
  ******************/
+
 document.addEventListener('DOMContentLoaded', function() {
     var noticeTitles = document.getElementsByClassName('dropdown-notice');
     var noticeDetails = document.getElementsByClassName('dropdown-detail');
@@ -134,10 +135,13 @@ document.addEventListener('DOMContentLoaded', function() {
         noticeTitles[j].addEventListener('click', function() {
             // 현재 클릭된 제목 바로 다음에 오는 요소를 찾습니다.
             var relatedDetail = this.closest('tr').nextElementSibling.querySelector('.dropdown-detail');
+           
             if (relatedDetail) {
                 // 상세 내용을 토글합니다.
+                
                 if (relatedDetail.style.display === 'none' || relatedDetail.style.display === '') {
                     relatedDetail.style.display = 'table-cell';
+                    
                 } else {
                     relatedDetail.style.display = 'none';
                 }
@@ -176,10 +180,19 @@ document.addEventListener("DOMContentLoaded", function() {
         ClassicEditor
             .create(noticeEditorElement, {
                 language: 'ko',
-                enterMode: 'paragraph'
+                enterMode: 'paragraph',
+                removePlugins: ['AutoFormat']
             })
             .then(editor => {
+				
                 ckEditorInstanceNotice = editor;
+                
+                 // 데이터가 있을 경우 CKEditor에 내용 설정
+		        const initData = document.querySelector('#noticeDetail').value;
+		        if (initData) {
+		            editor.setData(initData);
+		        }
+		        
             })
             .catch(error => {
                 console.error('Error initializing noticeEditor:', error);
@@ -197,26 +210,23 @@ document.addEventListener("DOMContentLoaded", function() {
             let title = document.getElementById('noticeTitle').value.trim();
             let ctg = document.getElementById('category').value.trim();
             
-            if(ctg.length == 0) {
-                alert("카테고리를 작성해주세요.")
-                document.getElementById('category').focus();
-                return
-            }
-    
-            if (title.length == 0) {
-                alert("제목을 작성해주세요."); // 사용자에게 경고 메시지 표시
-                document.getElementById('noticeTitle').focus(); 
-                return
-            }
-    
             // CKEditor에서 텍스트 가져오기
             let contents = ckEditorInstanceNotice.getData().trim();
             // console.log(contents);
-    
-            if (!contents) {
-                alert("내용을 작성해주세요.");// 필드가 비어있으면 제출 방지
-                return;
-            }
+            
+           if (title.length === 0 || ctg.length === 0 || contents.length === 0) {
+		        if (ctg.length === 0) {
+		            alert("카테고리를 입력해주세요.");
+		            document.getElementById('category').focus();
+		        } else if (title.length === 0) {
+		            alert("제목을 입력해주세요.");
+		            document.getElementById('noticeTitle').focus();
+		        } else {
+		            alert("내용을 작성해주세요.");
+		            ckEditorInstanceNotice.focus();
+		        }
+		        return;
+		    }
     
             // 숨겨진 필드에 값 설정
             $("#noticeDetail").val(contents);
@@ -238,22 +248,23 @@ document.addEventListener("DOMContentLoaded", function() {
             
             let phone = document.getElementById('phone').value.trim(); // #phone 요소의 값 가져오기
             let name = document.getElementById('reviewer').value.trim();
-
-            if (name.length == 0) {
-                alert("개인 정보 확인을 위해 이름을 적어주세요."); // 사용자에게 경고 메시지 표시
-                document.getElementById('reviewer').focus(); // 포커스를 다시 #phone 입력란으로 이동
-                return
-            }
-
-            if (phone.length == 0) {
-                alert("개인 정보 확인을 위해 핸드폰 번호를 적어주세요."); // 사용자에게 경고 메시지 표시
-                document.getElementById('phone').focus(); // 포커스를 다시 #phone 입력란으로 이동
-                return
-            }
             
+            if (name.length == 0 || phone.length == 0) {
+		        alert("개인 정보 확인을 위해 빈칸을 채워주세요.");
+		        
+		        if (name.length == 0) {
+		            document.getElementById('reviewer').focus(); 
+		        
+		        } else {
+		            document.getElementById('phone').focus();
+		        }
+		        
+		        return;
+  			  }
+
             if (phone.length !== 11) {
-                alert("핸드폰 번호는 11자리여야 합니다."); // 사용자에게 경고 메시지 표시
-                document.getElementById('phone').focus(); // 포커스를 다시 #phone 입력란으로 이동
+                alert("핸드폰 번호는 11자리여야 합니다."); 
+                document.getElementById('phone').focus();
                 return
             }
 

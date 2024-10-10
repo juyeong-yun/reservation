@@ -38,20 +38,26 @@
     
     <div class="content">
         <form th:action="@{/admin/noticeWrite}" method="post" id="noticeSubmitForm" enctype="multipart/form-data" >
+			<input type="hidden" th:if="${createdNotice != null}" th:name="noticeId" th:value="${createdNotice.noticeId}">
             <table>
                 <tr>
                     <td colspan="1" class="category">
-                        <input type="text" name="category" id="category" placeholder="카테고리" required>
+                        <input type="text" name="category" id="category" th:value="${createdNotice != null ? createdNotice.category : ''}"
+                        placeholder="카테고리" required>
                     </td>
-					<td colspan="3" class="title"><input type="text" name="title" id="noticeTitle" placeholder="제목을 입력해주세요." required></td>
+					<td colspan="3" class="title">
+						<input type="text" name="title" id="noticeTitle" placeholder="제목을 입력해주세요." 
+						th:value="${createdNotice != null ? createdNotice.title : '' }" required></td>
 				</tr>
                 <tr>
 					<td colspan="4">
                         <div name="editor" id="noticeEditor">
                             <img name="noticeImage" id="noticeImage" src="#" alt="">
                         </div>
+                        
+                        
                     </td>
-                    <input type="hidden" name="detail" id="noticeDetail">
+                    <input type="hidden" name="detail" id="noticeDetail" th:value="${createdNotice != null ? createdNotice.detail : '' }">
 				</tr>
             </table>
             <div class="button">

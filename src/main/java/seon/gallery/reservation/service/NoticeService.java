@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,17 +93,60 @@ public class NoticeService {
         }
     }
 
+    /**
+     * 공지 한 개 조회
+     * @param noticeId
+     * @return
+     */
     public NoticeDTO selectOne(Long noticeId) {
         Optional<NoticeEntity> entity = noticeRepository.findById(noticeId);
     
         if (entity.isPresent()) {
             NoticeEntity noticeEntity = entity.get();
-            return NoticeDTO.toDTO(noticeEntity);
-        } else {
-            // Optional에서 값이 존재하지 않는 경우 처리 (예외처리, 기본값 설정 등)
-            return null;
+            
+            return NoticeDTO.toDTO(noticeEntity);        
         }
+        
+        return null;
     }
+
+    
+    /**
+     * 공지 한 개 삭제
+     * @param noticeId
+     */
+    @Transactional
+	public void noticeDelete(Long noticeId) {
+		Optional<NoticeEntity> entity = noticeRepository.findById(noticeId);
+		
+		log.info("Deleting notice with ID: {} and entity: {}", noticeId, entity);
+
+		if(entity.isPresent()) {
+			noticeRepository.deleteById(noticeId);
+		}
+		
+	}
+
+    /**
+     * 날짜는 변경하지 않고, 공지 한 개 수정
+     * @param noticeDTO
+     */
+    @Transactional
+	public void updateOne(NoticeDTO noticeDTO) {
+    	Optional<NoticeEntity> entity = noticeRepository.findById(noticeDTO.getNoticeId());
+    	
+    	if(entity.isPresent()) {
+    		NoticeEntity noticeEntity = entity.get();
+    		
+    		noticeEntity.setCategory(noticeDTO.getCategory());
+    		noticeEntity.setTitle(noticeDTO.getTitle());
+    		noticeEntity.setDetail(noticeDTO.getDetail());
+			
+		}
+		
+	}
+    
+    
 
 
 

@@ -87,6 +87,12 @@ table.reserveCheck {
     text-align: center;
 }
 
+/****************
+writeManage
+***************/
+
+.notice .button-group {display: flex; align-items: center; justify-content: center; }
+
 
 /*********
 adminManage 화면

@@ -17,8 +17,8 @@ create table notice(
 
 select * from notice;
 
-delete from notice where notice_id = 21;
-commit;
+-- delete from notice where notice_id = 21;
+-- commit;
 
 
 

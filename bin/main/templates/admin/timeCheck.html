@@ -50,7 +50,7 @@
                     <h4 th:text="${entry.key}">날짜</h4>
                     <table>
 						<tr th:each="event : ${entry.value}">
-							<form th:action="@{/admin/eventDelete}" method="get">
+							<form th:action="@{/admin/eventDelete}" method="post">
 								<input type="hidden" th:name="eventId" th:value="${event.eventId}">
 	                            <td th:text="${event.eventTime}">12:00</td>
 	                            <td><button class="delete" type="submit">삭제</button></td>

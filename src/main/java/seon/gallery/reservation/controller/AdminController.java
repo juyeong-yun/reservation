@@ -161,7 +161,7 @@ public class AdminController {
 	 * @return
 	 */
 	@PostMapping("/eventInsert")
-	public String eventInsert(@ModelAttribute EventFormDTO formDTO, RedirectAttributes attr) {
+	public String eventInsert(@ModelAttribute EventFormDTO formDTO, RedirectAttributes rttr) {
 		try {
 
 			LocalDate eventDate = formDTO.getEventDate();
@@ -182,11 +182,11 @@ public class AdminController {
 
 				startTime = startTime.plusMinutes(30);
 			}
-			attr.addFlashAttribute("message","event 등록 성공");
+			rttr.addFlashAttribute("message","event 등록 성공");
 			return "redirect:/admin/timeCheck";
 
 		} catch (Exception e) {
-			attr.addFlashAttribute("error", "event 등록 중 오류가 발생했습니다.");
+			rttr.addFlashAttribute("error", "event 등록 중 오류가 발생했습니다.");
 			log.error("event 등록 중 오류 발생", e);
 			return "redirect:/admin/timeCheck"; // 오류 발생 시에도 동일한 경로로 리다이렉트
 
@@ -200,7 +200,7 @@ public class AdminController {
 	 * @param eventId
 	 * @return
 	 */
-	@GetMapping("/eventDelete")
+	@PostMapping("/eventDelete")
 	public String eventDelete(@RequestParam(name="eventId") String eventId,
 			RedirectAttributes attr ) {
 		
@@ -246,13 +246,13 @@ public class AdminController {
 	 */
 	@PostMapping("/reservationProc")
 	public String reservationProc(@RequestParam(value = "reserveId", required = false) Long reserveId, 
-	@RequestParam(value = "action", required = false) String action, RedirectAttributes attr){
+	@RequestParam(value = "action", required = false) String action, RedirectAttributes rttr){
 		
 		if ("complete".equals(action)) {
 			try{
 				// ReserveDTO reserveDTO = reserveService.selectOne(reserveId);
 				reserveService.completeReservation(reserveId);
-				attr.addFlashAttribute("message", "예약 완료 처리");
+				rttr.addFlashAttribute("message", "예약 완료 처리");
 
 			} catch(Exception e) {
 				log.info("입금완료 처리중 오류 발생");
@@ -261,7 +261,7 @@ public class AdminController {
 		} else if("cancel".equals(action)) {
 			try {
 				reserveService.cancelReservation(reserveId);
-				attr.addFlashAttribute("message", "예약 취소 처리");
+				rttr.addFlashAttribute("message", "예약 취소 처리");
 			} catch (Exception e) {
 				log.info("예약 취소 중 오류 발생");
 			}
@@ -275,44 +275,36 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/writeManage")
-	public String writeManage(Model model, @Qualifier("q_pageable")@PageableDefault(page = 1) Pageable q_pageable,
+	public String writeManage(Model model,
     @Qualifier("n_pageable")@PageableDefault(page = 1) Pageable n_pageable ) {
 
 		Page<NoticeDTO> noticeList = noticeService.selectAll(n_pageable);
-        Page<QnaDTO> qnaList = qnaService.selectAll(q_pageable);
         // List<NoticeDTO> noticeList = noticeService.selectAll();
-        // List<QnaDTO> qnaList = qnaService.selectAll();
 
         int n_totalPages = (int) noticeList.getTotalPages();
-        int q_totalPages = (int) qnaList.getTotalPages();
 		int n_page = n_pageable.getPageNumber();
-		int q_page = q_pageable.getPageNumber();
 
         PageNevigator n_nevi = new PageNevigator(pageLimit, n_page, n_totalPages);
-        PageNevigator q_nevi = new PageNevigator(pageLimit, q_page, q_totalPages);
 
         model.addAttribute("noticeList", noticeList);
-        model.addAttribute("qnaList", qnaList);
-        model.addAttribute("qnevi", q_nevi);
         model.addAttribute("nnevi", n_nevi);
 
 		return "admin/writeManage";
 	}
 
+	
 	/**
-	 * 글쓰기 화면
+	 * 공지 글쓰기 화면
 	 * @return
 	 */
-	@GetMapping("/adminWrite")
-	public String adminWrite(){
-
-		log.info("notice 글쓰기");
+	@GetMapping("/noticeWrite")
+	public String noticeWrite(){
 		
-		return "admin/adminWrite";
+		return "admin/noticeWrite";
 	}
 
 	/**
-	 * 공지 글쓰기
+	 * 공지 쓰기
 	 * @param details
 	 * @param noticeDTO
 	 * @param attr
@@ -320,19 +312,27 @@ public class AdminController {
 	 */
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(@RequestParam(value = "detail", required = false) String details,
-	@ModelAttribute NoticeDTO noticeDTO,RedirectAttributes attr) {
+	@ModelAttribute NoticeDTO noticeDTO, RedirectAttributes rttr) {
 		
 		try{
-			noticeDTO.setDetail(details);
-			noticeService.writeNotice(noticeDTO);
-			attr.addFlashAttribute("message", "notice 작성 완료");
-			return "redirect:/admin/writeManage";
+			// 수정					
+			if(noticeDTO.getNoticeId() != null) {
+				noticeService.updateOne(noticeDTO);
+				log.info("notice DTO : {}", noticeDTO);
+				rttr.addFlashAttribute("message", "공지 수정 성공");
+				
+			} else {
+				// 추가
+				noticeDTO.setDetail(details);
+				noticeService.writeNotice(noticeDTO);
+				rttr.addFlashAttribute("message", "notice 작성 완료");				
+			}
 		
 		} catch (Exception e) {
-			attr.addFlashAttribute("message", "notice 작성 중 오류가 발생했습니다.");
-            log.error("notice 작성 중 오류 발생", e);
-            return "redirect:/admin/writeManage"; // 오류 발생 시에도 동일한 경로로 리다이렉트
+			rttr.addFlashAttribute("message", "notice 작성 중 오류가 발생했습니다.");
 		}
+		
+		return "redirect:/admin/writeManage";
 	}
 
 	/**
@@ -351,6 +351,51 @@ public class AdminController {
 
 		return noticeDTO;
 	} 
+	
+	/**
+	 * 공지 한 개 삭제
+	 * @param noticeId
+	 * @param attr
+	 * @return
+	 */
+	@PostMapping("/noticeDelete")
+	public String noticeDelete(@RequestParam(name="noticeId") Long noticeId,
+			RedirectAttributes rttr) {
+		
+		try {
+			
+			noticeService.noticeDelete(noticeId);
+			rttr.addFlashAttribute("message", "공지 삭제 성공");
+			
+		} catch (Exception e) {
+			rttr.addFlashAttribute("message", "공지 삭제 중 오류");
+		}
+		
+		return "redirect:/admin/writeManage";
+	}
+	
+	/**
+	 * 공지 수정 위해 다시 작성 페이지로 이동
+	 * @param model
+	 * @param noticeId
+	 * @return
+	 */
+	@GetMapping("/noticeUpdate")
+	public String noticeUpdate(Model model, @RequestParam(name="noticeId") Long noticeId) {
+		
+		NoticeDTO noticeDTO = noticeService.selectOne(noticeId);
+		log.info("noticeDTO controller: ", noticeDTO);
+		
+		if(noticeDTO == null) {
+			log.info("NoticeDTO 오류");
+		}
+		
+		model.addAttribute("createdNotice", noticeDTO);
+		
+		return "admin/noticeWrite";
+	}
+	
+	
 
 	/**
 	 * ajax 로 qna detail 보기
@@ -363,7 +408,9 @@ public class AdminController {
 		QnaDTO qnaDTO = qnaService.selectOne(qnaId);
 		log.info("DTO" +qnaDTO);
 		return qnaDTO;
-	}	
+	}
+	
+	
 	
 
 }
