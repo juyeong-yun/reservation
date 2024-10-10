@@ -63,11 +63,11 @@
                         <tr>
                             <!-- 모달 나오는 <td colspan="3" class="detail" id="dropdown-detail" th:utext="${notice.detail}"></td> -->
                             <td colspan="2" class="dropdown-detail" th:utext="${notice.detail}"></td>
-                            <td class="button-group">
+                            <td colspan="1" class="button-group" style="display: none;">
                             	<!-- 수정 폼 -->
 						        <form th:action="@{/admin/noticeUpdate}">
 						            <input type="hidden" name="noticeId" th:value="${notice.noticeId}">
-						            <button type="submit" class="update">수정</button>
+						            <button  type="submit" class="update">수정</button>
 						        </form>
 						
 						        <!-- 삭제 폼 -->
@@ -81,6 +81,27 @@
                 </table>
             </div>
             
+            <script>
+				document.addEventListener("DOMContentLoaded", function(){
+					const titles = document.querySelectorAll(".dropdown-notice");
+					console.log("titles: ", titles);
+					titles.forEach(title => {
+						title.addEventListener("click", function() {
+							const buttonGroup = this.closest("tr").nextElementSibling.querySelector(".button-group");
+							console.log("title: ", title);
+							console.log("buttonGroup: ", buttonGroup);
+							
+							// 버튼 그룹의 현재 display 상태를 토글 (보이게 하거나 숨기기)
+				            if (buttonGroup.style.display === "flex") {
+				                buttonGroup.style.display = "none"; // 이미 보이면 숨김
+				            } else {
+				                buttonGroup.style.display = "flex"; // 보이지 않으면 보이게
+				            }
+						});
+					});
+										
+				});
+			</script>
             <!-- <div class="popup-wrap" id="notice-popup">
                 <div class="popup">
                     <div class="contentbox">
@@ -97,8 +118,7 @@
                     </div>
                 </div>
             </div> -->
-            
-        </form>
+
     </div>
     
 </body>
