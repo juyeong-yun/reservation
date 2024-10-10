@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,6 +143,7 @@ public class AdminController {
 		
 		// 날짜, 이벤트 시간		
 		Map<LocalDate, List<EventDTO>> eventsByDate = eventList.stream()
+				.sorted(Comparator.comparing(EventDTO::getEventTime))
 				.collect(Collectors.groupingBy(EventDTO::getEventDate));
 		
 		
