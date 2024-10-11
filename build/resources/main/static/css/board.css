@@ -19,7 +19,7 @@ table tr {
 
 .title { text-align: start;}
 
-.dropdown-detail { display: none; padding: 0 10%; }
+.dropdown-detail { display: none; padding: 0 2%; }
 
 .dropdown-detail p {
     background: #f3f3f3;
