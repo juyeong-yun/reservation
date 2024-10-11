@@ -8,6 +8,13 @@
 
 - 사용 tool
   - Sqldeveloper, Spring Boot, Vs Code, Github, Notion
+ 
+- 서버 내 배포
+  cd build/libs
+  java -jar java -jar reservation-0.0.1-SNAPSHOT.jar
+
+  본 페이지 - http://localhost:8080
+  관리자 - http://localhost:8080/admin/adminMain
 
   
 ### 기능
