@@ -41,7 +41,7 @@ a:hover {
 }
 
 div.background {
-    background-image: url('../images/mainpage_imsi.jpeg');
+    background-image: url('../images/backImage.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
