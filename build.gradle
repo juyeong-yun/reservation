@@ -23,7 +23,7 @@ repositories {
 	mavenCentral()
 }
 
-compileJava {
+tasks.named('compileJava') {
     options.compilerArgs << '-parameters'
 }
 
